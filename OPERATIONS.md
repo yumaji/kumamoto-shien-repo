@@ -29,7 +29,29 @@
 - **週1回**（毎週月曜目安）: 主要窓口の内容変更（受付期間の延長・終了、支援措置の追加）を各公式ページで確認する。
 - **月1回**: サイト全体を通読し、フェーズに合わない情報（例: 発災直後の緊急情報）を復興フェーズの情報に入れ替える。
 
-## 5. やらないこと
+## 5. リポジトリ設定（一度だけ／自動化の前提）
+
+上の自動化は、次の2つの設定が入っていないと動きません。ワークフローを追加した直後に必ず確認してください。
+
+| 設定 | 場所 | 値 |
+| --- | --- | --- |
+| Pages の公開元 | Settings → Pages | Branch: `main` / Folder: `/ (root)` |
+| Actions の書き込み権限 | Settings → Actions → General → Workflow permissions | **Read and write permissions** |
+
+- Pages の公開元が `/docs` になっていると、`docs` ディレクトリが無いためビルドが失敗し、サイトは公開されません。
+- Workflow permissions が read-only のままだと、`update-timestamp.yml` の自動コミットが push できず、`link-check.yml` も Issue を作成できません（ワークフロー側の `permissions:` は上限を超えられないため）。
+- ルートの `.nojekyll` は、素の HTML を Jekyll に加工させずそのまま配信するためのファイルです。削除しないこと。
+
+CLI で設定する場合:
+
+```sh
+gh api -X PUT /repos/yumaji/kumamoto-shien-repo/pages \
+  -f "source[branch]=main" -f "source[path]=/"
+gh api -X PUT /repos/yumaji/kumamoto-shien-repo/actions/permissions/workflow \
+  -f default_workflow_permissions=write
+```
+
+## 6. やらないこと
 
 - 未確認情報・伝聞の掲載
 - 特定の寄付先への誘導や優先表示（並びはカテゴリ内で公的窓口→民間の順）
