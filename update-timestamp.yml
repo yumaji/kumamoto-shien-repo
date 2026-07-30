@@ -1,0 +1,36 @@
+name: 更新日時の自動書き換え
+
+# index.html を編集して push すると、ページ内の「最終更新」を
+# その日の日付（日本時間）に自動で書き換えてコミットします。
+on:
+  push:
+    branches: [main]
+    paths: ["index.html"]
+
+permissions:
+  contents: write
+
+jobs:
+  stamp:
+    runs-on: ubuntu-latest
+    # 自動コミット自身で再実行されるのを防ぐ
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 日付を書き換え（JST）
+        run: |
+          DATE_ISO=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          DATE_JP=$(TZ=Asia/Tokyo date +%Y年%-m月%-d日)
+          sed -i -E "s|<span id=\"last-updated\">[^<]*</span>|<span id=\"last-updated\">${DATE_ISO}</span>|" index.html
+          sed -i -E "s|<span id=\"last-updated-foot\">[^<]*</span>|<span id=\"last-updated-foot\">${DATE_JP}</span>|" index.html
+
+      - name: 変更があればコミット
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet; then
+            git add index.html
+            git commit -m "chore: 最終更新日時を自動更新"
+            git push
+          fi
