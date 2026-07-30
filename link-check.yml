@@ -1,0 +1,41 @@
+name: リンク切れの定期チェック
+
+# 毎朝6時（日本時間）に index.html 内の全リンクを確認し、
+# 切れているリンクがあれば自動で Issue を作成します。
+on:
+  schedule:
+    - cron: "0 21 * * *" # 21:00 UTC = 06:00 JST
+  workflow_dispatch: {}   # 手動実行も可能
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: リンクチェック（lychee）
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 403/429 はbot対策の可能性が高いので許容。リダイレクトも許容。
+          args: >-
+            --no-progress
+            --accept 200,201,204,206,301,302,308,403,429
+            --max-retries 3
+            --timeout 20
+            --user-agent "Mozilla/5.0 (link-check; kumamoto-shien-matome)"
+            index.html
+          output: ./lychee-report.md
+          fail: false
+
+      - name: リンク切れがあればIssueを作成
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "【要対応】リンク切れが見つかりました（自動チェック）"
+          content-filepath: ./lychee-report.md
+          labels: リンク切れ, 自動チェック

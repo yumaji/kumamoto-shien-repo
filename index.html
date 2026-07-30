@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>令和8年熊本地震 支援情報まとめ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20272a;
+    --ink-soft:#55605f;
+    --paper:#f4f7f5;
+    --card:#ffffff;
+    --line:#dde4e0;
+    --green:#2e6e4e;      /* 阿蘇の深緑：行動・寄付 */
+    --green-soft:#e4efe8;
+    --blue:#1e4e79;       /* 藍：公的・信頼 */
+    --blue-soft:#e6edf4;
+    --amber:#b97a12;      /* 山吹：被災者向け・注意 */
+    --amber-soft:#f7efdd;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    background:var(--paper);color:var(--ink);line-height:1.75;
+    font-feature-settings:"palt";
+  }
+  a{color:var(--blue)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+  /* ヘッダー */
+  header{
+    background:var(--card);border-bottom:1px solid var(--line);
+    position:sticky;top:0;z-index:20;
+  }
+  .head-in{max-width:960px;margin:0 auto;padding:12px 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .site-title{font-weight:900;font-size:1.05rem;letter-spacing:.02em}
+  .site-title .r8{color:var(--green)}
+  .stamp{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--ink-soft)}
+
+  /* ヒーロー */
+  .hero{max-width:960px;margin:0 auto;padding:44px 20px 28px}
+  .hero h1{font-weight:900;font-size:clamp(1.5rem,4.5vw,2.3rem);line-height:1.35;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--green)}
+  .hero p{margin-top:12px;color:var(--ink-soft);max-width:620px}
+  .quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:24px}
+  .quick a{
+    display:block;background:var(--green);color:#fff;text-decoration:none;
+    border-radius:var(--radius);padding:14px 16px;font-weight:700;
+    border:1px solid var(--green);
+  }
+  .quick a small{display:block;font-weight:400;font-size:.78rem;opacity:.85;margin-top:2px}
+  .quick a.alt{background:var(--card);color:var(--ink);border-color:var(--line)}
+  .quick a.alt small{color:var(--ink-soft)}
+  .quick a:hover{filter:brightness(1.05)}
+
+  /* フィルター（道標） */
+  .nav-filter{
+    max-width:960px;margin:8px auto 0;padding:0 20px;
+    display:flex;gap:8px;flex-wrap:wrap;
+  }
+  .nav-filter button{
+    font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;
+    padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);
+    background:var(--card);color:var(--ink-soft);
+  }
+  .nav-filter button[aria-pressed="true"]{
+    background:var(--ink);border-color:var(--ink);color:#fff;
+  }
+
+  /* セクション */
+  main{max-width:960px;margin:0 auto;padding:20px 20px 60px}
+  section{margin-top:36px}
+  section[hidden]{display:none}
+  .sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+  .sec-head h2{font-size:1.15rem;font-weight:900}
+  .sec-head .tag{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px}
+  .tag.money{background:var(--green-soft);color:var(--green)}
+  .tag.public{background:var(--blue-soft);color:var(--blue)}
+  .tag.life{background:var(--amber-soft);color:var(--amber)}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;display:flex;flex-direction:column;gap:6px;
+  }
+  .card h3{font-size:.98rem;font-weight:700}
+  .card .who{font-size:.72rem;font-weight:700;color:var(--ink-soft);letter-spacing:.05em}
+  .card p{font-size:.86rem;color:var(--ink-soft)}
+  .card .note{font-size:.78rem;color:var(--amber)}
+  .card a.go{
+    margin-top:auto;padding-top:8px;font-size:.85rem;font-weight:700;text-decoration:none;
+  }
+  .card a.go::after{content:" →"}
+  .card a.go:hover{text-decoration:underline}
+
+  /* 被災者向け帯 */
+  .for-hisaisha .card{border-left:4px solid var(--amber)}
+
+  /* 注意ボックス */
+  .caution{
+    margin-top:44px;background:var(--amber-soft);border:1px solid #e8d9b4;
+    border-radius:var(--radius);padding:18px 20px;
+  }
+  .caution h2{font-size:1rem;font-weight:900;color:var(--amber)}
+  .caution ul{margin:8px 0 0 1.2em;font-size:.86rem;color:var(--ink)}
+  .caution li{margin-top:4px}
+
+  footer{
+    border-top:1px solid var(--line);margin-top:40px;background:var(--card);
+  }
+  .foot-in{max-width:960px;margin:0 auto;padding:20px;font-size:.78rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="site-title"><span class="r8">令和8年熊本地震</span> 支援情報まとめ</div>
+    <div class="stamp">最終更新 <span id="last-updated">2026-07-30</span> ／ 発災 2026-07-28 16:27</div>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>いま、熊本のために<br><em>じぶんにできる支援</em>を選ぶ。</h1>
+  <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）への支援窓口を、公式発表をもとに整理しました。寄付・サービス利用・被災された方向けの情報まで、行き先はすべて公式ページです。</p>
+  <div class="quick">
+    <a href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県に義援金を送る<small>県の公式口座（受付〜10/30予定）</small></a>
+    <a class="alt" href="https://donation.yahoo.co.jp/promo/20260728.html" target="_blank" rel="noopener">ネットで少額から寄付<small>Yahoo!ネット募金 特設ページ</small></a>
+    <a class="alt" href="#hisaisha" >被災された方はこちら<small>無料Wi-Fi・料金支援・相談窓口</small></a>
+  </div>
+</div>
+
+<nav class="nav-filter" aria-label="支援の種類で絞り込む">
+  <button aria-pressed="true"  data-filter="all">すべて</button>
+  <button aria-pressed="false" data-filter="kifu">お金で支援する</button>
+  <button aria-pressed="false" data-filter="hisaisha">被災された方へ</button>
+  <button aria-pressed="false" data-filter="jigyo">事業者・企業の方</button>
+</nav>
+
+<main>
+
+  <!-- 義援金：自治体 -->
+  <section data-cat="kifu">
+    <div class="sec-head"><h2>自治体への義援金</h2><span class="tag public">公的窓口</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">熊本県</span>
+        <h3>令和8年熊本地震 義援金</h3>
+        <p>県が義援金口座を開設。受付期間は2026年7月29日〜10月30日（予定）。県庁などの義援金箱へ直接持参も可能で、その場で領収書が発行されます。</p>
+        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
+      </div>
+      <div class="card">
+        <span class="who">福岡市</span>
+        <h3>令和8年熊本地震 災害義援金</h3>
+        <p>近隣自治体として義援金を募集しています。</p>
+        <a class="go" href="https://www.city.fukuoka.lg.jp/bousai/r8kumamoto.html" target="_blank" rel="noopener">福岡市の募集ページ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ふるさと納税 -->
+  <section data-cat="kifu">
+    <div class="sec-head"><h2>ふるさと納税で支援</h2><span class="tag money">税控除の対象</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">ふるさとチョイス 災害支援</span>
+        <h3>被災自治体への緊急寄附</h3>
+        <p>八代市（茨城県境町が代理受付）、宇城市（茨城県桜川市が代理受付）、氷川町、嘉島町、芦北町などへの寄附を受付中。2,000円以上・返礼品なし。</p>
+        <a class="go" href="https://www.furusato-tax.jp/saigai/" target="_blank" rel="noopener">災害支援ページ</a>
+      </div>
+      <div class="card">
+        <span class="who">さとふる</span>
+        <h3>令和8年熊本地震 災害緊急支援寄付</h3>
+        <p>代理寄付を含む被災自治体への寄付を受付。申し込まれた寄付はすべて支援金として届けられます。</p>
+        <a class="go" href="https://www.satofull.jp/oenkifu/oenkifu_detail.php?page_id=542" target="_blank" rel="noopener">さとふる受付ページ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ネット募金・NPO -->
+  <section data-cat="kifu">
+    <div class="sec-head"><h2>ネット募金・支援団体への寄付</h2><span class="tag money">少額からOK</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">Yahoo!ネット募金</span>
+        <h3>緊急支援募金 特設ページ</h3>
+        <p>複数団体のプロジェクトをまとめて掲載。PayPayなどで少額から寄付できます。</p>
+        <a class="go" href="https://donation.yahoo.co.jp/promo/20260728.html" target="_blank" rel="noopener">特設ページ</a>
+      </div>
+      <div class="card">
+        <span class="who">赤い羽根共同募金</span>
+        <h3>ボラサポ・令和8年熊本地震</h3>
+        <p>被災地で活動するボランティア団体・NPOを支える「支える人を支える」募金。税制優遇の対象です。</p>
+        <a class="go" href="https://www.akaihane.or.jp/saigai/2026kumamoto_earthquake/" target="_blank" rel="noopener">中央共同募金会</a>
+      </div>
+      <div class="card">
+        <span class="who">ピースウィンズ・ジャパン</span>
+        <h3>空飛ぶ捜索医療団 ARROWS</h3>
+        <p>発災当日夕に先遣隊が出発。ニーズ調査・緊急物資支援などを実施中。認定NPOのため寄付控除の対象。</p>
+        <a class="go" href="https://donation.yahoo.co.jp/detail/925104" target="_blank" rel="noopener">寄付ページ</a>
+      </div>
+      <div class="card">
+        <span class="who">ジャパンハート</span>
+        <h3>医療・物資の緊急支援</h3>
+        <p>先遣隊を派遣し、医療支援・物資支援を予定。2016年熊本地震でも活動し、熊本県と災害支援協定を締結しています。</p>
+        <a class="go" href="https://www.japanheart.org/topics/support/20260728_kumamoto_earthquake.html" target="_blank" rel="noopener">受付ページ</a>
+      </div>
+      <div class="card">
+        <span class="who">CAMPFIRE</span>
+        <h3>緊急災害支援金</h3>
+        <p>1,000円から寄付可能（募集は9月25日まで）。決済手数料5%を除いた全額が義援金として届けられます。</p>
+        <a class="go" href="https://camp-fire.jp/" target="_blank" rel="noopener">CAMPFIRE</a>
+      </div>
+      <div class="card">
+        <span class="who">店頭募金</span>
+        <h3>ファミリーマート 店頭支援金募金</h3>
+        <p>全国のファミリーマート店頭レジで募金を受付中。買い物のついでに支援できます。</p>
+        <a class="go" href="https://www.family.co.jp/company/news_releases/2026/20260729_01.html" target="_blank" rel="noopener">お知らせ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 被災者向け -->
+  <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
+    <div class="sec-head"><h2>被災された方が使える支援</h2><span class="tag life">無料・減免</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">ドコモ / au / ソフトバンク</span>
+        <h3>無料Wi-Fi「00000JAPAN」</h3>
+        <p>被災地域で公衆無線LANを無料開放中。ネットワーク一覧から「00000JAPAN」を選ぶだけで、契約キャリアを問わず利用できます。</p>
+        <p class="note">※暗号化されていないため、カード情報等の入力は避けてください。</p>
+        <a class="go" href="https://www.itmedia.co.jp/news/article/2607/28/2000000246/" target="_blank" rel="noopener">利用方法を見る</a>
+      </div>
+      <div class="card">
+        <span class="who">携帯各社</span>
+        <h3>料金支援・災害用伝言板</h3>
+        <p>災害救助法適用地域では、支払期限の延長や修理費用の減免などの支援措置を実施。NTT東西・ドコモ・KDDI・ソフトバンク・楽天モバイルが災害用伝言板を展開中です。</p>
+        <a class="go" href="https://www.softbank.jp/disaster/202607_02/" target="_blank" rel="noopener">支援措置の例（ソフトバンク）</a>
+      </div>
+      <div class="card">
+        <span class="who">Honda × ゼンリンデータコム</span>
+        <h3>通行実績マップ「いつもNAVI」</h3>
+        <p>ドライブデータをもとにした、震災エリアの通行可能な道路の参考情報が公開されています。</p>
+        <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
+      </div>
+      <div class="card">
+        <span class="who">日本カーシェアリング協会 等</span>
+        <h3>車の無償貸出</h3>
+        <p>「災害サポートレンタカー」による車の無償貸出支援が始動しています。</p>
+        <a class="go" href="https://www.kyuplat.com/media-channel/info-janpia_2607/" target="_blank" rel="noopener">支援情報まとめ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 事業者向け -->
+  <section data-cat="jigyo">
+    <div class="sec-head"><h2>事業者・企業向けの支援</h2><span class="tag public">公的制度</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">経済産業省</span>
+        <h3>被災中小企業・小規模事業者 支援措置</h3>
+        <p>災害救助法の適用（熊本県10市10町1村）を受け、日本政策金融公庫・商工中金・信用保証協会などに特別相談窓口を設置。災害復旧貸付等を実施しています。</p>
+        <a class="go" href="https://www.meti.go.jp/press/20260729003.html" target="_blank" rel="noopener">経産省の発表</a>
+      </div>
+      <div class="card">
+        <span class="who">企業版ふるさと納税</span>
+        <h3>法人からの災害支援寄附</h3>
+        <p>「river」等のプラットフォームで、熊本県内12自治体への企業版ふるさと納税による寄附受付が始まっています。</p>
+        <a class="go" href="https://prtimes.jp/main/html/rd/p/000000103.000112121.html" target="_blank" rel="noopener">詳細を見る</a>
+      </div>
+      <div class="card">
+        <span class="who">企業の支援事例</span>
+        <h3>Honda：義援金5千万円・物資提供</h3>
+        <p>熊本県への義援金のほか、発電機などの自社製品、食料品・日用品を提供。自社でできる支援を検討する際の参考に。</p>
+        <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 注意 -->
+  <div class="caution">
+    <h2>寄付・支援の前に必ず確認を</h2>
+    <ul>
+      <li>災害時は義援金をかたる<strong>詐欺や偽サイト</strong>が発生します。必ず公式ページのURLを確認してから寄付してください。</li>
+      <li>「義援金」（被災者に直接配分）と「支援金」（支援団体の活動費）は使い道が異なります。目的に合わせて選びましょう。</li>
+      <li>個人からの物資の直接送付は、仕分けの負担になる場合があります。自治体の受け入れ発表を確認してから送りましょう。</li>
+      <li>各支援の内容・期間は日々更新されます。最新情報は各リンク先の公式発表をご確認ください。</li>
+    </ul>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-in">
+    このページは<span id="last-updated-foot">2026年7月30日</span>時点の各公式発表をもとに、個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>
+  </div>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.nav-filter button');
+  const sections = document.querySelectorAll('main section[data-cat]');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      const f = btn.dataset.filter;
+      sections.forEach(sec => {
+        sec.hidden = (f !== 'all' && sec.dataset.cat !== f);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
