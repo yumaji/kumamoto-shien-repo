@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 1ページ構成のため URL は1件のみ。
+     lastmod は意図的に書いていない（手で更新し忘れて古い日付が残るのを避けるため）。 -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kumamoto-shien.net/</loc>
+    <changefreq>daily</changefreq>
+  </url>
+</urlset>
