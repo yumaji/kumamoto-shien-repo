@@ -56,6 +56,7 @@ gh api -X PUT /repos/yumaji/kumamoto-shien-repo/actions/permissions/workflow \
 - **外部アクションはコミットSHAで固定する。** `uses: owner/action@v2` のようなタグ参照は、タグが動かされると別のコードが実行されうるため、`@<40桁のSHA> # vX.Y.Z` の形で固定しています。更新は Dependabot（`.github/dependabot.yml`、毎週月曜）が PR で提案するので、差分を見てマージすること。手でタグに戻さないこと。
 - **CSP は `index.html` の meta タグで指定。** GitHub Pages はHTTPヘッダーを設定できないため meta で代替しています。画像やスクリプトなど外部リソースを追加したら、CSP の許可リストも同時に更新すること（更新しないと読み込みが無言でブロックされ、表示が壊れます）。
 - **独自ドメインの検証（推奨・未実施）:** GitHub の Settings → Pages → Verified domains に `kumamoto-shien.net` を登録しておくと、万一 Pages を無効化した際に第三者がこのドメインを乗っ取って偽サイトを公開することを防げます。
+- **OGP画像の作り直し:** SNSシェア時に出る `ogp.png` は `python3 tools/make-ogp.py` で再生成できます（要 Pillow）。サイトのタイトルやURLを変えたら、この画像も作り直すこと。手で画像編集ソフトを使う必要はありません。
 - **アカウントの2要素認証:** GitHub とお名前.com の両方で有効にしておくこと。このサイトの実質的な攻撃経路は、サイト本体ではなくアカウントの乗っ取り（リポジトリ改竄・DNS書き換え）です。
 
 ## 7. やらないこと
