@@ -27,6 +27,16 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="令和8年熊本地震 支援情報まとめ">
 <meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "令和8年熊本地震 支援情報まとめ",
+  "url": "https://kumamoto-shien.net/",
+  "inLanguage": "ja",
+  "description": "2026年7月28日に発生した令和8年熊本地震の支援情報まとめ。義援金・ふるさと納税・ネット募金の窓口と、被災された方が使える支援を、公式発表をもとに整理しています。"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -138,6 +148,14 @@
     border-top:1px solid var(--line);margin-top:40px;background:var(--card);
   }
   .foot-in{max-width:960px;margin:0 auto;padding:20px;font-size:.78rem;color:var(--ink-soft)}
+  .foot-in p + p{margin-top:8px}
+  .foot-strong strong{color:var(--ink)}
+  .op-handle{
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.14em;
+    color:var(--green);background:var(--green-soft);cursor:pointer;
+    border:1px dashed var(--green);border-radius:6px;padding:1px 8px;
+  }
+  .op-handle.decoded{font-family:inherit;letter-spacing:.04em;border-style:solid;font-weight:700;cursor:default}
 </style>
 </head>
 <body>
@@ -368,11 +386,37 @@
 
 <footer>
   <div class="foot-in">
-    このページは<span id="last-updated-foot">2026年7月31日</span>時点の各公式発表をもとに、個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>
+    <p class="foot-strong"><strong>このサイト自体は寄付を一切受け取っていません。</strong>すべてのリンクは各公式窓口へ直接つながり、アフィリエイト等の収益も一切ありません。</p>
+    <p>運営者：<button id="op-handle" class="op-handle" type="button" title="ROT13" aria-label="運営者名は暗号になっています。押すと解読されます">XHZNZBA</button>（個人）／
+    誤りの指摘・掲載のご相談は <a href="https://github.com/yumaji/kumamoto-shien-repo/issues" target="_blank" rel="noopener">GitHub の Issue</a> へお寄せください。</p>
+    <p>このページは<span id="last-updated-foot">2026年7月31日</span>時点の各公式発表をもとに、個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>　／　<a href="https://github.com/yumaji/kumamoto-shien-repo" target="_blank" rel="noopener">ソースコードと更新履歴（GitHub）</a></p>
   </div>
 </footer>
 
 <script>
+  // 運営者名の解読ギミック：XHZNZBA を1文字ずつ13回回転（=ROT13）して
+  // KUMAMON を経由し、最後に くまモン へ。
+  const op = document.getElementById('op-handle');
+  if (op) {
+    const rot1 = s => s.replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0) - 65 + 1) % 26 + 65));
+    let decoded = false;
+    op.addEventListener('click', () => {
+      if (decoded) return;
+      decoded = true;
+      const finish = () => {
+        op.textContent = 'くまモン';
+        op.classList.add('decoded');
+        op.title = 'XHZNZBA を ROT13 で解読するとこうなります';
+      };
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
+      let steps = 0;
+      const tick = setInterval(() => {
+        op.textContent = rot1(op.textContent);
+        if (++steps >= 13) { clearInterval(tick); setTimeout(finish, 400); }
+      }, 70);
+    });
+  }
+
   const buttons = document.querySelectorAll('.nav-filter button');
   const sections = document.querySelectorAll('main section[data-cat]');
   buttons.forEach(btn => {
