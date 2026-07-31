@@ -1,0 +1,13 @@
+# ワークフローで使う GitHub Actions の更新を毎週チェックし、
+# 新しいバージョンがあれば PR を自動作成する（SHA固定の更新もこれで追従する）
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Asia/Tokyo"
+    labels:
+      - "自動チェック"

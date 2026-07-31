@@ -36,10 +36,10 @@
 | 設定 | 場所 | 値 |
 | --- | --- | --- |
 | Pages の公開元 | Settings → Pages | Branch: `main` / Folder: `/ (root)` |
-| Actions の書き込み権限 | Settings → Actions → General → Workflow permissions | **Read and write permissions** |
+| Actions の既定権限 | Settings → Actions → General → Workflow permissions | **Read repository contents（read-only）** |
 
 - Pages の公開元が `/docs` になっていると、`docs` ディレクトリが無いためビルドが失敗し、サイトは公開されません。
-- Workflow permissions が read-only のままだと、`update-timestamp.yml` の自動コミットが push できず、`link-check.yml` も Issue を作成できません（ワークフロー側の `permissions:` は上限を超えられないため）。
+- Actions の既定権限は read-only で構いません。各ワークフローが必要な権限（`contents: write` / `issues: write`）を `permissions:` ブロックで明示しており、ワークフロー側の宣言は既定値より優先されるためです。既定を read-write にする必要はなく、最小権限の原則から read-only を推奨します。
 - ルートの `.nojekyll` は、素の HTML を Jekyll に加工させずそのまま配信するためのファイルです。削除しないこと。
 
 CLI で設定する場合:
@@ -48,10 +48,17 @@ CLI で設定する場合:
 gh api -X PUT /repos/yumaji/kumamoto-shien-repo/pages \
   -f "source[branch]=main" -f "source[path]=/"
 gh api -X PUT /repos/yumaji/kumamoto-shien-repo/actions/permissions/workflow \
-  -f default_workflow_permissions=write
+  -f default_workflow_permissions=read
 ```
 
-## 6. やらないこと
+## 6. セキュリティ
+
+- **外部アクションはコミットSHAで固定する。** `uses: owner/action@v2` のようなタグ参照は、タグが動かされると別のコードが実行されうるため、`@<40桁のSHA> # vX.Y.Z` の形で固定しています。更新は Dependabot（`.github/dependabot.yml`、毎週月曜）が PR で提案するので、差分を見てマージすること。手でタグに戻さないこと。
+- **CSP は `index.html` の meta タグで指定。** GitHub Pages はHTTPヘッダーを設定できないため meta で代替しています。画像やスクリプトなど外部リソースを追加したら、CSP の許可リストも同時に更新すること（更新しないと読み込みが無言でブロックされ、表示が壊れます）。
+- **独自ドメインの検証（推奨・未実施）:** GitHub の Settings → Pages → Verified domains に `kumamoto-shien.net` を登録しておくと、万一 Pages を無効化した際に第三者がこのドメインを乗っ取って偽サイトを公開することを防げます。
+- **アカウントの2要素認証:** GitHub とお名前.com の両方で有効にしておくこと。このサイトの実質的な攻撃経路は、サイト本体ではなくアカウントの乗っ取り（リポジトリ改竄・DNS書き換え）です。
+
+## 7. やらないこと
 
 - 未確認情報・伝聞の掲載
 - 特定の寄付先への誘導や優先表示（並びはカテゴリ内で公的窓口→民間の順）

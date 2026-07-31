@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- GitHub Pages ではHTTPヘッダーを設定できないため、CSPはmetaタグで指定する。
+     外部リソース（画像・スクリプト等）を追加するときは、ここの許可リストも更新すること。 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <title>令和8年熊本地震 支援情報まとめ</title>
+<script>
+  // クリックジャッキング対策（Pagesでは X-Frame-Options を送れないため、JSでの脱出が唯一の手段）
+  if (window.top !== window.self) {
+    try { window.top.location.replace(window.location.href); } catch (e) {}
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
