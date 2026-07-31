@@ -1,0 +1,3 @@
+# ops-reminder.py がCI上で生成する一時ファイル
+reminder-title.txt
+reminder-body.md

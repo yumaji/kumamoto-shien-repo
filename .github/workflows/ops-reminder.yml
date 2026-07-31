@@ -1,0 +1,41 @@
+name: 運用チェックのリマインド
+
+# 毎週月曜6時（日本時間）に、その週に確認すべきことを Issue にして通知します。
+# サイトの内容は自動更新しません（掲載は必ず公式発表を確認してから人が行う）。
+on:
+  schedule:
+    - cron: "0 21 * * 0" # 日曜21:00 UTC = 月曜06:00 JST
+  workflow_dispatch: {}   # 手動実行も可能
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # このジョブは push しないので、トークンをディスクに残さない
+          persist-credentials: false
+
+      - name: チェックリストを組み立て
+        run: python3 .github/ops-reminder.py
+
+      - name: Issueを作成（同じ週のものが無ければ）
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TITLE=$(cat reminder-title.txt)
+
+          # 同じ週のIssueが既にあれば作らない（手動実行を繰り返しても増えない）
+          if gh issue list --state all --search "\"$TITLE\" in:title" \
+               --json title --jq '.[].title' | grep -Fxq "$TITLE"; then
+            echo "「$TITLE」は既にあるためスキップします"
+            exit 0
+          fi
+
+          gh label create "運用" --color BFD4F2 --description "定期の運用チェック" --force
+          gh issue create --title "$TITLE" --body-file reminder-body.md --label "運用"
