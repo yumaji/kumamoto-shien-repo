@@ -14,14 +14,24 @@ TODAY = datetime.datetime.now(JST).date()
 
 # 掲載中の窓口の受付期限。期限の14日前から通知が出る。
 DEADLINES = [
+    # コンビニ3社の終了日は報道ベース（公式リリースでの明記は未確認）。
+    # 通知が来たら公式ページで実際の終了・延長を確認してからカードを整理すること。
+    ("ファミリーマート 店頭募金", "2026-08-25",
+     "https://www.family.co.jp/company/news_releases/2026/20260729_01.html"),
     ("楽天クラッチ募金", "2026-08-28",
      "https://corp.rakuten.co.jp/donation/kumamoto_2026_ja/kumamoto_2026_ja.html"),
+    ("セブン‐イレブン 店頭募金", "2026-08-31",
+     "https://www.sej.co.jp/company/news_release/news/2026/202607291130.html"),
+    ("ローソン 災害支援募金", "2026-08-31",
+     "https://www.lawson.co.jp/company/news/detail/1530518_2504.html"),
     ("CAMPFIRE 緊急災害支援金", "2026-09-25",
      "https://camp-fire.jp/projects/971234/view"),
     ("済生会熊本病院（READYFOR）", "2026-10-28",
      "https://readyfor.jp/projects/saiseikai-kumamoto"),
     ("熊本県 義援金", "2026-10-30",
      "https://www.pref.kumamoto.jp/soshiki/27/274572.html"),
+    ("日本赤十字社 義援金", "2026-10-30",
+     "https://www.jrc.or.jp/contribute/help/20260731/"),
 ]
 
 # フェーズが進んだら検討する掲載内容。対象日を過ぎると通知に出続ける。
