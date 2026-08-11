@@ -60,7 +60,20 @@ gh api -X PUT /repos/yumaji/kumamoto-shien-repo/actions/permissions/workflow \
   -f default_workflow_permissions=read
 ```
 
-## 6. セキュリティ
+## 6. 自動調査とPRの流れ
+
+月・水・金の朝7時（JST）に、公式発表を調べる自動セッションが動きます。掲載内容の更新が必要なときだけ、次の流れでPRが上がります。
+
+1. セッションが `claude/ops-update-<日付>` ブランチを作り、`index.html` 等を修正して push する
+2. push を検知して `ops-pr.yml` が **PRを自動作成**する（セッション自身はPRを作る手段を持たないため）
+3. PR本文には、コミットメッセージ本文＝「何を根拠に変更したか」「確認できなかったこと」が転記される
+4. **人がPRを読んでマージする。** 自動マージはしない
+
+- 変更が不要な回はブランチが作られないので、PRも立ちません。何も起きないのが正常です。
+- 同じブランチに再度 push された場合は、既存PRへの追記として扱われます（PRは増えません）。
+- **前提設定**: Settings → Actions → General → 「Allow GitHub Actions to create and approve pull requests」を有効にしておくこと。無効だと `ops-pr.yml` がPR作成に失敗します。
+
+## 7. セキュリティ
 
 - **外部アクションはコミットSHAで固定する。** `uses: owner/action@v2` のようなタグ参照は、タグが動かされると別のコードが実行されうるため、`@<40桁のSHA> # vX.Y.Z` の形で固定しています。更新は Dependabot（`.github/dependabot.yml`、毎週月曜）が PR で提案するので、差分を見てマージすること。手でタグに戻さないこと。
 - **CSP は `index.html` の meta タグで指定。** GitHub Pages はHTTPヘッダーを設定できないため meta で代替しています。画像やスクリプトなど外部リソースを追加したら、CSP の許可リストも同時に更新すること（更新しないと読み込みが無言でブロックされ、表示が壊れます）。
@@ -68,7 +81,7 @@ gh api -X PUT /repos/yumaji/kumamoto-shien-repo/actions/permissions/workflow \
 - **OGP画像の作り直し:** SNSシェア時に出る `ogp.png` は `python3 tools/make-ogp.py` で再生成できます（要 Pillow）。サイトのタイトルやURLを変えたら、この画像も作り直すこと。手で画像編集ソフトを使う必要はありません。
 - **アカウントの2要素認証:** GitHub とお名前.com の両方で有効にしておくこと。このサイトの実質的な攻撃経路は、サイト本体ではなくアカウントの乗っ取り（リポジトリ改竄・DNS書き換え）です。
 
-## 7. やらないこと
+## 8. やらないこと
 
 - 未確認情報・伝聞の掲載
 - 特定の寄付先への誘導や優先表示（並びはカテゴリ内で公的窓口→民間の順）
