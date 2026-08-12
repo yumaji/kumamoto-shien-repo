@@ -97,19 +97,21 @@
     max-width:960px;margin:8px auto 0;padding:0 20px;
     display:flex;gap:8px;flex-wrap:wrap;
   }
-  .nav-filter button{
-    font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;
+  .nav-filter a{
+    font-family:inherit;font-size:.9rem;font-weight:700;text-decoration:none;
     padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);
     background:var(--card);color:var(--ink-soft);
   }
-  .nav-filter button[aria-pressed="true"]{
+  .nav-filter a:hover,.nav-filter a:focus-visible{
     background:var(--ink);border-color:var(--ink);color:#fff;
   }
 
   /* セクション */
   main{max-width:960px;margin:0 auto;padding:20px 20px 60px}
   section{margin-top:36px}
-  section[hidden]{display:none}
+  /* 追従するヘッダーに見出しが隠れないよう、ジャンプ位置を下げる */
+  main section{scroll-margin-top:70px}
+  @media (max-width:700px){main section{scroll-margin-top:100px}}
   .sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
   .sec-head h2{font-size:1.15rem;font-weight:900}
   .sec-head .tag{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px}
@@ -177,17 +179,17 @@
   </div>
 </div>
 
-<nav class="nav-filter" aria-label="支援の種類で絞り込む">
-  <button aria-pressed="true"  data-filter="all">すべて</button>
-  <button aria-pressed="false" data-filter="kifu">お金で支援する</button>
-  <button aria-pressed="false" data-filter="hisaisha">被災された方へ</button>
-  <button aria-pressed="false" data-filter="jigyo">事業者・企業の方</button>
+<nav class="nav-filter" aria-label="目的の情報へ移動">
+  <a href="#start">支援を始める前に</a>
+  <a href="#kifu">お金で支援する</a>
+  <a href="#hisaisha">被災された方へ</a>
+  <a href="#jigyo">事業者・企業の方</a>
 </nav>
 
 <main>
 
-  <!-- 支援を始める前に。data-cat を付けていないため、絞り込み中も常に表示される -->
-  <section>
+  <!-- 支援を始める前に -->
+  <section id="start">
     <div class="sec-head"><h2>支援を始める前に</h2><span class="tag life">まず確認</span></div>
     <div class="cards">
       <div class="card">
@@ -220,7 +222,7 @@
   </section>
 
   <!-- 義援金：自治体 -->
-  <section data-cat="kifu">
+  <section id="kifu" data-cat="kifu">
     <div class="sec-head"><h2>義援金（自治体・日本赤十字社）</h2><span class="tag public">公的窓口</span></div>
     <div class="cards">
       <div class="card">
@@ -384,7 +386,7 @@
   </section>
 
   <!-- 事業者向け -->
-  <section data-cat="jigyo">
+  <section id="jigyo" data-cat="jigyo">
     <div class="sec-head"><h2>事業者・企業向けの支援</h2><span class="tag public">公的制度</span></div>
     <div class="cards">
       <div class="card">
@@ -454,18 +456,6 @@
     });
   }
 
-  const buttons = document.querySelectorAll('.nav-filter button');
-  const sections = document.querySelectorAll('main section[data-cat]');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.setAttribute('aria-pressed', 'false'));
-      btn.setAttribute('aria-pressed', 'true');
-      const f = btn.dataset.filter;
-      sections.forEach(sec => {
-        sec.hidden = (f !== 'all' && sec.dataset.cat !== f);
-      });
-    });
-  });
 </script>
 
 </body>
