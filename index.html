@@ -66,10 +66,9 @@
   a{color:var(--blue)}
   a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 
-  /* ヘッダー */
+  /* ヘッダー。追従するのは下のカテゴリナビに任せ、ここは通常どおり流す */
   header{
     background:var(--card);border-bottom:1px solid var(--line);
-    position:sticky;top:0;z-index:20;
   }
   .head-in{max-width:960px;margin:0 auto;padding:12px 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .site-title{font-weight:900;font-size:1.05rem;letter-spacing:.02em}
@@ -92,10 +91,22 @@
   .quick a.alt small{color:var(--ink-soft)}
   .quick a:hover{filter:brightness(1.05)}
 
-  /* フィルター（道標） */
+  /* カテゴリナビ（道標）。画面上部に固定し、どこからでも移動できるようにする */
   .nav-filter{
-    max-width:960px;margin:8px auto 0;padding:0 20px;
+    position:sticky;top:0;z-index:20;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    padding:10px 20px;
     display:flex;gap:8px;flex-wrap:wrap;
+  }
+  .nav-filter-in{
+    max-width:960px;margin:0 auto;width:100%;
+    display:flex;gap:8px;flex-wrap:wrap;
+  }
+  /* 画面が狭いときは折り返さず横スクロールにして、占有する高さを1行に抑える */
+  @media (max-width:700px){
+    .nav-filter-in{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+    .nav-filter-in::-webkit-scrollbar{display:none}
+    .nav-filter a{flex:0 0 auto;white-space:nowrap}
   }
   .nav-filter a{
     font-family:inherit;font-size:.9rem;font-weight:700;text-decoration:none;
@@ -180,10 +191,12 @@
 </div>
 
 <nav class="nav-filter" aria-label="目的の情報へ移動">
-  <a href="#start">支援を始める前に</a>
-  <a href="#kifu">お金で支援する</a>
-  <a href="#hisaisha">被災された方へ</a>
-  <a href="#jigyo">事業者・企業の方</a>
+  <div class="nav-filter-in">
+    <a href="#start">支援を始める前に</a>
+    <a href="#kifu">お金で支援する</a>
+    <a href="#hisaisha">被災された方へ</a>
+    <a href="#jigyo">事業者・企業の方</a>
+  </div>
 </nav>
 
 <main>
