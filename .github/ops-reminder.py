@@ -58,6 +58,7 @@ WEEKLY = [
     ("国交省 通れるマップ", "https://www.mlit.go.jp/road/saigai/r8kumamoto/index.html"),
 ]
 
+# 期限の何日前から通知を出すか
 DEADLINE_NOTICE_DAYS = 14
 
 
