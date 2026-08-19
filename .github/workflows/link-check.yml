@@ -29,16 +29,30 @@ jobs:
             --no-progress
             --accept 200,201,204,206,301,302,308,403,429
             --max-retries 3
-            --timeout 20
+            --timeout 40
             --user-agent "Mozilla/5.0 (link-check; kumamoto-shien-matome)"
             index.html
           output: ./lychee-report.md
           fail: false
 
-      - name: リンク切れがあればIssueを作成
+      # 毎日新しいIssueを立てると未対応が積み上がるため、
+      # 未クローズのものがあればそれを更新する
+      - name: 既存の未対応Issueを探す
+        if: steps.lychee.outputs.exit_code != 0
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh issue list --state open --label "リンク切れ" --limit 1 \
+                --json number --jq '.[0].number // empty')
+          echo "number=$n" >> "$GITHUB_OUTPUT"
+          echo "既存Issue: ${n:-なし（新規作成します）}"
+
+      - name: リンク切れがあればIssueを作成／更新
         if: steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6.0.0
         with:
+          issue-number: ${{ steps.existing.outputs.number }}
           title: "【要対応】リンク切れが見つかりました（自動チェック）"
           content-filepath: ./lychee-report.md
           labels: リンク切れ, 自動チェック
