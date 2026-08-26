@@ -13,13 +13,13 @@
     try { window.top.location.replace(window.location.href); } catch (e) {}
   }
 </script>
-<meta name="description" content="2026年7月28日に発生した令和8年熊本地震の支援情報まとめ。義援金・ふるさと納税・ネット募金の窓口と、被災された方が使える無料Wi-Fiや料金支援を、公式発表をもとに整理しています。">
+<meta name="description" content="2026年7月28日に発生した令和8年熊本地震の支援情報まとめ。義援金、生活再建支援金、住宅修理、公費解体、復旧事業者向け情報を公式発表から整理しています。">
 <link rel="canonical" href="https://kumamoto-shien.net/">
 <!-- SNSでシェアされたときのカード表示用（OGP） -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="令和8年熊本地震 支援情報まとめ">
 <meta property="og:title" content="令和8年熊本地震 支援情報まとめ">
-<meta property="og:description" content="義援金・ふるさと納税・ネット募金の窓口と、被災された方が使える支援を、公式発表をもとに整理しています。">
+<meta property="og:description" content="寄付の窓口と、被災された方・事業者が使える生活再建、住宅修理、公費解体などの支援を整理しています。">
 <meta property="og:url" content="https://kumamoto-shien.net/">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://kumamoto-shien.net/ogp.png">
@@ -34,12 +34,12 @@
   "name": "令和8年熊本地震 支援情報まとめ",
   "url": "https://kumamoto-shien.net/",
   "inLanguage": "ja",
-  "description": "2026年7月28日に発生した令和8年熊本地震の支援情報まとめ。義援金・ふるさと納税・ネット募金の窓口と、被災された方が使える支援を、公式発表をもとに整理しています。"
+  "description": "2026年7月28日に発生した令和8年熊本地震の支援情報まとめ。寄付、生活再建、住宅修理、公費解体、復旧事業者向けの公式情報を整理しています。"
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#20272a;
@@ -52,6 +52,7 @@
     --blue:#1e4e79;       /* 藍：公的・信頼 */
     --blue-soft:#e6edf4;
     --amber:#b97a12;      /* 山吹：被災者向け・注意 */
+    --amber-ink:#8a5700;  /* 山吹の文字用：明るい背景での可読性を確保 */
     --amber-soft:#f7efdd;
     --radius:10px;
   }
@@ -125,10 +126,10 @@
   @media (max-width:700px){main section{scroll-margin-top:100px}}
   .sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
   .sec-head h2{font-size:1.15rem;font-weight:900}
-  .sec-head .tag{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px}
+  .sec-head .tag{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px;white-space:nowrap}
   .tag.money{background:var(--green-soft);color:var(--green)}
   .tag.public{background:var(--blue-soft);color:var(--blue)}
-  .tag.life{background:var(--amber-soft);color:var(--amber)}
+  .tag.life{background:var(--amber-soft);color:var(--amber-ink)}
 
   .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
   .card{
@@ -138,7 +139,7 @@
   .card h3{font-size:.98rem;font-weight:700}
   .card .who{font-size:.72rem;font-weight:700;color:var(--ink-soft);letter-spacing:.05em}
   .card p{font-size:.86rem;color:var(--ink-soft)}
-  .card .note{font-size:.78rem;color:var(--amber)}
+  .card .note{font-size:.78rem;color:var(--amber-ink)}
   .card a.go{
     margin-top:auto;padding-top:8px;font-size:.85rem;font-weight:700;text-decoration:none;
   }
@@ -148,12 +149,19 @@
   /* 被災者向け帯 */
   .for-hisaisha .card{border-left:4px solid var(--amber)}
 
+  /* 復旧工事に入る事業者向け帯 */
+  .for-genba .card{border-left:4px solid var(--blue)}
+
+  /* 終了した窓口は同じカード構造のまま背景だけを抑える */
+  .ended .card{background:var(--paper)}
+
   /* 注意ボックス */
   .caution{
     margin-top:44px;background:var(--amber-soft);border:1px solid #e8d9b4;
     border-radius:var(--radius);padding:18px 20px;
   }
-  .caution h2{font-size:1rem;font-weight:900;color:var(--amber)}
+  .caution--inline{margin:0 0 16px}
+  .caution h2,.caution h3{font-size:1rem;font-weight:900;color:var(--amber-ink)}
   .caution ul{margin:8px 0 0 1.2em;font-size:.86rem;color:var(--ink)}
   .caution li{margin-top:4px}
 
@@ -176,26 +184,28 @@
 <header>
   <div class="head-in">
     <div class="site-title"><span class="r8">令和8年熊本地震</span> 支援情報まとめ</div>
-    <div class="stamp">最終更新 <span id="last-updated">2026-08-19</span> ／ 発災 2026-07-28 16:27</div>
+    <div class="stamp">最終更新 <span id="last-updated">2026-08-26</span> ／ 発災 2026-07-28 16:27</div>
   </div>
 </header>
 
 <div class="hero">
   <h1>いま、熊本のために<br><em>じぶんにできる支援</em>を選ぶ。</h1>
-  <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）への支援窓口を、公式発表をもとに整理しました。寄付・サービス利用・被災された方向けの情報まで、行き先はすべて公式ページです。</p>
+  <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）について、寄付、生活再建、住宅修理、事業者向けの窓口を公式発表から整理しました。</p>
   <div class="quick">
     <a href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県に義援金を送る<small>県の公式口座（受付〜10/30予定）</small></a>
     <a class="alt" href="https://donation.yahoo.co.jp/promo/20260728.html" target="_blank" rel="noopener">ネットで少額から寄付<small>Yahoo!ネット募金 特設ページ</small></a>
-    <a class="alt" href="#hisaisha" >被災された方はこちら<small>無料Wi-Fi・料金支援・相談窓口</small></a>
+    <a class="alt" href="#hisaisha">被災された方が先に確認する支援<small>最大300万円・緊急修理・応急修理</small></a>
   </div>
 </div>
 
 <nav class="nav-filter" aria-label="目的の情報へ移動">
   <div class="nav-filter-in">
     <a href="#start">支援を始める前に</a>
-    <a href="#kifu">お金で支援する</a>
     <a href="#hisaisha">被災された方へ</a>
+    <a href="#kifu">お金で支援する</a>
     <a href="#jigyo">事業者・企業の方</a>
+    <a href="#genba">復旧工事に入る会社</a>
+    <a href="#ended">終了した支援</a>
   </div>
 </nav>
 
@@ -216,7 +226,7 @@
         <span class="who">熊本市</span>
         <h3>募集中の枠を探す「くまもとアプリ」</h3>
         <p>県内各市町村の災害ボランティア募集情報がアプリに集約されています。市町村ごとにサイトを回らなくても、募集中の日程と受付状況をまとめて確認できます。</p>
-        <p class="note">※8月11日〜16日は多くの市町村で活動を休止しています（熱中症対策等）。再開時期は各センターの発表をご確認ください。</p>
+        <p class="note">※募集日と締切は市町村ごとに異なり、随時更新されます。現地へ向かう前に、アプリで受付状況と参加条件を確認してください。</p>
         <a class="go" href="https://www.city.kumamoto.jp/kiji00372213/index.html" target="_blank" rel="noopener">熊本市のお知らせ</a>
       </div>
       <div class="card">
@@ -230,6 +240,81 @@
         <h3>確かめてから広める</h3>
         <p>今回の地震では、生成AIで作られた偽の被害動画や、実在しない救助要請の投稿が確認されています。偽の救助要請が広まると、救助の手が実際にそちらへ割かれます。出所が公式発表かを確かめてから共有してください。</p>
         <a class="go" href="https://www.soumu.go.jp/r8_kumamoto_jishin/index.html" target="_blank" rel="noopener">総務省の関連情報</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 被災者向け。金額が大きい制度と、着手前確認が必要な制度を先に掲載 -->
+  <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
+    <div class="sec-head"><h2>被災された方が先に確認する支援</h2><span class="tag life">生活再建・住まい</span></div>
+    <div class="caution caution--inline">
+      <h3>片付け・契約・支払いの前に</h3>
+      <ul>
+        <li>安全を確保し、片付けや修理、解体の前に建物の内外を写真で残してください。</li>
+        <li>制度によっては<strong>り災証明書</strong>が必要です。申請区分と必要書類を先に確認してください。</li>
+        <li>修理代をすでに支払うと対象外になる制度があります。修理、解体、賃貸契約を進める前に公式窓口へ確認してください。</li>
+      </ul>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>最大300万円 被災者生活再建支援金</h3>
+        <p>全壊、大規模半壊、中規模半壊などの世帯へ、住宅の被害程度と再建方法に応じて支援金が支給されます。複数人世帯は最大300万円、単身世帯は最大225万円です。</p>
+        <p class="note">※最大額は、全壊または解体世帯が住宅を建設・購入する場合です。り災証明書が必要です。基礎支援金は2027年8月27日、加算支援金は2029年8月27日が申込期限です。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/bousai/kiji00372460/index.html" target="_blank" rel="noopener">熊本市の制度案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>9月4日締切 建設型応急住宅</h3>
+        <p>全壊などで住める家がなく、自力で住宅を確保できない世帯向けです。城南・富合の計50戸で、家賃、敷金、駐車場使用料は不要です。</p>
+        <p class="note">※申込は2026年9月4日まで。郵送は必着です。対象要件と必要書類を必ず公式ページで確認してください。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372491/index.html" target="_blank" rel="noopener">熊本市の申込案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>上限56,400円 住家の緊急の修理</h3>
+        <p>屋根、外壁、窓などをブルーシート等でふさぎ、雨水の侵入による被害拡大を防ぐ制度です。熊本市が上限額の範囲で修理業者へ支払います。</p>
+        <p class="note">※り災証明書は不要です。2026年9月30日までの完了が必要です。申込前に修理できますが、対象外工事や施工前・施工後の写真不足で支払われない場合があります。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372143/index.html" target="_blank" rel="noopener">熊本市の制度案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>最大75万7,000円 被災住宅の応急修理</h3>
+        <p>半壊以上は最大75万7,000円、準半壊は最大36万7,000円。元の住宅に住み続けるための必要最小限の修理を、市が修理業者へ依頼して支払います。</p>
+        <p class="note">※支払済みの修理は対象外です。り災証明書と施工前・施工中・施工後の写真が必要です。原則の完了期限は2026年10月27日です。延長が検討されているため、最新期限は公式ページで確認してください。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372104/index.html" target="_blank" rel="noopener">熊本市の制度案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>半壊以上の家屋を公費で解体・撤去</h3>
+        <p>個人所有の家屋等で半壊以上と判定された場合、所有者の申請に基づき、市が解体・撤去します。建物全部を自費解体した場合も、費用償還の対象になることがあります。</p>
+        <p class="note">※2026年7月28日時点の所有者が対象で、事前予約が必要です。申請書類の受付は9月10日〜12月10日。部分解体は費用償還の対象外です。自費解体を先行する場合は、着手前に市へ確認し、写真・契約書・領収証等を保管してください。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372403/index.html" target="_blank" rel="noopener">熊本市の制度案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>迷ったら支援制度の一覧を確認</h3>
+        <p>り災証明、住まい、生活、減免、事業者向けなど、熊本市の支援制度が分野別に整理されています。制度ごとに担当課と電話番号も確認できます。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372110/" target="_blank" rel="noopener">熊本市の支援制度一覧</a>
+      </div>
+      <div class="card">
+        <span class="who">携帯各社</span>
+        <h3>料金支援・災害用伝言板</h3>
+        <p>災害救助法適用地域では、支払期限の延長や修理費用の減免などの支援措置を実施。NTT東西・ドコモ・KDDI・ソフトバンク・楽天モバイルが災害用伝言板を展開中です。</p>
+        <a class="go" href="https://www.softbank.jp/disaster/202607_02/" target="_blank" rel="noopener">支援措置の例（ソフトバンク）</a>
+      </div>
+      <div class="card">
+        <span class="who">Honda × ゼンリンデータコム</span>
+        <h3>通行実績マップ「いつもNAVI」</h3>
+        <p>ドライブデータをもとにした、震災エリアの通行可能な道路の参考情報が公開されています。</p>
+        <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
+      </div>
+      <div class="card">
+        <span class="who">日本カーシェアリング協会</span>
+        <h3>車の無償貸出「災害サポート・レンタカー」</h3>
+        <p>被災された方・支援活動を行う団体が対象。長期貸出と軽トラックの短期貸出を熊本支部で受け付けています。</p>
+        <p class="note">※事前申込が必要です。予約専用番号は050-5799-4740です。</p>
+        <a class="go" href="https://www.japan-csa.org/blog/archives/13936" target="_blank" rel="noopener">協会の受付案内</a>
       </div>
     </div>
   </section>
@@ -338,62 +423,18 @@
         <a class="go" href="https://www.japanplatform.org/emergency/program/kumamoto_earthquake2026.html" target="_blank" rel="noopener">支援プログラムの案内</a>
       </div>
       <div class="card">
-        <span class="who">カブアンド</span>
-        <h3>熊本地震 緊急支援金（受付終了）</h3>
-        <p><strong>2026年8月17日で受付を終了しました。</strong>集まった支援金は熊本県の「令和8年熊本地震に係る義援金」へまとめて寄付され、被災された方に配分されます。</p>
-        <p class="note">※同じ届け先へは、下記の熊本県の窓口から引き続き寄付できます（10月30日まで・寄付金控除の対象）。</p>
-        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
-      </div>
-      <div class="card">
         <span class="who">店頭募金</span>
         <h3>セブン‐イレブン 店頭募金</h3>
         <p>全国の店舗レジ横に募金箱を設置。セブンマイルからの募金（10マイル＝1口〜）も実施予定です。あわせて被災地への支援物資の輸送も行われています。</p>
+        <p class="note">※店頭募金は2026年8月31日までです。実施開始日時は店舗によって異なります。</p>
         <a class="go" href="https://www.sej.co.jp/company/news_release/news/2026/202607291130.html" target="_blank" rel="noopener">お知らせ</a>
-      </div>
-      <div class="card">
-        <span class="who">店頭募金</span>
-        <h3>ファミリーマート 店頭支援金募金</h3>
-        <p>全国のファミリーマート店頭レジで募金を受付中。買い物のついでに支援できます。</p>
-        <a class="go" href="https://www.family.co.jp/company/news_releases/2026/20260729_01.html" target="_blank" rel="noopener">お知らせ</a>
       </div>
       <div class="card">
         <span class="who">店頭募金</span>
         <h3>ローソン 災害支援募金</h3>
         <p>全国のローソン店舗（ローソンストア100含む）で受付中。募金の全額が被災自治体等を通じて被害にあわれた方々の支援に役立てられます。</p>
+        <p class="note">※店頭募金は2026年8月31日までです。受付開始・終了時間は店舗によって異なります。</p>
         <a class="go" href="https://www.lawson.co.jp/company/news/detail/1530518_2504.html" target="_blank" rel="noopener">お知らせ</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 被災者向け -->
-  <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
-    <div class="sec-head"><h2>被災された方が使える支援</h2><span class="tag life">無料・減免</span></div>
-    <div class="cards">
-      <div class="card">
-        <span class="who">ドコモ / au / ソフトバンク</span>
-        <h3>無料Wi-Fi「00000JAPAN」</h3>
-        <p>被災地域で公衆無線LANを無料開放中。ネットワーク一覧から「00000JAPAN」を選ぶだけで、契約キャリアを問わず利用できます。</p>
-        <p class="note">※暗号化されていないため、カード情報等の入力は避けてください。</p>
-        <a class="go" href="https://www.itmedia.co.jp/news/article/2607/28/2000000246/" target="_blank" rel="noopener">利用方法を見る</a>
-      </div>
-      <div class="card">
-        <span class="who">携帯各社</span>
-        <h3>料金支援・災害用伝言板</h3>
-        <p>災害救助法適用地域では、支払期限の延長や修理費用の減免などの支援措置を実施。NTT東西・ドコモ・KDDI・ソフトバンク・楽天モバイルが災害用伝言板を展開中です。</p>
-        <a class="go" href="https://www.softbank.jp/disaster/202607_02/" target="_blank" rel="noopener">支援措置の例（ソフトバンク）</a>
-      </div>
-      <div class="card">
-        <span class="who">Honda × ゼンリンデータコム</span>
-        <h3>通行実績マップ「いつもNAVI」</h3>
-        <p>ドライブデータをもとにした、震災エリアの通行可能な道路の参考情報が公開されています。</p>
-        <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
-      </div>
-      <div class="card">
-        <span class="who">日本カーシェアリング協会</span>
-        <h3>車の無償貸出「災害サポート・レンタカー」</h3>
-        <p>被災された方・支援活動を行う団体が対象。長期貸出（軽乗用・普通車／最長14日）と短期貸出（軽トラック／最長3日）を熊本支部で受付中。予約専用番号 050-5799-4740（10:00〜16:00、水・日・祝休み）。</p>
-        <p class="note">※事前申込がないまま拠点へ行っても貸出できません。</p>
-        <a class="go" href="https://www.japan-csa.org/blog/archives/13936" target="_blank" rel="noopener">協会の受付案内</a>
       </div>
     </div>
   </section>
@@ -402,6 +443,13 @@
   <section id="jigyo" data-cat="jigyo">
     <div class="sec-head"><h2>事業者・企業向けの支援</h2><span class="tag public">公的制度</span></div>
     <div class="cards">
+      <div class="card">
+        <span class="who">熊本市（被災した事業所等）</span>
+        <h3>半壊以上の事業所等を公費で解体</h3>
+        <p>中小企業者等が所有する事業所等で半壊以上と判定された建物は、所有者の申請により熊本市が解体・撤去します。建物全部を自費解体した場合も、市の基準内で費用償還の対象になることがあります。</p>
+        <p class="note">※2026年7月28日時点の所有者が対象です。事前予約が必要で、申請書類の受付は9月10日〜12月10日。部分解体は費用償還の対象外です。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372403/index.html" target="_blank" rel="noopener">熊本市の公費解体案内</a>
+      </div>
       <div class="card">
         <span class="who">経済産業省</span>
         <h3>被災中小企業・小規模事業者 支援措置</h3>
@@ -419,6 +467,54 @@
         <h3>Honda：義援金5千万円・物資提供</h3>
         <p>熊本県への義援金のほか、発電機などの自社製品、食料品・日用品を提供。自社でできる支援を検討する際の参考に。</p>
         <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 復旧工事に入る会社向け -->
+  <section id="genba" class="for-genba" data-cat="genba">
+    <div class="sec-head"><h2>復旧工事に入る会社が先に確認すること</h2><span class="tag public">発注条件・精算</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">熊本市（市発注の対象土木工事）</span>
+        <h3>宿泊費・交通費等は事前協議を</h3>
+        <p>県外から労働者を確保する必要がある場合、宿泊費、労働者送迎費、通勤等の費用が設計変更の対象になることがあります。特記仕様書を確認し、事前協議と支出を証明する書類を準備してください。</p>
+        <p class="note">※熊本へ来ただけで自動的に支給される制度ではありません。下請会社は元請へ、元請は発注者へ作業前に確認してください。高速料金を含められるかは個別確認が必要です。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji0037212/index.html" target="_blank" rel="noopener">熊本市の土木工事技術情報</a>
+      </div>
+      <div class="card">
+        <span class="who">復旧工事に入る会社</span>
+        <h3>領収書等を会社で保管する</h3>
+        <p>この仕組みは作業員本人への一律給付ではなく、受注者が実施計画と支出実績を示して工事費を精算するものです。宿泊先、移動方法、人数、期間を確認できる資料を残してください。</p>
+        <p class="note">※民間工事や熊本市以外の発注工事へ同じ条件が適用されるとは限りません。契約先の発注条件を確認してください。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji0037212/index.html" target="_blank" rel="noopener">対象条件と様式を確認</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 終了済み。現在受付中の窓口と混同しないよう別掲 -->
+  <section id="ended" class="ended" data-cat="ended">
+    <div class="sec-head"><h2>終了した支援</h2><span class="tag life">受付終了</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>被災住宅の障害物除去</h3>
+        <p>住宅の生活に必要な場所に入った土砂や木竹等の除去は、受付を終了しています。</p>
+        <p class="note">※申請済みの方は市からの案内に従ってください。現在の扱いは市の支援制度一覧で確認できます。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372110/" target="_blank" rel="noopener">熊本市の支援制度一覧</a>
+      </div>
+      <div class="card">
+        <span class="who">カブアンド</span>
+        <h3>熊本地震 緊急支援金</h3>
+        <p>2026年8月17日で受付を終了しました。</p>
+        <p class="note">※熊本県の義援金窓口は引き続き受け付けています。</p>
+        <a class="go" href="https://kabuand.com/mz/articles/4y83ske7vnksemyz06fyjsevgr" target="_blank" rel="noopener">カブアンドの終了案内</a>
+      </div>
+      <div class="card">
+        <span class="who">ファミリーマート</span>
+        <h3>店頭支援金募金</h3>
+        <p>2026年8月25日で受付を終了しました。</p>
+        <a class="go" href="https://www.family.co.jp/company/news_releases/2026/20260729_01.html" target="_blank" rel="noopener">公式の実施案内</a>
       </div>
     </div>
   </section>
@@ -441,7 +537,7 @@
     <p class="foot-strong"><strong>このサイト自体は寄付を一切受け取っていません。</strong>すべてのリンクは各公式窓口へ直接つながり、アフィリエイト等の収益も一切ありません。</p>
     <p>運営者：<button id="op-handle" class="op-handle" type="button" title="ROT13" aria-label="運営者名は暗号になっています。押すと解読されます">XHZNZBA</button>（個人）／
     誤りの指摘・掲載のご相談は <a href="https://github.com/yumaji/kumamoto-shien-repo/issues" target="_blank" rel="noopener">GitHub の Issue</a> へお寄せください。</p>
-    <p>このページは<span id="last-updated-foot">2026年8月19日</span>時点の各公式発表をもとに、個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>　／　<a href="https://github.com/yumaji/kumamoto-shien-repo" target="_blank" rel="noopener">ソースコードと更新履歴（GitHub）</a></p>
+    <p>このページは<span id="last-updated-foot">2026年8月26日</span>時点の各公式発表をもとに、個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>　／　<a href="https://github.com/yumaji/kumamoto-shien-repo" target="_blank" rel="noopener">ソースコードと更新履歴（GitHub）</a></p>
   </div>
 </footer>
 

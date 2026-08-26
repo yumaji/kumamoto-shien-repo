@@ -12,28 +12,30 @@ import pathlib
 JST = datetime.timezone(datetime.timedelta(hours=9))
 TODAY = datetime.datetime.now(JST).date()
 
-# 掲載中の窓口の受付期限。期限の14日前から通知が出る。
+# 掲載中の窓口・制度の申込または完了期限。期限の14日前から通知が出る。
 DEADLINES = [
-    # コンビニ3社の終了日は報道ベース（公式リリースでの明記は未確認）。
-    # 通知が来たら公式ページで実際の終了・延長を確認してからカードを整理すること。
-    ("カブアンド 緊急支援金", "2026-08-17",
-     "https://kabuand.com/order/donation-kumamoto-202607"),
-    ("ファミリーマート 店頭募金", "2026-08-25",
-     "https://www.family.co.jp/company/news_releases/2026/20260729_01.html"),
     ("楽天クラッチ募金", "2026-08-28",
      "https://corp.rakuten.co.jp/donation/kumamoto_2026_ja/kumamoto_2026_ja.html"),
     ("セブン‐イレブン 店頭募金", "2026-08-31",
      "https://www.sej.co.jp/company/news_release/news/2026/202607291130.html"),
     ("ローソン 災害支援募金", "2026-08-31",
      "https://www.lawson.co.jp/company/news/detail/1530518_2504.html"),
+    ("建設型応急住宅 申込", "2026-09-04",
+     "https://www.city.kumamoto.jp/kiji00372491/index.html"),
     ("CAMPFIRE 緊急災害支援金", "2026-09-25",
      "https://camp-fire.jp/projects/971234/view"),
+    ("住家の緊急の修理 完了", "2026-09-30",
+     "https://www.city.kumamoto.jp/kiji00372143/index.html"),
+    ("被災住宅の応急修理 原則完了", "2026-10-27",
+     "https://www.city.kumamoto.jp/kiji00372104/index.html"),
     ("済生会熊本病院（READYFOR）", "2026-10-28",
      "https://readyfor.jp/projects/saiseikai-kumamoto"),
     ("熊本県 義援金", "2026-10-30",
      "https://www.pref.kumamoto.jp/soshiki/27/274572.html"),
     ("日本赤十字社 義援金", "2026-10-30",
      "https://www.jrc.or.jp/contribute/help/20260731/"),
+    ("被災家屋等の公費解体 書類受付", "2026-12-10",
+     "https://www.city.kumamoto.jp/kiji00372403/index.html"),
 ]
 
 # フェーズが進んだら検討する掲載内容。対象日を過ぎると通知に出続ける。
@@ -54,6 +56,13 @@ WEEKLY = [
     ("熊本県 義援金", "https://www.pref.kumamoto.jp/soshiki/27/274572.html"),
     ("熊本県 令和8年熊本地震に関する情報", "https://www.pref.kumamoto.jp/soshiki/1/274517.html"),
     ("熊本県 災害ボランティア情報", "https://www.fukushi-kumamoto.or.jp/kvc/"),
+    ("熊本市 被災者支援制度一覧", "https://www.city.kumamoto.jp/kiji00372110/"),
+    ("熊本市 被災者生活再建支援金", "https://www.city.kumamoto.jp/bousai/kiji00372460/index.html"),
+    ("熊本市 建設型応急住宅", "https://www.city.kumamoto.jp/kiji00372491/index.html"),
+    ("熊本市 住家の緊急の修理", "https://www.city.kumamoto.jp/kiji00372143/index.html"),
+    ("熊本市 被災住宅の応急修理", "https://www.city.kumamoto.jp/kiji00372104/index.html"),
+    ("熊本市 被災家屋等の公費解体", "https://www.city.kumamoto.jp/kiji00372403/index.html"),
+    ("熊本市 土木工事の技術情報", "https://www.city.kumamoto.jp/kiji0037212/index.html"),
     ("経済産業省 中小企業支援措置", "https://www.meti.go.jp/press/20260729003.html"),
     ("国交省 通れるマップ", "https://www.mlit.go.jp/road/saigai/r8kumamoto/index.html"),
 ]
@@ -68,7 +77,7 @@ def main() -> None:
 
     out = [f"OPERATIONS.md 4節の定期見直しです。確認して、対応が済んだらこの Issue を閉じてください。",
            "",
-           "**このIssueは通知だけで、サイトは自動更新されません。**"
+           "**このIssueは通知だけで、サイトは自動更新されません。**",
            "掲載の追加・修正は公式発表を確認してから手で行ってください。",
            ""]
 
@@ -78,13 +87,13 @@ def main() -> None:
         d = datetime.date.fromisoformat(date_s)
         left = (d - TODAY).days
         if left < 0:
-            urgent.append(f"- [ ] **{name}** — {date_s} で受付終了済み（{-left}日経過）。"
-                          f"カードを削除するか「受付終了」と明記してリンクを外す。<{url}>")
+            urgent.append(f"- [ ] **{name}** — {date_s} の期限から{-left}日経過。"
+                          f"終了や延長の有無を確認し、掲載内容を更新する。<{url}>")
         elif left <= DEADLINE_NOTICE_DAYS:
             urgent.append(f"- [ ] **{name}** — 残り{left}日（{date_s}）。"
-                          f"延長の有無を確認する。<{url}>")
+                          f"期限と延長の有無を確認する。<{url}>")
     if urgent:
-        out += ["## 受付期限が近い・過ぎた窓口", ""] + urgent + [""]
+        out += ["## 期限が近い・過ぎた窓口・制度", ""] + urgent + [""]
 
     # フェーズ別に検討するもの
     phase = [f"- [ ] **{t}**\n  {desc}\n  <{url}>"
