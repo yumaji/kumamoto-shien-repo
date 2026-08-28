@@ -61,6 +61,8 @@ WEEKLY = [
     ("経済産業省 中小企業支援措置", "https://www.meti.go.jp/press/20260729003.html"),
     ("国交省 通れるマップ", "https://www.mlit.go.jp/road/saigai/r8kumamoto/index.html"),
     ("熊本県 住まいの支援制度", "https://www.pref.kumamoto.jp/soshiki/117/277826.html"),
+    # 2026-08-26 開設の新しいサイト。毎週火曜の更新が続いているかを確認する
+    ("神田研究室 渋滞状況（毎週火曜更新）", "https://www.ykandalab.net/d-trip/2026-kumamoto/"),
 ]
 
 # 期限の何日前から通知を出すか
