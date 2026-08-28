@@ -13,13 +13,11 @@ JST = datetime.timezone(datetime.timedelta(hours=9))
 TODAY = datetime.datetime.now(JST).date()
 
 # 掲載中の窓口の受付期限。期限の14日前から通知が出る。
+# 【重要】カードを整理し終えた窓口は、この一覧からも必ず削除すること。
+# 残したままだと「〇日経過」の通知が永久に出続け、本当に未対応のものが埋もれる。
 DEADLINES = [
     # コンビニ3社の終了日は報道ベース（公式リリースでの明記は未確認）。
     # 通知が来たら公式ページで実際の終了・延長を確認してからカードを整理すること。
-    ("カブアンド 緊急支援金", "2026-08-17",
-     "https://kabuand.com/order/donation-kumamoto-202607"),
-    ("ファミリーマート 店頭募金", "2026-08-25",
-     "https://www.family.co.jp/company/news_releases/2026/20260729_01.html"),
     ("楽天クラッチ募金", "2026-08-28",
      "https://corp.rakuten.co.jp/donation/kumamoto_2026_ja/kumamoto_2026_ja.html"),
     ("セブン‐イレブン 店頭募金", "2026-08-31",
