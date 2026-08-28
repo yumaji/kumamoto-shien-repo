@@ -18,6 +18,12 @@ TODAY = datetime.datetime.now(JST).date()
 DEADLINES = [
     # コンビニ3社の終了日は報道ベース（公式リリースでの明記は未確認）。
     # 通知が来たら公式ページで実際の終了・延長を確認してからカードを整理すること。
+    ("建設型応急住宅（熊本市）申込", "2026-09-04",
+     "https://www.pref.kumamoto.jp/soshiki/117/277826.html"),
+    ("住宅の応急修理 完了", "2026-10-27",
+     "https://www.pref.kumamoto.jp/soshiki/27/275109.html"),
+    ("公費解体（熊本市）書類受付", "2026-12-10",
+     "https://www.city.kumamoto.jp/kiji00372403/index.html"),
     ("楽天クラッチ募金", "2026-08-28",
      "https://corp.rakuten.co.jp/donation/kumamoto_2026_ja/kumamoto_2026_ja.html"),
     ("セブン‐イレブン 店頭募金", "2026-08-31",
@@ -54,6 +60,7 @@ WEEKLY = [
     ("熊本県 災害ボランティア情報", "https://www.fukushi-kumamoto.or.jp/kvc/"),
     ("経済産業省 中小企業支援措置", "https://www.meti.go.jp/press/20260729003.html"),
     ("国交省 通れるマップ", "https://www.mlit.go.jp/road/saigai/r8kumamoto/index.html"),
+    ("熊本県 住まいの支援制度", "https://www.pref.kumamoto.jp/soshiki/117/277826.html"),
 ]
 
 # 期限の何日前から通知を出すか
