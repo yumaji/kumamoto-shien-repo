@@ -16,18 +16,12 @@ TODAY = datetime.datetime.now(JST).date()
 # 【重要】カードを整理し終えた窓口は、この一覧からも必ず削除すること。
 # 残したままだと「〇日経過」の通知が永久に出続け、本当に未対応のものが埋もれる。
 DEADLINES = [
-    # コンビニ3社の終了日は報道ベース（公式リリースでの明記は未確認）。
-    # 通知が来たら公式ページで実際の終了・延長を確認してからカードを整理すること。
     ("建設型応急住宅（熊本市）申込", "2026-09-04",
      "https://www.pref.kumamoto.jp/soshiki/117/277826.html"),
     ("住宅の応急修理 完了", "2026-10-27",
      "https://www.pref.kumamoto.jp/soshiki/27/275109.html"),
     ("公費解体（熊本市）書類受付", "2026-12-10",
      "https://www.city.kumamoto.jp/kiji00372403/index.html"),
-    ("セブン‐イレブン 店頭募金", "2026-08-31",
-     "https://www.sej.co.jp/company/news_release/news/2026/202607291130.html"),
-    ("ローソン 災害支援募金", "2026-08-31",
-     "https://www.lawson.co.jp/company/news/detail/1530518_2504.html"),
     ("CAMPFIRE 緊急災害支援金", "2026-09-25",
      "https://camp-fire.jp/projects/971234/view"),
     ("済生会熊本病院（READYFOR）", "2026-10-28",
