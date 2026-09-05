@@ -13,13 +13,13 @@
     try { window.top.location.replace(window.location.href); } catch (e) {}
   }
 </script>
-<meta name="description" content="2026年7月28日に発生した令和8年熊本地震の支援情報まとめ。義援金・ふるさと納税・ネット募金の窓口と、被災された方が使える無料Wi-Fiや料金支援を、公式発表をもとに整理しています。">
+<meta name="description" content="令和8年熊本地震で被災された方向けに、り災証明書・住宅の応急修理・公費解体・被災者生活再建支援金・応急住宅の期限と申請先を、公式発表をもとに整理しています。義援金・ふるさと納税・ネット募金の窓口も掲載。">
 <link rel="canonical" href="https://kumamoto-shien.net/">
 <!-- SNSでシェアされたときのカード表示用（OGP） -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="令和8年熊本地震 支援情報まとめ">
 <meta property="og:title" content="令和8年熊本地震 支援情報まとめ">
-<meta property="og:description" content="義援金・ふるさと納税・ネット募金の窓口と、被災された方が使える支援を、公式発表をもとに整理しています。">
+<meta property="og:description" content="り災証明書・応急修理・公費解体・生活再建支援金の期限と申請先を、公式発表をもとに整理しています。義援金・ネット募金の窓口も掲載。">
 <meta property="og:url" content="https://kumamoto-shien.net/">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:image" content="https://kumamoto-shien.net/ogp.png">
@@ -34,7 +34,7 @@
   "name": "令和8年熊本地震 支援情報まとめ",
   "url": "https://kumamoto-shien.net/",
   "inLanguage": "ja",
-  "description": "2026年7月28日に発生した令和8年熊本地震の支援情報まとめ。義援金・ふるさと納税・ネット募金の窓口と、被災された方が使える支援を、公式発表をもとに整理しています。"
+  "description": "令和8年熊本地震で被災された方向けの支援制度（り災証明書・住宅の応急修理・公費解体・被災者生活再建支援金・応急住宅）の期限と申請先、および義援金・ネット募金の窓口を、公式発表をもとに整理しています。"
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,7 +153,7 @@
     margin-top:44px;background:var(--amber-soft);border:1px solid #e8d9b4;
     border-radius:var(--radius);padding:18px 20px;
   }
-  .caution h2{font-size:1rem;font-weight:900;color:var(--amber)}
+  .caution h2,.caution h3{font-size:1rem;font-weight:900;color:var(--amber)}
   .caution ul{margin:8px 0 0 1.2em;font-size:.86rem;color:var(--ink)}
   .caution li{margin-top:4px}
 
@@ -182,19 +182,19 @@
 
 <div class="hero">
   <h1>いま、熊本のために<br><em>じぶんにできる支援</em>を選ぶ。</h1>
-  <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）への支援窓口を、公式発表をもとに整理しました。寄付・サービス利用・被災された方向けの情報まで、行き先はすべて公式ページです。</p>
+  <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）の支援情報です。復興期に入り、被災された方が使える制度は<strong>いずれも期限のある申請制</strong>になっています。住まいの再建・寄付の窓口ともに、行き先はすべて公式ページです。</p>
   <div class="quick">
-    <a href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県に義援金を送る<small>県の公式口座（受付〜10/30予定）</small></a>
+    <a href="#hisaisha">被災された方の手続き<small>応急修理・公費解体・生活再建支援金</small></a>
     <a class="alt" href="https://donation.yahoo.co.jp/promo/20260728.html" target="_blank" rel="noopener">ネットで少額から寄付<small>Yahoo!ネット募金 特設ページ</small></a>
-    <a class="alt" href="#hisaisha" >被災された方はこちら<small>住まいの再建・応急修理・公費解体</small></a>
+    <a class="alt" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県に義援金を送る<small>県の公式口座（受付〜10/30予定）</small></a>
   </div>
 </div>
 
 <nav class="nav-filter" aria-label="目的の情報へ移動">
   <div class="nav-filter-in">
     <a href="#start">支援を始める前に</a>
-    <a href="#kifu">お金で支援する</a>
     <a href="#hisaisha">被災された方へ</a>
+    <a href="#kifu">お金で支援する</a>
     <a href="#jigyo">事業者・企業の方</a>
   </div>
 </nav>
@@ -236,6 +236,81 @@
         <h3>確かめてから広める</h3>
         <p>今回の地震では、生成AIで作られた偽の被害動画や、実在しない救助要請の投稿が確認されています。偽の救助要請が広まると、救助の手が実際にそちらへ割かれます。出所が公式発表かを確かめてから共有してください。</p>
         <a class="go" href="https://www.soumu.go.jp/r8_kumamoto_jishin/index.html" target="_blank" rel="noopener">総務省の関連情報</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 被災者向け：住まいと生活の再建。金額・期限は熊本県／熊本市の公式ページで確認済み -->
+  <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
+    <div class="sec-head"><h2>住まいと生活の再建</h2><span class="tag life">被災された方へ</span></div>
+    <div class="caution">
+      <h3>申請する順番にご注意ください</h3>
+      <ul>
+        <li><strong>り災証明書の判定に納得できないときは、支援を受ける前に</strong>二次調査を申請してください。支援を受けた後は判定が確定し、申請できなくなります（申請後に支援を受けた場合も取り消されます）。判定区分はすべての支援の基準になる一方、再調査で判定が下がることもあります。</li>
+        <li><strong>住宅の応急修理と応急仮設住宅は、原則としてどちらか一方</strong>です。修理に長期間かかる見込みの場合など例外もあるため、どちらを選ぶかは決める前に市町村の窓口へご相談ください。</li>
+        <li><strong>ご自身で解体した場合も、費用の償還を受けられます。</strong>ただし工事前・工事中・工事後の写真、契約書、見積書、領収証、廃棄物処理の帳票が必要です。捨てないでください（建物の一部だけの解体は対象外）。</li>
+      </ul>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">熊本県</span>
+        <h3>被災者生活再建支援金</h3>
+        <p>住宅の被害程度に応じた基礎支援金（最大100万円）と、再建方法に応じた加算支援金（最大200万円）で、<strong>合わせて最大300万円</strong>。り災証明書が必要です。</p>
+        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/276299.html" target="_blank" rel="noopener">熊本県の案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本県 ／ 各市町村</span>
+        <h3>住宅の応急修理</h3>
+        <p>屋根・開口部・配管など、日常生活に不可欠な箇所を市町村が業者へ直接支払う形で修理します。上限は全壊〜半壊で<strong>75万7,000円</strong>、準半壊で36万7,000円。<strong>原則10月27日までに完了</strong>する必要があります。</p>
+        <p class="note">※ブルーシート展張などの「緊急の修理」（上限56,400円）は8月7日で受付終了。屋根の被害が残る場合はこちらの応急修理を相談してください。</p>
+        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275109.html" target="_blank" rel="noopener">熊本県の案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本県 ／ 熊本市</span>
+        <h3>応急住宅（建設型・賃貸型）</h3>
+        <p>住居が全壊等の被害を受け、自力で住宅を確保できない方に無償で提供されます。民間賃貸を借り上げる<strong>賃貸型（みなし仮設）は引き続き受付中</strong>。建設型は市町村ごとの募集で、熊本市分の申込は9月4日に締め切られました。</p>
+        <p class="note">※賃貸型の県窓口は災害救助法適用の20市町村が対象（熊本市は市が独自に実施）。申込先と期限は市町村ごとに異なるため、お住まいの自治体の窓口でご確認ください。</p>
+        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275223.html" target="_blank" rel="noopener">賃貸型応急住宅の案内</a>
+      </div>
+      <div class="card">
+        <span class="who">熊本市</span>
+        <h3>被災家屋等の公費解体</h3>
+        <p>り災証明書で半壊以上と判定された家屋等が対象。熊本市の申請書類受付は<strong>9月10日から12月10日まで</strong>（月〜金・祝日除く）。</p>
+        <p class="note">※他の市町村は受付時期が異なります。お住まいの自治体にご確認ください。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372403/index.html" target="_blank" rel="noopener">熊本市の案内</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 被災者向け：生活インフラ -->
+  <section id="hisaisha-life" class="for-hisaisha" data-cat="hisaisha">
+    <div class="sec-head"><h2>被災された方が使える支援</h2><span class="tag life">無料・減免</span></div>
+    <div class="cards">
+      <div class="card">
+        <span class="who">ドコモ / au / ソフトバンク</span>
+        <h3>無料Wi-Fi「00000JAPAN」</h3>
+        <p>被災地域で公衆無線LANを無料開放中。ネットワーク一覧から「00000JAPAN」を選ぶだけで、契約キャリアを問わず利用できます。</p>
+        <p class="note">※暗号化されていないため、カード情報等の入力は避けてください。</p>
+        <a class="go" href="https://www.itmedia.co.jp/news/article/2607/28/2000000246/" target="_blank" rel="noopener">利用方法を見る</a>
+      </div>
+      <div class="card">
+        <span class="who">携帯各社</span>
+        <h3>料金支援・災害用伝言板</h3>
+        <p>災害救助法適用地域では、支払期限の延長や修理費用の減免などの支援措置を実施。NTT東西・ドコモ・KDDI・ソフトバンク・楽天モバイルが災害用伝言板を展開中です。</p>
+        <a class="go" href="https://www.softbank.jp/disaster/202607_02/" target="_blank" rel="noopener">支援措置の例（ソフトバンク）</a>
+      </div>
+      <div class="card">
+        <span class="who">Honda × ゼンリンデータコム</span>
+        <h3>通行実績マップ「いつもNAVI」</h3>
+        <p>ドライブデータをもとにした、震災エリアの通行可能な道路の参考情報が公開されています。</p>
+        <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
+      </div>
+      <div class="card">
+        <span class="who">日本カーシェアリング協会</span>
+        <h3>車の無償貸出「災害サポート・レンタカー」</h3>
+        <p>被災された方・支援活動を行う団体が対象。長期貸出（軽乗用・普通車／最長14日）と短期貸出（軽トラック／最長3日）を熊本支部で受付中。予約専用番号 050-5799-4740（10:00〜16:00、水・日・祝休み）。</p>
+        <p class="note">※事前申込がないまま拠点へ行っても貸出できません。</p>
+        <a class="go" href="https://www.japan-csa.org/blog/archives/13936" target="_blank" rel="noopener">協会の受付案内</a>
       </div>
     </div>
   </section>
@@ -349,73 +424,6 @@
         <p>ファミリーマート（8月25日）、セブン‐イレブン・ローソン（8月31日）の店頭募金は、いずれも受付を終了しました。集まった募金は被災自治体等を通じて被災された方へ届けられます。</p>
         <p class="note">※店頭での受付は終了しましたが、下記の熊本県をはじめ、義援金・ネット募金の窓口は継続しています。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 被災者向け：住まいと生活の再建。金額・期限は熊本県／熊本市の公式ページで確認済み -->
-  <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
-    <div class="sec-head"><h2>住まいと生活の再建</h2><span class="tag life">被災された方へ</span></div>
-    <div class="cards">
-      <div class="card">
-        <span class="who">熊本県</span>
-        <h3>被災者生活再建支援金</h3>
-        <p>住宅の被害程度に応じた基礎支援金（最大100万円）と、再建方法に応じた加算支援金（最大200万円）で、<strong>合わせて最大300万円</strong>。り災証明書が必要です。</p>
-        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/276299.html" target="_blank" rel="noopener">熊本県の案内</a>
-      </div>
-      <div class="card">
-        <span class="who">熊本県 ／ 各市町村</span>
-        <h3>住宅の応急修理</h3>
-        <p>屋根・開口部・配管など、日常生活に不可欠な箇所を市町村が業者へ直接支払う形で修理します。上限は全壊〜半壊で<strong>75万7,000円</strong>、準半壊で36万7,000円。<strong>原則10月27日までに完了</strong>する必要があります。</p>
-        <p class="note">※ブルーシート展張などの「緊急の修理」（上限56,400円）は8月7日で受付終了。屋根の被害が残る場合はこちらの応急修理を相談してください。</p>
-        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275109.html" target="_blank" rel="noopener">熊本県の案内</a>
-      </div>
-      <div class="card">
-        <span class="who">熊本県 ／ 熊本市</span>
-        <h3>応急住宅（建設型・賃貸型）</h3>
-        <p>住居が全壊等の被害を受け、自力で住宅を確保できない方に無償で提供されます。民間賃貸を借り上げる<strong>賃貸型（みなし仮設）は引き続き受付中</strong>。建設型は市町村ごとの募集で、熊本市分の申込は9月4日に締め切られました。</p>
-        <p class="note">※賃貸型の県窓口は災害救助法適用の20市町村が対象（熊本市は市が独自に実施）。申込先と期限は市町村ごとに異なるため、お住まいの自治体の窓口でご確認ください。</p>
-        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275223.html" target="_blank" rel="noopener">賃貸型応急住宅の案内</a>
-      </div>
-      <div class="card">
-        <span class="who">熊本市</span>
-        <h3>被災家屋等の公費解体</h3>
-        <p>り災証明書で半壊以上と判定された家屋等が対象。熊本市の申請書類受付は<strong>9月10日から12月10日まで</strong>（月〜金・祝日除く）。</p>
-        <p class="note">※他の市町村は受付時期が異なります。お住まいの自治体にご確認ください。</p>
-        <a class="go" href="https://www.city.kumamoto.jp/kiji00372403/index.html" target="_blank" rel="noopener">熊本市の案内</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 被災者向け：生活インフラ -->
-  <section id="hisaisha-life" class="for-hisaisha" data-cat="hisaisha">
-    <div class="sec-head"><h2>被災された方が使える支援</h2><span class="tag life">無料・減免</span></div>
-    <div class="cards">
-      <div class="card">
-        <span class="who">ドコモ / au / ソフトバンク</span>
-        <h3>無料Wi-Fi「00000JAPAN」</h3>
-        <p>被災地域で公衆無線LANを無料開放中。ネットワーク一覧から「00000JAPAN」を選ぶだけで、契約キャリアを問わず利用できます。</p>
-        <p class="note">※暗号化されていないため、カード情報等の入力は避けてください。</p>
-        <a class="go" href="https://www.itmedia.co.jp/news/article/2607/28/2000000246/" target="_blank" rel="noopener">利用方法を見る</a>
-      </div>
-      <div class="card">
-        <span class="who">携帯各社</span>
-        <h3>料金支援・災害用伝言板</h3>
-        <p>災害救助法適用地域では、支払期限の延長や修理費用の減免などの支援措置を実施。NTT東西・ドコモ・KDDI・ソフトバンク・楽天モバイルが災害用伝言板を展開中です。</p>
-        <a class="go" href="https://www.softbank.jp/disaster/202607_02/" target="_blank" rel="noopener">支援措置の例（ソフトバンク）</a>
-      </div>
-      <div class="card">
-        <span class="who">Honda × ゼンリンデータコム</span>
-        <h3>通行実績マップ「いつもNAVI」</h3>
-        <p>ドライブデータをもとにした、震災エリアの通行可能な道路の参考情報が公開されています。</p>
-        <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
-      </div>
-      <div class="card">
-        <span class="who">日本カーシェアリング協会</span>
-        <h3>車の無償貸出「災害サポート・レンタカー」</h3>
-        <p>被災された方・支援活動を行う団体が対象。長期貸出（軽乗用・普通車／最長14日）と短期貸出（軽トラック／最長3日）を熊本支部で受付中。予約専用番号 050-5799-4740（10:00〜16:00、水・日・祝休み）。</p>
-        <p class="note">※事前申込がないまま拠点へ行っても貸出できません。</p>
-        <a class="go" href="https://www.japan-csa.org/blog/archives/13936" target="_blank" rel="noopener">協会の受付案内</a>
       </div>
     </div>
   </section>
