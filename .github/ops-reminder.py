@@ -16,8 +16,6 @@ TODAY = datetime.datetime.now(JST).date()
 # 【重要】カードを整理し終えた窓口は、この一覧からも必ず削除すること。
 # 残したままだと「〇日経過」の通知が永久に出続け、本当に未対応のものが埋もれる。
 DEADLINES = [
-    ("建設型応急住宅（熊本市）申込", "2026-09-04",
-     "https://www.pref.kumamoto.jp/soshiki/117/277826.html"),
     ("住宅の応急修理 完了", "2026-10-27",
      "https://www.pref.kumamoto.jp/soshiki/27/275109.html"),
     ("公費解体（熊本市）書類受付", "2026-12-10",
