@@ -25,12 +25,15 @@ jobs:
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
           # 403/429 はbot対策の可能性が高いので許容。リダイレクトも許容。
+          # さとふるは実行環境から毎回タイムアウトし、誤報の Issue しか生まないため除外。
+          # 代わりに週次の運用チェック（ops-reminder.py の WEEKLY）で人が確認する。
           args: >-
             --no-progress
             --accept 200,201,204,206,301,302,308,403,429
             --max-retries 3
             --timeout 40
             --user-agent "Mozilla/5.0 (link-check; kumamoto-shien-matome)"
+            --exclude "satofull\.jp"
             index.html
           output: ./lychee-report.md
           fail: false

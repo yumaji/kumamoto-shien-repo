@@ -20,6 +20,8 @@ DEADLINES = [
      "https://www.pref.kumamoto.jp/soshiki/27/275109.html"),
     ("公費解体（熊本市）書類受付", "2026-12-10",
      "https://www.city.kumamoto.jp/kiji00372403/index.html"),
+    ("小規模事業者持続化補助金 災害支援枠（1次）", "2026-10-16",
+     "https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260909001.html"),
     ("日本カーシェアリング協会 災害サポート・レンタカー", "2026-12-25",
      "https://www.japan-csa.org/blog/archives/13936"),
     ("済生会熊本病院（READYFOR）", "2026-10-28",
@@ -58,6 +60,9 @@ WEEKLY = [
     ("熊本県 住まいの支援制度", "https://www.pref.kumamoto.jp/soshiki/117/277826.html"),
     # 2026-08-26 開設の新しいサイト。毎週火曜の更新が続いているかを確認する
     ("神田研究室 渋滞状況（毎週火曜更新）", "https://www.ykandalab.net/d-trip/2026-kumamoto/"),
+    # 自動リンクチェックでは毎回タイムアウトする（GitHub の実行環境からは応答が遅い）ため、
+    # link-check.yml の対象から外し、ここで人が確認する。
+    ("さとふる 災害緊急支援寄付", "https://www.satofull.jp/oenkifu/oenkifu_detail.php?page_id=542"),
 ]
 
 # 期限の何日前から通知を出すか
