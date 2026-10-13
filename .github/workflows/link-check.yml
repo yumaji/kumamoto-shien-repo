@@ -1,6 +1,6 @@
 name: リンク切れの定期チェック
 
-# 毎朝6時（日本時間）に index.html 内の全リンクを確認し、
+# 毎朝6時（日本時間）に index.html / accessibility.html 内の全リンクを確認し、
 # 切れているリンクがあれば自動で Issue を作成します。
 on:
   schedule:
@@ -35,6 +35,7 @@ jobs:
             --user-agent "Mozilla/5.0 (link-check; kumamoto-shien-matome)"
             --exclude "satofull\.jp"
             index.html
+            accessibility.html
           output: ./lychee-report.md
           fail: false
 

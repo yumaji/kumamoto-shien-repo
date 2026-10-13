@@ -80,7 +80,7 @@ gh api -X PUT /repos/yumaji/kumamoto-shien-repo/actions/permissions/workflow \
 ## 7. セキュリティ
 
 - **外部アクションはコミットSHAで固定する。** `uses: owner/action@v2` のようなタグ参照は、タグが動かされると別のコードが実行されうるため、`@<40桁のSHA> # vX.Y.Z` の形で固定しています。更新は Dependabot（`.github/dependabot.yml`、毎週月曜）が PR で提案するので、差分を見てマージすること。手でタグに戻さないこと。
-- **CSP は `index.html` の meta タグで指定。** GitHub Pages はHTTPヘッダーを設定できないため meta で代替しています。画像やスクリプトなど外部リソースを追加したら、CSP の許可リストも同時に更新すること（更新しないと読み込みが無言でブロックされ、表示が壊れます）。
+- **CSP は `index.html` と `accessibility.html` の meta タグで指定。** GitHub Pages はHTTPヘッダーを設定できないため meta で代替しています。画像やスクリプトなど外部リソースを追加したら、CSP の許可リストも同時に更新すること（更新しないと読み込みが無言でブロックされ、表示が壊れます）。
 - **独自ドメインの検証（推奨・未実施）:** GitHub の Settings → Pages → Verified domains に `kumamoto-shien.net` を登録しておくと、万一 Pages を無効化した際に第三者がこのドメインを乗っ取って偽サイトを公開することを防げます。
 - **OGP画像の作り直し:** SNSシェア時に出る `ogp.png` は `python3 tools/make-ogp.py` で再生成できます（要 Pillow）。サイトのタイトルやURLを変えたら、この画像も作り直すこと。手で画像編集ソフトを使う必要はありません。
 - **アカウントの2要素認証:** GitHub とお名前.com の両方で有効にしておくこと。このサイトの実質的な攻撃経路は、サイト本体ではなくアカウントの乗っ取り（リポジトリ改竄・DNS書き換え）です。
@@ -90,3 +90,25 @@ gh api -X PUT /repos/yumaji/kumamoto-shien-repo/actions/permissions/workflow \
 - 未確認情報・伝聞の掲載
 - 特定の寄付先への誘導や優先表示（並びはカテゴリ内で公的窓口→民間の順）
 - 個人情報や被災者個人に関する情報の掲載
+
+## 9. アクセシビリティ（JIS X 8341-3:2016 適合レベル AA）
+
+`accessibility.html` で「JIS X 8341-3:2016 の適合レベル AA に準拠」と表明しています。更新で崩すと表明が事実と食い違うため、以下を守ること。
+
+**自動検査（更新のたびに自動）:** `index.html` か `accessibility.html` を push すると、Actions の「アクセシビリティ検査」（`.github/workflows/a11y-check.yml`）が `tools/a11y-check.mjs` を実行します。問題があれば「アクセシビリティ」ラベルの Issue が立つので、修正すること。手元で試すときは:
+
+```
+npm install --no-save playwright-core@1.63.0 axe-core@4.14.0 html-validate@11.16.2
+node tools/a11y-check.mjs index.html accessibility.html
+```
+
+**編集するときの決まり（自動検査では見つけられないものを含む）:**
+
+- **文字色に `--amber` を使わない。** 白地で 3.6:1 しかなく基準（4.5:1）に届きません。山吹色の文字は `--amber-ink` を使う。`--amber` は線や帯などの飾り専用。
+- **カードの発信元は `<h3>` の中に置く。** `<h3><span class="who">熊本県</span>見出し</h3>` の形。見出しで移動する読み上げ利用者に発信元が伝わり、リンク（「受付ページ」など）の行き先も見出しから分かるようになります。
+- **位置や見た目だけに頼る書き方をしない。** 「上の〇〇」「下記の〇〇」「右のボタン」「赤字の部分」などは、読み上げや拡大表示では伝わりません。名前で指すか、直接リンクする。
+- **リンクの文言だけで行き先が分かるようにする。** 「こちら」「詳細」だけにしない。
+- **画像を追加するときは `alt` を必ず付ける。** 飾りの画像は `alt=""`。文字を画像にしない。
+- **ページを追加したら**、ヘッダーとフッターを既存ページと同じにし（同じリンクを同じ順に）、`accessibility.html` の「試験したページ」とフッターのリンクに加え、`sitemap.xml` と `link-check.yml` にも追加すること。
+
+**再試験:** セクションの組み替えなど構成を大きく変えたときは、`accessibility.html` の達成基準チェックリストに沿って全項目を確認し直し、試験日を更新すること。少なくとも年1回は行う。

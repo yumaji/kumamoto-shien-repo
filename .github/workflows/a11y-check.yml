@@ -1,0 +1,75 @@
+name: アクセシビリティ検査
+
+# index.html / accessibility.html を更新するたびに、JIS X 8341-3:2016（WCAG 2.0）の
+# うち機械で確認できる項目を検査し、問題があれば Issue を作成します。
+# accessibility.html で「適合レベル AA に準拠」と表明しているため、
+# 更新で崩れたら気づけるようにしておく必要があります。
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - accessibility.html
+      - tools/a11y-check.mjs
+      - .github/workflows/a11y-check.yml
+  workflow_dispatch: {}   # 手動実行も可能
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # このジョブは push しないので、トークンをディスクに残さない
+          persist-credentials: false
+
+      # html-validate が Node 22 以上を必要とするため
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+
+      # バージョンを固定して入れる。インストール時のスクリプトは実行しない
+      # （ブラウザは実行環境に入っている Chrome を使う）
+      - name: 検査ツールを入れる
+        run: >-
+          npm install --no-save --no-audit --no-fund --ignore-scripts
+          playwright-core@1.63.0 axe-core@4.14.0 html-validate@11.16.2
+
+      - name: アクセシビリティ検査
+        id: a11y
+        run: |
+          if node tools/a11y-check.mjs index.html accessibility.html; then
+            echo "failed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      # 未対応の Issue があれば、新しく立てずにそれを更新する
+      - name: 既存の未対応Issueを探す
+        if: steps.a11y.outputs.failed == 'true'
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n=$(gh issue list --state open --label "アクセシビリティ" --limit 1 \
+                --json number --jq '.[0].number // empty')
+          echo "number=$n" >> "$GITHUB_OUTPUT"
+          echo "既存Issue: ${n:-なし（新規作成します）}"
+
+      - name: 問題があればIssueを作成／更新
+        if: steps.a11y.outputs.failed == 'true'
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710 # v6.0.0
+        with:
+          issue-number: ${{ steps.existing.outputs.number }}
+          title: "【要対応】アクセシビリティの基準を満たさない箇所があります（自動検査）"
+          content-filepath: ./a11y-report.md
+          labels: アクセシビリティ, 自動チェック
+
+      # 実行結果の画面でも失敗とわかるようにする
+      - name: 結果
+        if: steps.a11y.outputs.failed == 'true'
+        run: exit 1

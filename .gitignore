@@ -1,3 +1,7 @@
 # ops-reminder.py がCI上で生成する一時ファイル
 reminder-title.txt
 reminder-body.md
+
+# アクセシビリティ検査（tools/a11y-check.mjs）が生成する一時ファイル
+a11y-report.md
+node_modules/

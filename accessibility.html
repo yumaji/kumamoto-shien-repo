@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- GitHub Pages ではHTTPヘッダーを設定できないため、CSPはmetaタグで指定する。
+     外部リソース（画像・スクリプト等）を追加するときは、ここの許可リストも更新すること。 -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<title>アクセシビリティ方針 | 令和8年熊本地震 支援情報まとめ</title>
+<script>
+  // クリックジャッキング対策（Pagesでは X-Frame-Options を送れないため、JSでの脱出が唯一の手段）
+  if (window.top !== window.self) {
+    try { window.top.location.replace(window.location.href); } catch (e) {}
+  }
+</script>
+<meta name="description" content="令和8年熊本地震 支援情報まとめのアクセシビリティ方針と、JIS X 8341-3:2016 に基づく試験結果です。">
+<link rel="canonical" href="https://kumamoto-shien.net/accessibility.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#20272a;
+    --ink-soft:#55605f;
+    --paper:#f4f7f5;
+    --card:#ffffff;
+    --line:#dde4e0;
+    --green:#2e6e4e;      /* 阿蘇の深緑：行動・寄付 */
+    --green-soft:#e4efe8;
+    --blue:#1e4e79;       /* 藍：公的・信頼 */
+    --blue-soft:#e6edf4;
+    --amber:#b97a12;      /* 山吹：被災者向け・注意（線や帯などの装飾用） */
+    --amber-ink:#8a5a0b;  /* 山吹の文字用。--amber は白地で 3.6:1 しかなく文字に使えない（JIS X 8341-3 は 4.5:1 以上） */
+    --amber-soft:#f7efdd;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    background:var(--paper);color:var(--ink);line-height:1.75;
+    font-feature-settings:"palt";
+  }
+  a{color:var(--blue)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .skip{
+    position:absolute;left:8px;top:-60px;z-index:50;
+    background:var(--ink);color:#fff;font-weight:700;text-decoration:none;
+    padding:8px 14px;border-radius:6px;
+  }
+  .skip:focus{top:8px}
+  .sr-only{
+    position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+  header{background:var(--card);border-bottom:1px solid var(--line)}
+  .head-in{max-width:960px;margin:0 auto;padding:12px 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .site-title{font-weight:900;font-size:1.05rem;letter-spacing:.02em}
+  .site-title a{color:inherit;text-decoration:none}
+  .site-title a:hover{text-decoration:underline}
+  .site-title .r8{color:var(--green)}
+  .stamp{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--ink-soft)}
+  main{display:block;max-width:960px;margin:0 auto;padding:36px 20px 60px}
+  main:focus{outline:none}
+  h1{font-weight:900;font-size:clamp(1.4rem,4vw,1.9rem);line-height:1.35}
+  h2{font-size:1.15rem;font-weight:900;border-bottom:2px solid var(--ink);padding-bottom:8px;margin:40px 0 14px}
+  main p,main li{font-size:.92rem}
+  main p + p{margin-top:10px}
+  main ul{margin:8px 0 0 1.4em}
+  .lead,.after-facts{margin-top:14px}
+  main li{margin-top:4px}
+  .claim{
+    margin-top:20px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--green);
+    border-radius:var(--radius);padding:16px 18px;font-weight:700;
+  }
+  dl.facts{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;font-size:.92rem}
+  dl.facts dt{font-weight:700}
+  @media (max-width:560px){dl.facts{grid-template-columns:1fr} dl.facts dd{margin-bottom:6px}}
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:.86rem;margin-top:14px}
+  caption{text-align:left;font-weight:700;padding:4px 0 8px}
+  /* 列幅を固定し、文字を大きくしても表が画面からはみ出さないようにする */
+  table{table-layout:fixed}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+  thead th:nth-child(1){width:34%}
+  thead th:nth-child(2){width:20%}
+  thead th{background:var(--green-soft)}
+  tbody th{font-weight:700}
+  @media (max-width:560px){th,td{padding:6px}}
+  footer{border-top:1px solid var(--line);margin-top:40px;background:var(--card)}
+  .foot-in{max-width:960px;margin:0 auto;padding:20px;font-size:.78rem;color:var(--ink-soft)}
+  .foot-in p + p{margin-top:8px}
+  .foot-strong strong{color:var(--ink)}
+  .op-handle{
+    font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.14em;
+    color:var(--green);background:var(--green-soft);cursor:pointer;
+    border:1px dashed var(--green);border-radius:6px;padding:1px 8px;
+  }
+  .op-handle.decoded{font-family:inherit;letter-spacing:.04em;border-style:solid;font-weight:700;cursor:default}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">本文へ移動</a>
+
+<header>
+  <div class="head-in">
+    <div class="site-title"><a href="./"><span class="r8">令和8年熊本地震</span> 支援情報まとめ</a></div>
+    <div class="stamp">試験日 2026-10-13</div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <h1>アクセシビリティ方針</h1>
+  <p class="lead">このサイトは、被災された方や支援したい方が、年齢や障害の有無、使っている機器にかかわらず必要な情報にたどり着けることを目指しています。そのために、日本産業規格 JIS X 8341-3:2016「高齢者・障害者等配慮設計指針−情報通信における機器，ソフトウェア及びサービス−第3部：ウェブコンテンツ」に対応しています。</p>
+
+  <h2>目標とする適合レベル</h2>
+  <p>JIS X 8341-3:2016 の適合レベル AA に準拠することを目標とし、2026年10月13日の試験で達成を確認しました。</p>
+  <p class="claim">JIS X 8341-3:2016 の適合レベル AA に準拠</p>
+
+  <h2>対象範囲</h2>
+  <p>https://kumamoto-shien.net/ で公開しているすべてのページ（2ページ）が対象です。リンク先の外部サイト（公的機関や寄付の受付窓口など）は、このサイトの管理外のため対象に含みません。</p>
+  <p>例外とする事項はありません。</p>
+
+  <h2>試験結果</h2>
+  <dl class="facts">
+    <dt>規格</dt><dd>JIS X 8341-3:2016</dd>
+    <dt>試験日</dt><dd>2026年10月13日</dd>
+    <dt>適合レベル</dt><dd>AA に準拠（レベル A・AA の38項目すべてに適合）</dd>
+    <dt>依存した技術</dt><dd>HTML、CSS、JavaScript</dd>
+    <dt>試験したページ</dt><dd>全ページ（<a href="./">トップページ</a>、このページ）</dd>
+    <dt>試験の方法</dt><dd>自動検査（axe-core 4.14.0 による WCAG 2.0 レベル A・AA の検査、html-validate 11.16.2 による HTML の検証）と、手作業での確認（キーボード操作、200% 拡大、コントラスト比の計算、見出し構造と読み上げ順序の確認）を、パソコンとスマートフォンの画面幅で行いました。</dd>
+  </dl>
+  <p class="after-facts">JavaScript は運営者名の表示の仕掛けにだけ使っています。JavaScript が動かない環境でも、掲載している情報はすべて利用できます。</p>
+
+  <h2>達成基準チェックリスト</h2>
+      <table>
+        <caption>レベル A（25項目）</caption>
+        <thead><tr><th scope="col">達成基準</th><th scope="col">結果</th><th scope="col">確認した内容</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1.1.1 非テキストコンテンツ</th><td>適合</td><td>画像は使っていない。リンクに添えている装飾の矢印（→）は、読み上げの対象から外している。</td></tr>
+          <tr><th scope="row">1.2.1 音声のみ及び映像のみ（収録済み）</th><td>適合（該当なし）</td><td>音声・映像を使っていない。</td></tr>
+          <tr><th scope="row">1.2.2 キャプション（収録済み）</th><td>適合（該当なし）</td><td>音声・映像を使っていない。</td></tr>
+          <tr><th scope="row">1.2.3 音声解説、又はメディアに対する代替（収録済み）</th><td>適合（該当なし）</td><td>音声・映像を使っていない。</td></tr>
+          <tr><th scope="row">1.3.1 情報及び関係性</th><td>適合</td><td>見出し（h1〜h3）、リスト、表の見出しセル、ランドマーク（header・nav・main・footer）をマークアップしている。各カードの発信元は見出しの一部として読み上げられる。</td></tr>
+          <tr><th scope="row">1.3.2 意味のある順序</th><td>適合</td><td>HTML の順序と表示の順序が一致している。CSS で順序を入れ替えていない。</td></tr>
+          <tr><th scope="row">1.3.3 感覚的な特徴</th><td>適合</td><td>「上の」「下記の」など、位置や形だけに頼った説明を使っていない。</td></tr>
+          <tr><th scope="row">1.4.1 色の使用</th><td>適合</td><td>文中のリンクには下線がある。カードの分類は色だけでなく文字のラベルでも示している。</td></tr>
+          <tr><th scope="row">1.4.2 音声の制御</th><td>適合（該当なし）</td><td>音声を使っていない。</td></tr>
+          <tr><th scope="row">2.1.1 キーボード</th><td>適合</td><td>すべてのリンクとボタンに Tab キーで到達し、Enter キーで操作できることを確認した。</td></tr>
+          <tr><th scope="row">2.1.2 キーボードトラップなし</th><td>適合</td><td>Tab キーでページを一周でき、途中で抜けられなくなる箇所がない。</td></tr>
+          <tr><th scope="row">2.2.1 タイミング調整可能</th><td>適合（該当なし）</td><td>時間制限のある操作がない。</td></tr>
+          <tr><th scope="row">2.2.2 一時停止、停止、非表示</th><td>適合</td><td>自動で動く・更新される内容はない。運営者名の解読表示は、押したときだけ約1秒動いて止まる。</td></tr>
+          <tr><th scope="row">2.3.1 3回の閃光、又は閾値以下</th><td>適合</td><td>閃光する内容はない。運営者名の解読表示は小さな文字の切り替えで、「動きを減らす」設定ではアニメーションしない。</td></tr>
+          <tr><th scope="row">2.4.1 ブロックスキップ</th><td>適合</td><td>ページ先頭に「本文へ移動」のリンクがあり、ランドマークと見出しでも移動できる。</td></tr>
+          <tr><th scope="row">2.4.2 ページタイトル</th><td>適合</td><td>各ページに内容を表すタイトルがある。</td></tr>
+          <tr><th scope="row">2.4.3 フォーカス順序</th><td>適合</td><td>フォーカスは表示順に移動する。画面上部に固定したナビの下に、フォーカス中の要素が隠れないことを確認した。</td></tr>
+          <tr><th scope="row">2.4.4 リンクの目的（コンテキスト内）</th><td>適合</td><td>リンクの文言と、そのリンクを含むカードの見出しから行き先がわかる。</td></tr>
+          <tr><th scope="row">3.1.1 ページの言語</th><td>適合</td><td>html 要素に lang=&quot;ja&quot; を指定している。</td></tr>
+          <tr><th scope="row">3.2.1 フォーカス時</th><td>適合</td><td>フォーカスしただけで画面が切り替わったり内容が変わったりしない。</td></tr>
+          <tr><th scope="row">3.2.2 入力時</th><td>適合（該当なし）</td><td>入力欄がない。</td></tr>
+          <tr><th scope="row">3.3.1 エラーの特定</th><td>適合（該当なし）</td><td>入力欄がない。</td></tr>
+          <tr><th scope="row">3.3.2 ラベル又は説明</th><td>適合（該当なし）</td><td>入力欄がない。</td></tr>
+          <tr><th scope="row">4.1.1 構文解析</th><td>適合</td><td>HTML の検証ツール（html-validate）でエラーがない。ID の重複もない。</td></tr>
+          <tr><th scope="row">4.1.2 名前（name）・役割（role）及び値（value）</th><td>適合</td><td>標準のリンクとボタンを使っている。運営者名のボタンは、押すと解読されることを説明として持ち、解読後は結果を読み上げで知らせる。</td></tr>
+        </tbody>
+      </table>
+      <table>
+        <caption>レベル AA（13項目）</caption>
+        <thead><tr><th scope="col">達成基準</th><th scope="col">結果</th><th scope="col">確認した内容</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1.2.4 キャプション（ライブ）</th><td>適合（該当なし）</td><td>ライブ配信の音声・映像を使っていない。</td></tr>
+          <tr><th scope="row">1.2.5 音声解説（収録済み）</th><td>適合（該当なし）</td><td>映像を使っていない。</td></tr>
+          <tr><th scope="row">1.4.3 コントラスト（最低限レベル）</th><td>適合</td><td>すべての文字が背景とのコントラスト比 4.5:1 以上（最も低い箇所で 4.9:1）。</td></tr>
+          <tr><th scope="row">1.4.4 テキストのサイズ変更</th><td>適合</td><td>ブラウザで 200% に拡大しても、文字の欠けや重なり、横スクロールが発生しない。文字だけを 200% にした場合も同様。</td></tr>
+          <tr><th scope="row">1.4.5 文字画像</th><td>適合（該当なし）</td><td>文字を画像で表示していない。</td></tr>
+          <tr><th scope="row">2.4.5 複数の手段</th><td>適合</td><td>全2ページ。各ページのヘッダーとフッターから、ほかのすべてのページへ移動できる。</td></tr>
+          <tr><th scope="row">2.4.6 見出し及びラベル</th><td>適合</td><td>見出しは内容と発信元を表している。</td></tr>
+          <tr><th scope="row">2.4.7 フォーカスの可視化</th><td>適合</td><td>フォーカス中のリンクとボタンに 3px の枠線を表示する。</td></tr>
+          <tr><th scope="row">3.1.2 一部分の言語</th><td>適合（該当なし）</td><td>日本語以外の文章がない（固有名詞・略語のみ）。</td></tr>
+          <tr><th scope="row">3.2.3 一貫したナビゲーション</th><td>適合</td><td>ヘッダーとフッターのリンクは、全ページで同じ順序に並んでいる。</td></tr>
+          <tr><th scope="row">3.2.4 一貫した識別性</th><td>適合</td><td>同じ機能のリンクやボタンには、全ページで同じ名前を付けている。</td></tr>
+          <tr><th scope="row">3.3.3 エラー修正の提案</th><td>適合（該当なし）</td><td>入力欄がない。</td></tr>
+          <tr><th scope="row">3.3.4 エラー回避（法的、金融及びデータ）</th><td>適合（該当なし）</td><td>入力欄・取引の機能がない。</td></tr>
+        </tbody>
+      </table>
+
+  <h2>継続的な取り組み</h2>
+  <ul>
+    <li>掲載内容を更新するたびに、自動検査を実行しています。問題が見つかった場合は修正します。</li>
+    <li>ページの構成を大きく変えたときは、改めて試験を行い、このページの試験結果を更新します。</li>
+  </ul>
+
+  <h2>ご意見・お問い合わせ</h2>
+  <p>見づらい箇所や使いにくい箇所があれば、<a href="https://github.com/yumaji/kumamoto-shien-repo/issues" target="_blank" rel="noopener">GitHub の Issue</a> でお知らせください。</p>
+</main>
+
+<footer>
+  <div class="foot-in">
+    <p class="foot-strong"><strong>このサイト自体は寄付を一切受け取っていません。</strong>すべてのリンクは各公式窓口へ直接つながり、アフィリエイト等の収益も一切ありません。</p>
+    <p>運営者：<button id="op-handle" class="op-handle" type="button" title="ROT13" aria-describedby="op-hint">XHZNZBA</button><span id="op-hint" hidden>暗号になっています。押すと解読されます。</span><span id="op-live" class="sr-only" aria-live="polite"></span>（個人）／
+    誤りの指摘・掲載のご相談は <a href="https://github.com/yumaji/kumamoto-shien-repo/issues" target="_blank" rel="noopener">GitHub の Issue</a> へお寄せください。</p>
+    <p>このサイトは、各公式発表をもとに個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>　／　<a href="https://github.com/yumaji/kumamoto-shien-repo" target="_blank" rel="noopener">ソースコードと更新履歴（GitHub）</a>　／　<a href="accessibility.html">アクセシビリティ方針</a></p>
+  </div>
+</footer>
+
+<script>
+  // 運営者名の解読ギミック：XHZNZBA を1文字ずつ13回回転（=ROT13）して
+  // KUMAMON を経由し、最後に くまモン へ。
+  const op = document.getElementById('op-handle');
+  if (op) {
+    const rot1 = s => s.replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0) - 65 + 1) % 26 + 65));
+    let decoded = false;
+    op.addEventListener('click', () => {
+      if (decoded) return;
+      decoded = true;
+      const finish = () => {
+        op.textContent = 'くまモン';
+        op.classList.add('decoded');
+        op.title = 'XHZNZBA を ROT13 で解読するとこうなります';
+        // 読み上げ環境にも解読結果を伝え、押せなくなったことを示す
+        op.removeAttribute('aria-describedby');
+        op.setAttribute('aria-disabled', 'true');
+        const live = document.getElementById('op-live');
+        if (live) live.textContent = '解読しました。運営者名は くまモン です。';
+      };
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
+      let steps = 0;
+      const tick = setInterval(() => {
+        op.textContent = rot1(op.textContent);
+        if (++steps >= 13) { clearInterval(tick); setTimeout(finish, 400); }
+      }, 70);
+    });
+  }
+
+</script>
+
+</body>
+</html>

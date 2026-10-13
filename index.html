@@ -51,12 +51,13 @@
     --green-soft:#e4efe8;
     --blue:#1e4e79;       /* 藍：公的・信頼 */
     --blue-soft:#e6edf4;
-    --amber:#b97a12;      /* 山吹：被災者向け・注意 */
+    --amber:#b97a12;      /* 山吹：被災者向け・注意（線や帯などの装飾用） */
+    --amber-ink:#8a5a0b;  /* 山吹の文字用。--amber は白地で 3.6:1 しかなく文字に使えない（JIS X 8341-3 は 4.5:1 以上） */
     --amber-soft:#f7efdd;
     --radius:10px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:4.75rem}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   body{
     font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
@@ -66,12 +67,27 @@
   a{color:var(--blue)}
   a:focus-visible,button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 
+  /* 本文へのスキップリンク。キーボードで最初にフォーカスしたときだけ表示する */
+  .skip{
+    position:absolute;left:8px;top:-60px;z-index:50;
+    background:var(--ink);color:#fff;font-weight:700;text-decoration:none;
+    padding:8px 14px;border-radius:6px;
+  }
+  .skip:focus{top:8px}
+  /* 画面には出さず、読み上げにだけ渡す文字 */
+  .sr-only{
+    position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+    clip:rect(0 0 0 0);white-space:nowrap;border:0;
+  }
+
   /* ヘッダー。追従するのは下のカテゴリナビに任せ、ここは通常どおり流す */
   header{
     background:var(--card);border-bottom:1px solid var(--line);
   }
   .head-in{max-width:960px;margin:0 auto;padding:12px 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .site-title{font-weight:900;font-size:1.05rem;letter-spacing:.02em}
+  .site-title a{color:inherit;text-decoration:none}
+  .site-title a:hover{text-decoration:underline}
   .site-title .r8{color:var(--green)}
   .stamp{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--ink-soft)}
 
@@ -88,7 +104,7 @@
   }
   .quick a small{display:block;font-weight:400;font-size:.78rem;opacity:.85;margin-top:2px}
   .quick a.alt{background:var(--card);color:var(--ink);border-color:var(--line)}
-  .quick a.alt small{color:var(--ink-soft)}
+  .quick a.alt small{color:var(--ink-soft);opacity:1}  /* 半透明にすると白地で 4.5:1 ぎりぎりになるため不透明にする */
   .quick a:hover{filter:brightness(1.05)}
 
   /* カテゴリナビ（道標）。画面上部に固定し、どこからでも移動できるようにする */
@@ -118,18 +134,20 @@
   }
 
   /* セクション */
-  main{max-width:960px;margin:0 auto;padding:20px 20px 60px}
+  main{display:block}
+  main:focus{outline:none}  /* スキップリンクの移動先。操作できる要素ではないので枠は出さない */
+  .main-in{max-width:960px;margin:0 auto;padding:20px 20px 60px}
   section{margin-top:36px}
-  /* 追従するヘッダーに見出しが隠れないよう、ジャンプ位置を下げる */
-  main section{scroll-margin-top:70px}
-  @media (max-width:700px){main section{scroll-margin-top:100px}}
+  /* 追従するナビに見出しやフォーカス中のリンクが隠れないよう、html の scroll-padding-top で
+     スクロール位置を下げている。スマホは見出しの上に少し余白を足す */
+  @media (max-width:700px){main section{scroll-margin-top:1.5rem}}
   .sec-head{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
   .sec-head h2{font-size:1.15rem;font-weight:900}
   .sec-head .tag{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px}
   .sec-lead{margin:-6px 0 16px;font-size:.88rem;color:var(--ink-soft)}
   .tag.money{background:var(--green-soft);color:var(--green)}
   .tag.public{background:var(--blue-soft);color:var(--blue)}
-  .tag.life{background:var(--amber-soft);color:var(--amber)}
+  .tag.life{background:var(--amber-soft);color:var(--amber-ink)}
 
   .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
   .card{
@@ -138,12 +156,14 @@
   }
   .card h3{font-size:.98rem;font-weight:700}
   .card .who{font-size:.72rem;font-weight:700;color:var(--ink-soft);letter-spacing:.05em}
+  /* 発信元は見出しの一部として読み上げられるよう h3 の中に置き、表示は見出しの上に出す */
+  .card h3 .who{display:block;margin-bottom:6px}
   .card p{font-size:.86rem;color:var(--ink-soft)}
-  .card .note{font-size:.78rem;color:var(--amber)}
+  .card .note{font-size:.78rem;color:var(--amber-ink)}
   .card a.go{
     margin-top:auto;padding-top:8px;font-size:.85rem;font-weight:700;text-decoration:none;
   }
-  .card a.go::after{content:" →"}
+  .card a.go::after{content:" →";content:" →" / ""}  /* 矢印は飾りなので読み上げない */
   .card a.go:hover{text-decoration:underline}
 
   /* 被災者向け帯 */
@@ -154,7 +174,7 @@
     margin-top:44px;background:var(--amber-soft);border:1px solid #e8d9b4;
     border-radius:var(--radius);padding:18px 20px;
   }
-  .caution h2,.caution h3{font-size:1rem;font-weight:900;color:var(--amber)}
+  .caution h2,.caution h3{font-size:1rem;font-weight:900;color:var(--amber-ink)}
   .caution ul{margin:8px 0 0 1.2em;font-size:.86rem;color:var(--ink)}
   .caution li{margin-top:4px}
 
@@ -184,12 +204,16 @@
 </head>
 <body>
 
+<a class="skip" href="#main">本文へ移動</a>
+
 <header>
   <div class="head-in">
-    <div class="site-title"><span class="r8">令和8年熊本地震</span> 支援情報まとめ</div>
+    <div class="site-title"><a href="./"><span class="r8">令和8年熊本地震</span> 支援情報まとめ</a></div>
     <div class="stamp">最終更新 <span id="last-updated">2026-10-05</span> ／ 発災 2026-07-28 16:27</div>
   </div>
 </header>
+
+<main id="main" tabindex="-1">
 
 <div class="hero">
   <h1>いま、熊本のために<br><em>じぶんにできる支援</em>を選ぶ。</h1>
@@ -210,29 +234,26 @@
   </div>
 </nav>
 
-<main>
+<div class="main-in">
 
   <!-- ボランティアで支援する -->
   <section id="start">
     <div class="sec-head"><h2>ボランティアで支援する</h2><span class="tag life">まず確認</span></div>
     <div class="cards">
       <div class="card">
-        <span class="who">熊本県社会福祉協議会</span>
-        <h3>募集は「必要なときに、必要な人数だけ」の段階に</h3>
+        <h3><span class="who">熊本県社会福祉協議会</span>募集は「必要なときに、必要な人数だけ」の段階に</h3>
         <p>各市町村の社協に設けられた災害ボランティアセンターは、閉所したところや、被災された方からの依頼に応じてその都度募集する形に移ったところが増えています。募集は日程ごとの事前登録制です。<strong>向かう前に、その市町村がいま募集しているかを必ず確認してください。</strong></p>
         <p class="note">※ボランティア活動保険への事前加入が必要です。出発前にお住まいの社協かWEBで済ませてください。現地へは渋滞緩和のため乗り合わせが、また行き帰りの事故が報告されているため自動車任意保険の確認が呼びかけられています。</p>
         <a class="go" href="https://www.fukushi-kumamoto.or.jp/kvc/" target="_blank" rel="noopener">熊本県災害ボランティア情報</a>
       </div>
       <div class="card">
-        <span class="who">熊本市</span>
-        <h3>募集中の枠を探す「くまもとアプリ」</h3>
+        <h3><span class="who">熊本市</span>募集中の枠を探す「くまもとアプリ」</h3>
         <p>県内各市町村の災害ボランティア募集情報がアプリに集約されています。市町村ごとにサイトを回らなくても、募集中の日程と受付状況をまとめて確認できます。</p>
         <a class="go" href="https://www.city.kumamoto.jp/kiji00372213/index.html" target="_blank" rel="noopener">熊本市のお知らせ</a>
       </div>
       <div class="card">
-        <span class="who">呉工業高等専門学校 神田研究室</span>
-        <h3>混雑しにくい時間帯を選ぶ</h3>
-        <p>八代・氷川・宇城エリアの混雑状況を、VICSのデータをもとに月曜6時〜20時・30分間隔で可視化しています。画像をクリックすると時間帯ごとの変化を映像で確認できます。毎週火曜に更新予定。</p>
+        <h3><span class="who">呉工業高等専門学校 神田研究室</span>混雑しにくい時間帯を選ぶ</h3>
+        <p>八代・氷川・宇城エリアの混雑状況を、VICSのデータをもとに月曜6時〜20時・30分間隔で可視化しています。画像を選ぶと、時間帯ごとの変化を映像で確認できます。毎週火曜に更新予定。</p>
         <p class="note">※研究室による分析データです。通行止めなどの規制情報は、国土交通省の<a href="https://www.mlit.go.jp/road/saigai/r8kumamoto/index.html" target="_blank" rel="noopener">通れるマップ</a>でご確認ください。</p>
         <a class="go" href="https://www.ykandalab.net/d-trip/2026-kumamoto/" target="_blank" rel="noopener">混雑状況を見る</a>
       </div>
@@ -253,36 +274,31 @@
     </div>
     <div class="cards">
       <div class="card">
-        <span class="who">熊本県内の各市町村</span>
-        <h3>り災証明書（罹災証明書）— すべての入口</h3>
+        <h3><span class="who">熊本県内の各市町村</span>り災証明書（罹災証明書）— すべての入口</h3>
         <p>お住まいの市町村に申請すると、住まいの被害程度を判定して発行されます。生活再建支援金・応急修理・公費解体など<strong>ほぼすべての支援の前提</strong>になります。窓口のほか、マイナポータルからオンライン申請もできます。被害が軽微な場合は、写真だけで判定する「自己判定方式」で早く受け取れます。</p>
         <p class="note">※修理や解体の前に、必ず被害の写真を撮ってください。表札と家屋の全景（できれば4方向）、被害箇所は「寄り」と「引き」の両方を多めに。直したあとでは被害を証明できません。申請先と期限は市町村ごとに異なります。</p>
         <a class="go" href="https://digital-gov.note.jp/n/ne4f237bf506b" target="_blank" rel="noopener">デジタル庁のオンライン申請案内</a>
       </div>
       <div class="card">
-        <span class="who">熊本県</span>
-        <h3>被災者生活再建支援金</h3>
+        <h3><span class="who">熊本県</span>被災者生活再建支援金</h3>
         <p>住宅の被害程度に応じた基礎支援金（最大100万円）と、再建方法に応じた加算支援金（最大200万円）で、<strong>合わせて最大300万円</strong>。り災証明書が必要です。災害救助法とは対象範囲が異なり、<strong>熊本県内の全市町村</strong>が対象です。</p>
         <p class="note">※申請期限は基礎支援金が2027年8月27日、加算支援金が2029年8月27日。ほかの制度と違って期間に余裕があるため、住まいの再建方針が固まってから加算支援金を申請することもできます。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/276299.html" target="_blank" rel="noopener">熊本県の案内</a>
       </div>
       <div class="card">
-        <span class="who">熊本県 ／ 各市町村</span>
-        <h3>住宅の応急修理</h3>
+        <h3><span class="who">熊本県 ／ 各市町村</span>住宅の応急修理</h3>
         <p>熊本県内の被災した住宅が対象で、お住まいの市町村へ申請します。屋根・開口部・配管など、日常生活に不可欠な箇所を市町村が業者へ直接支払う形で修理します。上限は全壊〜半壊で<strong>75万7,000円</strong>、準半壊で36万7,000円。<strong>原則10月27日までに完了</strong>する必要があり、残り1か月を切りました。着工には市町村の決定が必要なため、検討中の方は早めに窓口へご相談ください。</p>
         <p class="note">※ブルーシート展張などの「緊急の修理」（上限56,400円）は8月7日で受付終了。屋根の被害が残る場合はこちらの応急修理を相談してください。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275109.html" target="_blank" rel="noopener">熊本県の案内</a>
       </div>
       <div class="card">
-        <span class="who">熊本県 ／ 熊本市</span>
-        <h3>応急住宅（建設型・賃貸型）</h3>
+        <h3><span class="who">熊本県 ／ 熊本市</span>応急住宅（建設型・賃貸型）</h3>
         <p>住居が全壊等の被害を受け、自力で住宅を確保できない方に無償で提供されます。民間賃貸を借り上げる<strong>賃貸型（みなし仮設）は引き続き受付中</strong>。建設型は市町村ごとの募集で、熊本市分の申込は9月4日に締め切られました。</p>
         <p class="note">※賃貸型の県窓口は災害救助法適用の20市町村が対象（熊本市は市が独自に実施）。申込先と期限は市町村ごとに異なるため、お住まいの自治体の窓口でご確認ください。建設型は完成の時期に幅があり、避難生活の長期化が課題になっています。住まいのめどが立たない場合は、早めにご相談ください。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275223.html" target="_blank" rel="noopener">賃貸型応急住宅の案内</a>
       </div>
       <div class="card">
-        <span class="who">熊本市</span>
-        <h3>被災家屋等の公費解体</h3>
+        <h3><span class="who">熊本市</span>被災家屋等の公費解体</h3>
         <p>り災証明書で半壊以上と判定された家屋等が対象。熊本市の申請書類受付は<strong>9月10日から12月10日まで</strong>（月〜金・祝日除く）。</p>
         <p class="note">※他の市町村は受付時期が異なります。お住まいの自治体にご確認ください。</p>
         <a class="go" href="https://www.city.kumamoto.jp/kiji00372403/index.html" target="_blank" rel="noopener">熊本市の案内</a>
@@ -295,29 +311,25 @@
     <div class="sec-head"><h2>くらしの安全と相談</h2><span class="tag life">被災された方へ</span></div>
     <div class="cards">
       <div class="card">
-        <span class="who">気象庁</span>
-        <h3>地震のあとは、少ない雨でも土砂災害に警戒</h3>
+        <h3><span class="who">気象庁</span>地震のあとは、少ない雨でも土砂災害に警戒</h3>
         <p>揺れの大きかった地域は地盤が緩んでいるおそれがあるため、熊本県などの市町村では、土砂災害や大雨に関する警報・注意報を<strong>通常より低い基準（暫定基準）</strong>で発表しています。いつもなら出ない程度の雨でも警報が出ることがあります。</p>
         <p class="note">※警報や避難情報が出たら、早めに避難してください。ブルーシートで応急処置をした屋根や、傾いた擁壁・斜面の近くは特に注意が必要です。</p>
         <a class="go" href="https://www.jma.go.jp/jma/press/2607/28c/20260728_zantei.html" target="_blank" rel="noopener">気象庁の発表</a>
       </div>
       <div class="card">
-        <span class="who">消費者庁 ／ 国民生活センター</span>
-        <h3>屋根修理などの訪問業者に注意</h3>
+        <h3><span class="who">消費者庁 ／ 国民生活センター</span>屋根修理などの訪問業者に注意</h3>
         <p>地震に便乗した住宅修理のトラブルが相次いでいます。「このままでは雨漏りする」と不安をあおって、その場で高額な契約を迫る手口が報告されています。<strong>その場で契約しない・お金を払わない</strong>こと、複数の業者から見積もりを取ることが大切です。</p>
         <p class="note">※困ったときは消費者ホットライン「188（いやや）」へ。契約してしまっても、クーリング・オフできる場合があります。</p>
         <a class="go" href="https://www.kokusen.go.jp/news/data/n-20220616_1.html" target="_blank" rel="noopener">国民生活センターの注意喚起</a>
       </div>
       <div class="card">
-        <span class="who">熊本県 ／ 各市町村</span>
-        <h3>使える制度をまとめて調べる</h3>
+        <h3><span class="who">熊本県 ／ 各市町村</span>使える制度をまとめて調べる</h3>
         <p>住まいのほかにも、税・国民健康保険料の減免、義援金の受け取り、こころの相談など、被災された方が使える制度は多岐にわたります。各市町村が支援制度をまとめた冊子を配布しているほか、どこに相談すればよいか分からない方に向けた総合相談窓口も設けられています。</p>
         <p class="note">※制度の内容・窓口・期限は市町村ごとに異なります。お住まいの自治体のページでご確認ください。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/1/274517.html" target="_blank" rel="noopener">熊本県の地震関連情報</a>
       </div>
       <div class="card">
-        <span class="who">日本カーシェアリング協会</span>
-        <h3>車の無償貸出「災害サポート・レンタカー」</h3>
+        <h3><span class="who">日本カーシェアリング協会</span>車の無償貸出「災害サポート・レンタカー」</h3>
         <p>被災された方・支援活動を行う団体が対象。長期貸出（軽乗用・普通車／最長14日）と短期貸出（軽トラック／最長3日）を熊本支部で受付中で、<strong>2026年12月25日まで</strong>実施予定です。予約専用番号 050-5799-4740（10:00〜16:00、水・日・祝休み）。</p>
         <p class="note">※事前申込がないまま拠点へ行っても貸出できません。運転免許証のほか、り災証明書や被災状況の写真など被災を証明できるものが必要です。</p>
         <a class="go" href="https://www.japan-csa.org/blog/archives/13936" target="_blank" rel="noopener">協会の受付案内</a>
@@ -330,20 +342,17 @@
     <div class="sec-head"><h2>義援金（自治体・日本赤十字社）</h2><span class="tag public">公的窓口</span></div>
     <div class="cards">
       <div class="card">
-        <span class="who">熊本県</span>
-        <h3>令和8年熊本地震 義援金</h3>
+        <h3><span class="who">熊本県</span>令和8年熊本地震 義援金</h3>
         <p>県が義援金口座を開設。受付期間は2026年7月29日〜10月30日（予定）。県庁などの義援金箱へ直接持参も可能で、その場で領収書が発行されます。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
       </div>
       <div class="card">
-        <span class="who">日本赤十字社</span>
-        <h3>令和8年熊本地震災害義援金</h3>
+        <h3><span class="who">日本赤十字社</span>令和8年熊本地震災害義援金</h3>
         <p>受付は2026年7月31日〜10月30日。ゆうちょ銀行・三井住友・三菱UFJ・みずほの専用口座への振込で、お寄せいただいた義援金は配分委員会を通じて被災者に届けられます。</p>
         <a class="go" href="https://www.jrc.or.jp/contribute/help/20260731/" target="_blank" rel="noopener">日赤の受付ページ</a>
       </div>
       <div class="card">
-        <span class="who">福岡市</span>
-        <h3>令和8年熊本地震 災害義援金</h3>
+        <h3><span class="who">福岡市</span>令和8年熊本地震 災害義援金</h3>
         <p>近隣自治体として義援金を募集しています。</p>
         <a class="go" href="https://www.city.fukuoka.lg.jp/bousai/r8kumamoto.html" target="_blank" rel="noopener">福岡市の募集ページ</a>
       </div>
@@ -355,14 +364,12 @@
     <div class="sec-head"><h2>ふるさと納税で支援</h2><span class="tag money">税控除の対象</span></div>
     <div class="cards">
       <div class="card">
-        <span class="who">ふるさとチョイス 災害支援</span>
-        <h3>被災自治体への緊急寄附</h3>
+        <h3><span class="who">ふるさとチョイス 災害支援</span>被災自治体への緊急寄附</h3>
         <p>八代市（茨城県境町が代理受付）、宇城市（茨城県桜川市が代理受付）、氷川町、嘉島町、芦北町などへの寄附を受付中。2,000円以上・返礼品なし。</p>
         <a class="go" href="https://www.furusato-tax.jp/saigai/" target="_blank" rel="noopener">災害支援ページ</a>
       </div>
       <div class="card">
-        <span class="who">さとふる</span>
-        <h3>令和8年熊本地震 災害緊急支援寄付</h3>
+        <h3><span class="who">さとふる</span>令和8年熊本地震 災害緊急支援寄付</h3>
         <p>代理寄付を含む被災自治体への寄付を受付。申し込まれた寄付はすべて支援金として届けられます。</p>
         <a class="go" href="https://www.satofull.jp/oenkifu/oenkifu_detail.php?page_id=542" target="_blank" rel="noopener">さとふる受付ページ</a>
       </div>
@@ -374,66 +381,56 @@
     <div class="sec-head"><h2>ネット募金・支援団体への寄付</h2><span class="tag money">少額からOK</span></div>
     <div class="cards">
       <div class="card">
-        <span class="who">Yahoo!ネット募金</span>
-        <h3>緊急支援募金 特設ページ</h3>
+        <h3><span class="who">Yahoo!ネット募金</span>緊急支援募金 特設ページ</h3>
         <p>複数団体のプロジェクトをまとめて掲載。PayPayなどで少額から寄付できます。</p>
         <a class="go" href="https://donation.yahoo.co.jp/promo/20260728.html" target="_blank" rel="noopener">特設ページ</a>
       </div>
       <div class="card">
-        <span class="who">楽天クラッチ募金</span>
-        <h3>令和8年熊本地震被害支援募金（受付終了）</h3>
+        <h3><span class="who">楽天クラッチ募金</span>令和8年熊本地震被害支援募金（受付終了）</h3>
         <p><strong>2026年8月28日で受付を終了しました。</strong>集まった募金は被災された方の支援に充てられます。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
       </div>
       <div class="card">
-        <span class="who">赤い羽根共同募金</span>
-        <h3>ボラサポ・令和8年熊本地震</h3>
+        <h3><span class="who">赤い羽根共同募金</span>ボラサポ・令和8年熊本地震</h3>
         <p>被災地で活動するボランティア団体・NPOを支える「支える人を支える」募金。税制優遇の対象です。</p>
         <a class="go" href="https://www.akaihane.or.jp/saigai/2026kumamoto_earthquake/" target="_blank" rel="noopener">中央共同募金会</a>
       </div>
       <div class="card">
-        <span class="who">ピースウィンズ・ジャパン</span>
-        <h3>空飛ぶ捜索医療団 ARROWS</h3>
+        <h3><span class="who">ピースウィンズ・ジャパン</span>空飛ぶ捜索医療団 ARROWS</h3>
         <p>発災当日夕に先遣隊が出発し、ニーズ調査・緊急物資支援などにあたりました。認定NPOのため寄付控除の対象です。</p>
         <a class="go" href="https://donation.yahoo.co.jp/detail/925104" target="_blank" rel="noopener">寄付ページ</a>
       </div>
       <div class="card">
-        <span class="who">ジャパンハート</span>
-        <h3>医療・物資の緊急支援</h3>
+        <h3><span class="who">ジャパンハート</span>医療・物資の緊急支援</h3>
         <p>医療支援・物資支援を行う認定NPO。2016年熊本地震でも活動し、熊本県と災害支援協定を締結しています。</p>
         <a class="go" href="https://www.japanheart.org/topics/support/20260728_kumamoto_earthquake.html" target="_blank" rel="noopener">受付ページ</a>
       </div>
       <div class="card">
-        <span class="who">済生会熊本病院</span>
-        <h3>災害拠点機能・強化プロジェクト</h3>
+        <h3><span class="who">済生会熊本病院</span>災害拠点機能・強化プロジェクト</h3>
         <p>県南の救急・急性期医療を担う災害拠点病院で、DMATの活動拠点にもなっています。隊員の仮眠環境や、職員の子どもを受け入れる環境の整備、医療機器・設備の修繕などに充てられます。募集は10月28日23:00まで、目標1,000万円。</p>
         <p class="note">※寄付金控除の対象。目標未達でも寄付はそのまま病院に渡ります（All in方式）。</p>
         <a class="go" href="https://readyfor.jp/projects/saiseikai-kumamoto" target="_blank" rel="noopener">READYFORの受付ページ</a>
       </div>
       <div class="card">
-        <span class="who">CAMPFIRE</span>
-        <h3>緊急災害支援金（受付終了）</h3>
+        <h3><span class="who">CAMPFIRE</span>緊急災害支援金（受付終了）</h3>
         <p><strong>2026年9月25日で募集を終了しました。</strong>集まった支援金は、決済手数料5%を除いた全額が日本赤十字社の「令和8年熊本地震災害義援金」へ寄付され、熊本県の義援金配分委員会を通じて被災された方に届けられます。</p>
         <p class="note">※ネットから寄付できる窓口としては、日本赤十字社・熊本県の義援金（いずれも10月30日まで）が引き続き受け付けています。</p>
         <a class="go" href="https://www.jrc.or.jp/contribute/help/20260731/" target="_blank" rel="noopener">日本赤十字社の受付ページ</a>
       </div>
       <div class="card">
-        <span class="who">日本財団</span>
-        <h3>災害復興支援特別基金</h3>
+        <h3><span class="who">日本財団</span>災害復興支援特別基金</h3>
         <p>被災地で活動するNPO・ボランティア団体への緊急助成のほか、ボランティアの輸送や軽トラック・機材の貸出拠点の運営などに使われる支援金です。熊本地震を受けて寄付を受付中。</p>
         <a class="go" href="https://www.nippon-foundation.or.jp/what/projects/disaster_fund" target="_blank" rel="noopener">基金の案内ページ</a>
       </div>
       <div class="card">
-        <span class="who">ジャパン・プラットフォーム</span>
-        <h3>令和8年熊本地震 被災者支援</h3>
+        <h3><span class="who">ジャパン・プラットフォーム</span>令和8年熊本地震 被災者支援</h3>
         <p>国際協力NGOのネットワーク（認定NPO法人）。寄付は出動を決定した加盟NGOの緊急支援活動（物資配布・避難所支援など）に配分されます。</p>
         <a class="go" href="https://www.japanplatform.org/emergency/program/kumamoto_earthquake2026.html" target="_blank" rel="noopener">支援プログラムの案内</a>
       </div>
       <div class="card">
-        <span class="who">コンビニ各社</span>
-        <h3>店頭募金（すべて受付終了）</h3>
+        <h3><span class="who">コンビニ各社</span>店頭募金（すべて受付終了）</h3>
         <p>ファミリーマート（8月25日）、セブン‐イレブン・ローソン（8月31日）の店頭募金は、いずれも受付を終了しました。集まった募金は被災自治体等を通じて被災された方へ届けられます。</p>
-        <p class="note">※店頭での受付は終了しましたが、下記の熊本県をはじめ、義援金・ネット募金の窓口は継続しています。</p>
+        <p class="note">※店頭での受付は終了しましたが、熊本県をはじめ、義援金・ネット募金の窓口は継続しています。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
       </div>
     </div>
@@ -444,27 +441,23 @@
     <div class="sec-head"><h2>事業者・企業向けの支援</h2><span class="tag public">公的制度</span></div>
     <div class="cards">
       <div class="card">
-        <span class="who">中小企業庁</span>
-        <h3>小規模事業者持続化補助金（災害支援枠）</h3>
+        <h3><span class="who">中小企業庁</span>小規模事業者持続化補助金（災害支援枠）</h3>
         <p>地震で被害を受けた小規模事業者の事業再建を支援する補助金です。補助率は2/3以内、上限は<strong>直接被害200万円・間接被害100万円</strong>。1次公募の締切は<strong>10月16日</strong>です。</p>
         <p class="note">※機械装置の復旧、修繕、販路開拓、被災した事業用車両の購入などが対象です。商工会・商工会議所の支援を受けて取り組む制度のため、申請前に地域の商工会・商工会議所へご相談ください。</p>
         <a class="go" href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260909001.html" target="_blank" rel="noopener">中小企業庁の公募要領</a>
       </div>
       <div class="card">
-        <span class="who">経済産業省</span>
-        <h3>被災中小企業・小規模事業者 支援措置</h3>
+        <h3><span class="who">経済産業省</span>被災中小企業・小規模事業者 支援措置</h3>
         <p>災害救助法の適用（熊本県10市10町1村）を受け、日本政策金融公庫・商工中金・信用保証協会などに特別相談窓口を設置。災害復旧貸付のほか、8月5日には小規模企業共済契約者への即日貸付や、既往債務の返済猶予を遡って柔軟に取り扱う措置が追加されました。</p>
         <a class="go" href="https://www.meti.go.jp/press/20260729003.html" target="_blank" rel="noopener">経産省の発表</a>
       </div>
       <div class="card">
-        <span class="who">企業版ふるさと納税</span>
-        <h3>法人からの災害支援寄附</h3>
+        <h3><span class="who">企業版ふるさと納税</span>法人からの災害支援寄附</h3>
         <p>「river」等のプラットフォームで、熊本県内12自治体への企業版ふるさと納税による寄附受付が始まっています。</p>
-        <a class="go" href="https://prtimes.jp/main/html/rd/p/000000103.000112121.html" target="_blank" rel="noopener">詳細を見る</a>
+        <a class="go" href="https://prtimes.jp/main/html/rd/p/000000103.000112121.html" target="_blank" rel="noopener">PR TIMES の発表</a>
       </div>
       <div class="card">
-        <span class="who">企業の支援事例</span>
-        <h3>Honda：義援金5千万円・物資提供</h3>
+        <h3><span class="who">企業の支援事例</span>Honda：義援金5千万円・物資提供</h3>
         <p>熊本県への義援金のほか、発電機などの自社製品、食料品・日用品を提供。自社でできる支援を検討する際の参考に。</p>
         <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
       </div>
@@ -495,14 +488,15 @@
     <p>災害救助法が適用された地域では、このページで紹介している住宅の応急修理や応急住宅、被災者生活再建支援金などと同じ種類の制度が使える場合があります。<strong>まずはお住まいの市町村で、り災証明書の申請と、使える支援の確認をしてください。</strong>適用されている地域は<a href="https://www.bousai.go.jp/taisaku/kyuujo/kyuujo_tekiyou.html" target="_blank" rel="noopener">内閣府の「災害救助法の適用状況」</a>で確認できます。</p>
   </div>
 
+</div>
 </main>
 
 <footer>
   <div class="foot-in">
     <p class="foot-strong"><strong>このサイト自体は寄付を一切受け取っていません。</strong>すべてのリンクは各公式窓口へ直接つながり、アフィリエイト等の収益も一切ありません。</p>
-    <p>運営者：<button id="op-handle" class="op-handle" type="button" title="ROT13" aria-label="運営者名は暗号になっています。押すと解読されます">XHZNZBA</button>（個人）／
+    <p>運営者：<button id="op-handle" class="op-handle" type="button" title="ROT13" aria-describedby="op-hint">XHZNZBA</button><span id="op-hint" hidden>暗号になっています。押すと解読されます。</span><span id="op-live" class="sr-only" aria-live="polite"></span>（個人）／
     誤りの指摘・掲載のご相談は <a href="https://github.com/yumaji/kumamoto-shien-repo/issues" target="_blank" rel="noopener">GitHub の Issue</a> へお寄せください。</p>
-    <p>このページは<span id="last-updated-foot">2026年10月5日</span>時点の各公式発表をもとに、個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>　／　<a href="https://github.com/yumaji/kumamoto-shien-repo" target="_blank" rel="noopener">ソースコードと更新履歴（GitHub）</a></p>
+    <p>このページは<span id="last-updated-foot">2026年10月5日</span>時点の各公式発表をもとに、個人が作成した非公式のまとめです。掲載内容の正確性・最新性は各リンク先でご確認ください。被害状況の公式情報：<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁</a> ／ <a href="https://www.mlit.go.jp/saigai/saigai_260728.html" target="_blank" rel="noopener">国土交通省</a>　／　<a href="https://github.com/yumaji/kumamoto-shien-repo" target="_blank" rel="noopener">ソースコードと更新履歴（GitHub）</a>　／　<a href="accessibility.html">アクセシビリティ方針</a></p>
   </div>
 </footer>
 
@@ -520,6 +514,11 @@
         op.textContent = 'くまモン';
         op.classList.add('decoded');
         op.title = 'XHZNZBA を ROT13 で解読するとこうなります';
+        // 読み上げ環境にも解読結果を伝え、押せなくなったことを示す
+        op.removeAttribute('aria-describedby');
+        op.setAttribute('aria-disabled', 'true');
+        const live = document.getElementById('op-live');
+        if (live) live.textContent = '解読しました。運営者名は くまモン です。';
       };
       if (matchMedia('(prefers-reduced-motion: reduce)').matches) { finish(); return; }
       let steps = 0;
