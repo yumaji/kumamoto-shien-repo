@@ -20,6 +20,12 @@ DEADLINES = [
      "https://www.pref.kumamoto.jp/soshiki/27/275109.html"),
     ("公費解体（熊本市）書類受付", "2026-12-10",
      "https://www.city.kumamoto.jp/kiji00372403/index.html"),
+    ("公費解体（宇土市）申請受付", "2026-12-28",
+     "https://www.city.uto.lg.jp/article/view/1243/16892.html"),
+    ("公費解体（宇城市）申請受付", "2027-01-29",
+     "https://www.city.uki.kumamoto.jp/kurashi/bosaiinfo/bosaimusen/2622644"),
+    ("公費解体（八代市）申請受付", "2027-03-31",
+     "https://www.city.yatsushiro.lg.jp/kiji00327083/index.html"),
     ("日本カーシェアリング協会 災害サポート・レンタカー", "2026-12-25",
      "https://www.japan-csa.org/blog/archives/13936"),
     ("済生会熊本病院（READYFOR）", "2026-10-28",
@@ -44,6 +50,10 @@ PHASES = [
      "熊本県の配分委員会で第2次配分が決まっていれば、義援金セクションの案内文と"
      "「義援金の受け取り」カードを更新する。",
      "https://www.pref.kumamoto.jp/soshiki/27/281576.html"),
+    ("2026-11-02", "公費解体の締切が未掲載の町を確認する",
+     "氷川町・益城町・嘉島町の公費解体の受付期限を各町の公式ページで確認し、"
+     "わかったものを「被災家屋等の公費解体」カードと DEADLINES に追加する。",
+     "https://www.town.hikawa.kumamoto.jp/bousai/default.html"),
     ("2026-11-02", "持続化補助金（災害支援枠）の2次公募を確認する",
      "1次公募は 10/16 で締切。2次公募が始まっていれば、事業者セクションのカードに"
      "締切を書き、DEADLINES にも登録する。",
