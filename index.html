@@ -168,6 +168,22 @@
   .card a.go::after{content:" →";content:" →" / ""}  /* 矢印は飾りなので読み上げない */
   .card a.go:hover{text-decoration:underline}
 
+  /* 市町村ごとの期限一覧 */
+  .kigen{
+    margin-top:20px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:var(--radius);padding:16px 18px;scroll-margin-top:0;
+  }
+  .kigen h3{font-size:.98rem;font-weight:700}
+  .kigen p{font-size:.84rem;color:var(--ink-soft);margin-top:6px}
+  .kigen .note{font-size:.78rem;color:var(--amber-ink)}
+  .kigen table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.8rem;margin-top:12px}
+  .kigen th,.kigen td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+  .kigen thead th{background:var(--amber-soft)}
+  .kigen thead th:first-child{width:17%}
+  .kigen tbody th{font-weight:700}
+  .kigen .end{color:var(--ink-soft)}
+  @media (max-width:560px){.kigen table{font-size:.74rem}.kigen th,.kigen td{padding:5px}}
+
   /* 被災者向け帯 */
   .for-hisaisha .card{border-left:4px solid var(--amber)}
 
@@ -219,18 +235,18 @@
 
 <div class="hero">
   <h1>いま、熊本のために<br><em>じぶんにできる支援</em>を選ぶ。</h1>
-  <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）の支援情報です。復興期に入り、被災された方が使える制度は<strong>いずれも期限のある申請制</strong>になっています。住まいの再建・寄付の窓口ともに、行き先はすべて公式ページです。</p>
+  <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）の支援情報です。発災から3か月が過ぎ、被災された方の手続きは<strong>市町村ごとに期限が分かれる</strong>段階に入りました。制度と相談先は、公式の発表をもとにまとめています。</p>
   <div class="quick">
-    <a href="#hisaisha">被災された方の手続き<small>応急修理・公費解体・生活再建支援金</small></a>
-    <a class="alt" href="https://donation.yahoo.co.jp/promo/20260728.html" target="_blank" rel="noopener">ネットで少額から寄付<small>Yahoo!ネット募金 特設ページ</small></a>
+    <a href="#hisaisha">被災された方の手続き<small>市町村ごとの期限・公費解体・生活再建支援金</small></a>
+    <a class="alt" href="#hisaisha-life">困ったときの相談先<small>災害専用フリーダイヤル・法律・こころ</small></a>
     <a class="alt" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県に義援金を送る<small>県の公式口座（受付〜2027/3/31予定）</small></a>
   </div>
 </div>
 
 <nav class="nav-filter" aria-label="目的の情報へ移動">
   <div class="nav-filter-in">
-    <a href="#start">ボランティアで支援する</a>
     <a href="#hisaisha">被災された方へ</a>
+    <a href="#start">ボランティアで支援する</a>
     <a href="#kifu">お金で支援する</a>
     <a href="#jigyo">事業者・企業の方</a>
   </div>
@@ -238,34 +254,10 @@
 
 <div class="main-in">
 
-  <!-- ボランティアで支援する -->
-  <section id="start">
-    <div class="sec-head"><h2>ボランティアで支援する</h2><span class="tag life">まず確認</span></div>
-    <div class="cards">
-      <div class="card">
-        <h3><span class="who">熊本県社会福祉協議会</span>募集は「必要なときに、必要な人数だけ」の段階に</h3>
-        <p>各市町村の社協に設けられた災害ボランティアセンターは、閉所したところや、被災された方からの依頼に応じてその都度募集する形に移ったところが増えています。募集は日程ごとの事前登録制です。<strong>向かう前に、その市町村がいま募集しているかを必ず確認してください。</strong></p>
-        <p class="note">※ボランティア活動保険への事前加入が必要です。出発前にお住まいの社協かWEBで済ませてください。現地へは渋滞緩和のため乗り合わせが、また行き帰りの事故が報告されているため自動車任意保険の確認が呼びかけられています。</p>
-        <a class="go" href="https://www.fukushi-kumamoto.or.jp/kvc/" target="_blank" rel="noopener">熊本県災害ボランティア情報</a>
-      </div>
-      <div class="card">
-        <h3><span class="who">熊本市</span>募集中の枠を探す「くまもとアプリ」</h3>
-        <p>県内各市町村の災害ボランティア募集情報がアプリに集約されています。市町村ごとにサイトを回らなくても、募集中の日程と受付状況をまとめて確認できます。</p>
-        <a class="go" href="https://www.city.kumamoto.jp/kiji00372213/index.html" target="_blank" rel="noopener">熊本市のお知らせ</a>
-      </div>
-      <div class="card">
-        <h3><span class="who">呉工業高等専門学校 神田研究室</span>混雑しにくい時間帯を選ぶ</h3>
-        <p>八代・氷川・宇城エリアの混雑状況を、VICSのデータをもとに月曜6時〜20時・30分間隔で可視化しています。画像を選ぶと、時間帯ごとの変化を映像で確認できます。毎週火曜に更新予定。</p>
-        <p class="note">※研究室による分析データです。通行止めなどの規制情報は、国土交通省の<a href="https://www.mlit.go.jp/road/saigai/r8kumamoto/index.html" target="_blank" rel="noopener">通れるマップ</a>でご確認ください。</p>
-        <a class="go" href="https://www.ykandalab.net/d-trip/2026-kumamoto/" target="_blank" rel="noopener">混雑状況を見る</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 被災者向け：住まいと生活の再建。金額・期限は熊本県／熊本市の公式ページで確認済み -->
+  <!-- 被災者向け：住まいと生活の再建。金額・期限は熊本県・各市町村・総務省ガイドブックで確認 -->
   <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
     <div class="sec-head"><h2>住まいと生活の再建</h2><span class="tag life">被災された方へ</span></div>
-    <p class="sec-lead">熊本県内で住まいに被害を受けた方が使える制度です。り災証明書・住宅の応急修理・公費解体・応急住宅は、いずれもお住まいの市町村への申請が必要で、それぞれ期限があります。<strong>住宅の応急修理は、原則10月27日が工事の完了期限</strong>です。延長を協議している市町村もあるため、工事が終わっていない方は期限を過ぎる前に窓口へ確認してください。</p>
+    <p class="sec-lead">熊本県内で住まいに被害を受けた方が使える制度です。発災から3か月が過ぎ、<strong>り災証明書の申請を締め切った市町村</strong>も出ています。一方、住宅の応急修理の完了期限は、多くの市町村で2027年1月27日まで延長されました。期限は市町村ごとに違うため、<a href="#kigen">市町村ごとの期限の一覧</a>でご確認ください。</p>
     <div class="caution">
       <h3>申請する順番にご注意ください</h3>
       <ul>
@@ -277,8 +269,8 @@
     <div class="cards">
       <div class="card">
         <h3><span class="who">熊本県内の各市町村</span>り災証明書（罹災証明書）— すべての入口</h3>
-        <p>お住まいの市町村に申請すると、住まいの被害程度を判定して発行されます。生活再建支援金・応急修理・公費解体など<strong>ほぼすべての支援の前提</strong>になります。窓口のほか、マイナポータルからオンライン申請もできます。被害が軽微な場合は、写真だけで判定する「自己判定方式」で早く受け取れます。</p>
-        <p class="note">※修理や解体の前に、必ず被害の写真を撮ってください。表札と家屋の全景（できれば4方向）、被害箇所は「寄り」と「引き」の両方を多めに。直したあとでは被害を証明できません。申請先と期限は市町村ごとに異なります。</p>
+        <p>お住まいの市町村に申請すると、住まいの被害程度を判定して発行されます。生活再建支援金・応急修理・公費解体など<strong>ほぼすべての支援の前提</strong>になります。窓口のほか、マイナポータルからオンライン申請もできる市町村があります。</p>
+        <p class="note">※熊本市・菊池市・美里町・御船町・益城町などは、10月30日（オンラインは31日）で申請を締め切りました。まだ申請していない方は、すぐにお住まいの市町村へご相談ください。持ち家だけでなく、賃貸住宅に住んでいる方も申請できます。</p>
         <a class="go" href="https://digital-gov.note.jp/n/ne4f237bf506b" target="_blank" rel="noopener">デジタル庁のオンライン申請案内</a>
       </div>
       <div class="card">
@@ -295,36 +287,93 @@
       </div>
       <div class="card">
         <h3><span class="who">熊本県 ／ 各市町村</span>住宅の応急修理</h3>
-        <p>熊本県内の被災した住宅が対象で、お住まいの市町村へ申請します。屋根・開口部・配管など、日常生活に不可欠な箇所を市町村が業者へ直接支払う形で修理します。上限は全壊〜半壊で<strong>75万7,000円</strong>、準半壊で36万7,000円。<strong>原則10月27日までに完了</strong>する必要があります。着工には市町村の決定が必要なため、検討中の方は早めに窓口へご相談ください。</p>
-        <p class="note">※熊本市は、完了期限を2027年1月27日まで延長する方向で国と協議済みと案内しています（10月19日時点で確定の告知は確認できていません）。ほかの市町村の扱いは、それぞれの窓口にご確認ください。</p>
-        <p class="note">※ブルーシート展張などの「緊急の修理」（上限56,400円）は8月7日で受付終了。屋根の被害が残る場合はこちらの応急修理を相談してください。</p>
+        <p>屋根・開口部・配管など、日常生活に不可欠な箇所を市町村が業者へ直接支払う形で修理します。上限は全壊〜半壊で<strong>75万7,000円</strong>、準半壊で36万7,000円。当初10月27日だった完了期限（完了報告の提出まで）は、<strong>多くの市町村で2027年1月27日まで延長</strong>されました。</p>
+        <p class="note">※期限は市町村ごとに違い、まだ決まっていないところもあります。業者に先に代金を払ってしまうと、この制度は使えません。見積書を取ってから、お住まいの市町村へ申し込んでください。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275109.html" target="_blank" rel="noopener">熊本県の案内</a>
       </div>
       <div class="card">
         <h3><span class="who">熊本県 ／ 熊本市</span>応急住宅（建設型・賃貸型）</h3>
         <p>住居が全壊等の被害を受け、自力で住宅を確保できない方に無償で提供されます。民間賃貸を借り上げる<strong>賃貸型（みなし仮設）は引き続き受付中</strong>。建設型は市町村ごとの募集で、熊本市分の申込は9月4日に締め切られました。</p>
-        <p class="note">※賃貸型の県窓口は災害救助法適用の20市町村が対象（熊本市は市が独自に実施）。申込先と期限は市町村ごとに異なるため、お住まいの自治体の窓口でご確認ください。建設型は完成の時期に幅があり、避難生活の長期化が課題になっています。住まいのめどが立たない場合は、早めにご相談ください。</p>
+        <p class="note">※賃貸型の県窓口は災害救助法適用の20市町村が対象（熊本市は市が独自に実施）。申込先と期限は市町村ごとに異なるため、お住まいの自治体の窓口でご確認ください。住まいのめどが立たない場合は、早めにご相談ください。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275223.html" target="_blank" rel="noopener">賃貸型応急住宅の案内</a>
       </div>
       <div class="card">
         <h3><span class="who">各市町村</span>被災家屋等の公費解体</h3>
-        <p>り災証明書で半壊以上と判定された家屋等を、所有者の申請にもとづいて市町村が解体・撤去します。受付期間と受付の方法は市町村ごとに違います（締切の早い順）。</p>
-        <ul>
-          <li><a href="https://www.city.kumamoto.jp/kiji00372403/index.html" target="_blank" rel="noopener">熊本市</a>：<strong>12月10日まで</strong>（平日のみ）</li>
-          <li><a href="https://www.city.uto.lg.jp/article/view/1243/16892.html" target="_blank" rel="noopener">宇土市</a>：<strong>12月28日まで</strong>（予約不要、当日に整理券）</li>
-          <li><a href="https://www.city.uki.kumamoto.jp/kurashi/bosaiinfo/bosaimusen/2622644" target="_blank" rel="noopener">宇城市</a>：<strong>2027年1月29日まで</strong></li>
-          <li><a href="https://www.city.yatsushiro.lg.jp/kiji00327083/index.html" target="_blank" rel="noopener">八代市</a>：<strong>2027年3月31日まで</strong>（要予約。Web か電話 0965-37-7550）</li>
-          <li><a href="https://www.town.hikawa.kumamoto.jp/bousai/default.html" target="_blank" rel="noopener">氷川町</a>：9月15日から受付中（締切は町にご確認ください）</li>
-        </ul>
-        <p class="note">※益城町・嘉島町なども公費解体の案内を出しています。ここにない市町村を含め、受付期間はお住まいの自治体でご確認ください。</p>
+        <p>り災証明書で半壊以上と判定された家屋等を、所有者の申請にもとづいて市町村が解体・撤去します。受付期間は市町村ごとに違い、<strong>11月30日</strong>（上天草市・芦北町）から2027年3月31日（八代市）まで幅があります。12月中に締め切る市町村が多いため、<a href="#kigen">市町村ごとの期限の一覧</a>でご確認ください。</p>
+        <p class="note">※すでに自分で解体した場合も、費用の償還を申請できます。ただし償還されるのは市町村が決めた額で、支払った全額とは限りません。</p>
       </div>
+      <div class="card">
+        <h3><span class="who">金融機関 ／ 住宅金融支援機構</span>住宅ローンの減免と、再建のための融資</h3>
+        <p>住宅ローンなどの返済が難しくなった方は、借入先の同意のもとで返済の免除や減額を申し出られる仕組み（<strong>自然災害債務整理ガイドライン</strong>）があります。まず借入先の金融機関へご相談ください。住まいを建て直す・補修する資金には、住宅金融支援機構の<strong>災害復興住宅融資</strong>があります（り災証明書で半壊以上の方）。</p>
+        <p class="note">※全国銀行協会の相談室 0570-017-109（平日9:00〜17:00）。住宅金融支援機構の災害専用ダイヤル 0120-086-353（9:00〜17:00、祝日・年末年始を除き土日も受付）。</p>
+      </div>
+      <div class="card">
+        <h3><span class="who">各市町村</span>災害援護資金の貸付・災害弔慰金</h3>
+        <p>世帯主がけがをした、または住まいや家財に被害を受けた世帯に、生活を立て直すための資金を貸し付ける制度です。限度額は被害の程度によって<strong>150万〜350万円</strong>。所得などの要件があります。</p>
+        <p class="note">※災害で亡くなられた方（災害関連死を含む）のご遺族には災害弔慰金（生計を維持していた方の場合500万円、それ以外の方250万円）が、重い障害を負われた方には災害障害見舞金が支給されます。窓口はいずれもお住まいの市町村の福祉担当課です。</p>
+      </div>
+    </div>
+
+    <div class="kigen" id="kigen">
+      <h3 id="kigen-h">市町村ごとの期限の一覧（10月19日時点）</h3>
+      <p>災害救助法が適用された21市町村の、り災証明書・住宅の応急修理・公費解体の期限です。<strong>「期限の記載なし」は、もとにした資料に期限が載っていないという意味で、受付が続いているとは限りません。</strong>必ずお住まいの市町村の窓口でご確認ください。</p>
+      <table aria-labelledby="kigen-h">
+        <thead>
+          <tr><th scope="col">市町村</th><th scope="col">り災証明書の申請</th><th scope="col">応急修理の完了</th><th scope="col">公費解体の申請</th></tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">熊本市</th><td><span class="end">終了（窓口10月30日、オンライン10月31日）</span></td><td>2027年1月27日まで延長する方向（さらに延長を協議中）</td><td>12月10日まで（要予約）</td></tr>
+            <tr><th scope="row">八代市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>2027年3月31日まで（要予約）</td></tr>
+            <tr><th scope="row">水俣市</th><td>発災から6か月以内</td><td>期限の記載なし</td><td>12月28日まで</td></tr>
+            <tr><th scope="row">山鹿市</th><td><span class="end">原則、発災から3か月以内（経過）</span></td><td>発災から6か月以内</td><td>案内の記載なし</td></tr>
+            <tr><th scope="row">菊池市</th><td><span class="end">終了（10月30日）</span></td><td>期限の記載なし</td><td>期限の記載なし</td></tr>
+            <tr><th scope="row">宇土市</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>12月28日まで</td></tr>
+            <tr><th scope="row">上天草市</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td><strong>11月30日まで</strong>（自費解体は2027年1月29日まで）</td></tr>
+            <tr><th scope="row">宇城市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>2027年1月29日まで</td></tr>
+            <tr><th scope="row">天草市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>案内の記載なし</td></tr>
+            <tr><th scope="row">合志市</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>12月28日まで</td></tr>
+            <tr><th scope="row">美里町</th><td><span class="end">終了（10月30日）</span></td><td>期限の記載なし</td><td>12月21日まで</td></tr>
+            <tr><th scope="row">大津町</th><td>期限の記載なし</td><td>期限の記載なし</td><td>12月18日まで</td></tr>
+            <tr><th scope="row">菊陽町</th><td><strong>11月30日まで</strong></td><td>未定（申請時に確認）</td><td>準備中</td></tr>
+            <tr><th scope="row">西原村</th><td>期限の記載なし</td><td>期限の記載なし</td><td>12月28日まで（平日のみ）</td></tr>
+            <tr><th scope="row">御船町</th><td><span class="end">終了（窓口10月30日、オンライン10月31日）</span></td><td>期限の記載なし</td><td>期限の記載なし</td></tr>
+            <tr><th scope="row">嘉島町</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>申請相談の窓口あり（要予約）</td></tr>
+            <tr><th scope="row">益城町</th><td><span class="end">終了（10月30日）</span></td><td>2027年1月27日まで</td><td>10月30日まで（予定）とされていた。延長の有無は町に確認を</td></tr>
+            <tr><th scope="row">甲佐町</th><td>期限の記載なし</td><td>期限の記載なし</td><td>期限の記載なし</td></tr>
+            <tr><th scope="row">氷川町</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>12月25日まで（<strong>予約は11月30日まで</strong>）</td></tr>
+            <tr><th scope="row">芦北町</th><td>期限の記載なし</td><td>期限の記載なし</td><td><strong>11月30日まで</strong>（自費解体は11月30日までに契約したものを2027年2月26日まで）</td></tr>
+            <tr><th scope="row">津奈木町</th><td>期限の記載なし</td><td>期限の記載なし</td><td>案内の記載なし</td></tr>
+        </tbody>
+      </table>
+      <p class="note">※総務省 熊本行政評価事務所「生活支援窓口案内（熊本県版ガイドブック）」第18版（10月19日時点）をもとに、その後に確認できた熊本市の応急修理の延長を反映しています。各市町村の窓口の電話番号も、<a href="https://www.soumu.go.jp/main_content/001084949.pdf" target="_blank" rel="noopener">ガイドブック（PDF）</a>に載っています。</p>
     </div>
   </section>
 
-  <!-- 被災者向け：生活インフラ -->
+  <!-- 被災者向け：くらしの安全と相談 -->
   <section id="hisaisha-life" class="for-hisaisha" data-cat="hisaisha">
     <div class="sec-head"><h2>くらしの安全と相談</h2><span class="tag life">被災された方へ</span></div>
     <div class="cards">
+      <div class="card">
+        <h3><span class="who">総務省 熊本行政評価事務所</span>困ったら、まずこの番号へ</h3>
+        <p>被災後のくらしで困っていることを相談できる<strong>災害専用フリーダイヤル 0120-091-110</strong>（平日9:00〜16:45）。熊本県外からは 0570-090110 へ。</p>
+        <p class="note">※支援制度と、市町村ごとの窓口・電話番号をまとめた「生活支援窓口案内（熊本県版ガイドブック）」も公開されており、随時更新されています。県の情報は<a href="https://www.pref.kumamoto.jp/soshiki/1/274517.html" target="_blank" rel="noopener">熊本県の地震関連情報</a>にもまとまっています。</p>
+        <a class="go" href="https://www.soumu.go.jp/main_content/001084949.pdf" target="_blank" rel="noopener">ガイドブック（PDF）</a>
+      </div>
+      <div class="card">
+        <h3><span class="who">日本弁護士連合会 ／ 熊本県弁護士会</span>お金や契約、相続の悩みを弁護士に相談</h3>
+        <p>日本弁護士連合会の電話相談 <strong>0120-254-994</strong>（平日10:00〜12:00、14:00〜16:00、<strong>11月30日まで</strong>）。熊本県弁護士会でも、面談での相談を受け付けています（1回30分、予約 096-325-0009）。</p>
+        <p class="note">※災害救助法が適用された市町村に住所があった方は、相続を放棄するかどうかを決める期限（熟慮期間）が<strong>2027年3月31日まで</strong>延長されています（7月28日以降に期限を迎えるものが対象）。</p>
+      </div>
+      <div class="card">
+        <h3><span class="who">熊本県 ／ 熊本市</span>眠れない、不安が続くときの相談先</h3>
+        <p>「眠れない」「不安が強い」「体調がすぐれない」といった心配を、電話で相談できます。熊本市にお住まいの方は熊本市こころの健康センター <strong>096-362-8100</strong>、それ以外の市町村の方は熊本県精神保健福祉センター「こころの健康相談電話」<strong>096-386-1166</strong>（いずれも平日9:00〜16:00）。</p>
+        <p class="note">※発災からしばらくたってから不調が出てくることもあります。ひとりで抱え込まずにご相談ください。</p>
+      </div>
+      <div class="card">
+        <h3><span class="who">国税庁 ／ 熊本県 ／ 各市町村</span>税金の軽減と、申告・納付の期限延長</h3>
+        <p>住宅や家財に損害を受けた方は、<strong>確定申告</strong>で所得税の全部または一部が軽減される場合があります（雑損控除、または災害減免法による軽減）。<strong>年末調整では受けられない</strong>ため、会社員の方も確定申告が必要です。</p>
+        <p class="note">※八代市・宇土市・宇城市・氷川町に納税地のある方は、国税の申告・納付などの期限が延長されています。固定資産税・住民税・国民健康保険税（料）などの減免や猶予は、お住まいの市町村にご相談ください。</p>
+      </div>
       <div class="card">
         <h3><span class="who">気象庁</span>地震のあとは、少ない雨でも土砂災害に警戒</h3>
         <p>揺れの大きかった地域は地盤が緩んでいるおそれがあるため、熊本県などの市町村では、土砂災害や大雨に関する警報・注意報を<strong>通常より低い基準（暫定基準）</strong>で発表しています。いつもなら出ない程度の雨でも警報が出ることがあります。</p>
@@ -338,16 +387,34 @@
         <a class="go" href="https://www.kokusen.go.jp/news/data/n-20220616_1.html" target="_blank" rel="noopener">国民生活センターの注意喚起</a>
       </div>
       <div class="card">
-        <h3><span class="who">熊本県 ／ 各市町村</span>使える制度をまとめて調べる</h3>
-        <p>住まいのほかにも、税・国民健康保険料の減免、義援金の受け取り、こころの相談など、被災された方が使える制度は多岐にわたります。各市町村が支援制度をまとめた冊子を配布しているほか、どこに相談すればよいか分からない方に向けた総合相談窓口も設けられています。</p>
-        <p class="note">※制度の内容・窓口・期限は市町村ごとに異なります。お住まいの自治体のページでご確認ください。</p>
-        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/1/274517.html" target="_blank" rel="noopener">熊本県の地震関連情報</a>
-      </div>
-      <div class="card">
         <h3><span class="who">日本カーシェアリング協会</span>車の無償貸出「災害サポート・レンタカー」</h3>
         <p>被災された方・支援活動を行う団体が対象。長期貸出（軽乗用・普通車／最長14日）と短期貸出（軽トラック／最長3日）を熊本支部で受付中で、<strong>2026年12月25日まで</strong>実施予定です。予約専用番号 050-5799-4740（10:00〜16:00、水・日・祝休み）。</p>
         <p class="note">※事前申込がないまま拠点へ行っても貸出できません。運転免許証のほか、り災証明書や被災状況の写真など被災を証明できるものが必要です。</p>
         <a class="go" href="https://www.japan-csa.org/blog/archives/13936" target="_blank" rel="noopener">協会の受付案内</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ボランティアで支援する -->
+  <section id="start">
+    <div class="sec-head"><h2>ボランティアで支援する</h2><span class="tag money">まず確認</span></div>
+    <div class="cards">
+      <div class="card">
+        <h3><span class="who">熊本県社会福祉協議会</span>募集は「必要なときに、必要な人数だけ」の段階に</h3>
+        <p>熊本市の災害ボランティアセンターは10月18日に閉所し、嘉島町・芦北町なども閉所しています。続いているセンターも、被災された方からの依頼に応じてその都度募集する形が中心です。<strong>向かう前に、その市町村がいま募集しているかを必ず確認してください。</strong></p>
+        <p class="note">※ボランティア活動保険への事前加入が必要です。出発前にお住まいの社協かWEBで済ませてください。現地へは渋滞緩和のため乗り合わせが、また行き帰りの事故が報告されているため自動車任意保険の確認が呼びかけられています。</p>
+        <a class="go" href="https://www.fukushi-kumamoto.or.jp/kvc/" target="_blank" rel="noopener">熊本県災害ボランティア情報</a>
+      </div>
+      <div class="card">
+        <h3><span class="who">熊本市</span>募集中の枠を探す「くまもとアプリ」</h3>
+        <p>県内各市町村の災害ボランティア募集情報がアプリに集約されています。市町村ごとにサイトを回らなくても、募集中の日程と受付状況をまとめて確認できます。</p>
+        <a class="go" href="https://www.city.kumamoto.jp/kiji00372213/index.html" target="_blank" rel="noopener">熊本市のお知らせ</a>
+      </div>
+      <div class="card">
+        <h3><span class="who">呉工業高等専門学校 神田研究室</span>混雑しにくい時間帯を選ぶ</h3>
+        <p>八代・氷川・宇城エリアの混雑状況を、VICSのデータをもとに月曜6時〜20時・30分間隔で可視化しています。画像を選ぶと、時間帯ごとの変化を映像で確認できます。毎週火曜に更新予定。</p>
+        <p class="note">※研究室による分析データです。通行止めなどの規制情報は、国土交通省の<a href="https://www.mlit.go.jp/road/saigai/r8kumamoto/index.html" target="_blank" rel="noopener">通れるマップ</a>でご確認ください。</p>
+        <a class="go" href="https://www.ykandalab.net/d-trip/2026-kumamoto/" target="_blank" rel="noopener">混雑状況を見る</a>
       </div>
     </div>
   </section>
@@ -422,10 +489,9 @@
         <a class="go" href="https://www.japanheart.org/topics/support/20260728_kumamoto_earthquake.html" target="_blank" rel="noopener">受付ページ</a>
       </div>
       <div class="card">
-        <h3><span class="who">済生会熊本病院</span>災害拠点機能・強化プロジェクト</h3>
-        <p>県南の救急・急性期医療を担う災害拠点病院で、DMATの活動拠点にもなっています。隊員の仮眠環境や、職員の子どもを受け入れる環境の整備、医療機器・設備の修繕などに充てられます。募集は10月28日23:00まで、目標1,000万円。</p>
-        <p class="note">※寄付金控除の対象。目標未達でも寄付はそのまま病院に渡ります（All in方式）。</p>
-        <a class="go" href="https://readyfor.jp/projects/saiseikai-kumamoto" target="_blank" rel="noopener">READYFORの受付ページ</a>
+        <h3><span class="who">済生会熊本病院</span>災害拠点機能・強化プロジェクト（受付終了）</h3>
+        <p><strong>10月28日で募集を終了しました。</strong>目標1,000万円に対し、終了2日前の時点で約9,460万円（目標の9倍以上）が寄せられていました。DMAT隊員の仮眠環境や、職員の子どもを受け入れる環境の整備、医療機器・設備の修繕などに充てられます。</p>
+        <a class="go" href="https://sk-kumamoto.jp/info/33122/" target="_blank" rel="noopener">済生会熊本病院のお知らせ</a>
       </div>
       <div class="card">
         <h3><span class="who">CAMPFIRE</span>緊急災害支援金（受付終了）</h3>
@@ -458,9 +524,15 @@
     <div class="cards">
       <div class="card">
         <h3><span class="who">中小企業庁</span>小規模事業者持続化補助金（災害支援枠）</h3>
-        <p>地震で被害を受けた小規模事業者の事業再建を支援する補助金です。補助率は2/3以内、上限は<strong>直接被害200万円・間接被害100万円</strong>。1次公募は10月16日で締め切られました。2次公募は、1次の締切後に案内される予定です。</p>
+        <p>地震で被害を受けた小規模事業者の事業再建を支援する補助金です。補助率は2/3以内、上限は<strong>直接被害200万円・間接被害100万円</strong>。<strong>2次公募の申請は12月15日まで</strong>です（商工会・商工会議所が発行する支援機関確認書の受付は12月8日まで）。</p>
         <p class="note">※機械装置の復旧、修繕、販路開拓、被災した事業用車両の購入などが対象です。商工会・商工会議所の支援を受けて取り組む制度のため、申請前に地域の商工会・商工会議所へご相談ください。</p>
-        <a class="go" href="https://www.chusho.meti.go.jp/koukai/hojyokin/kobo/2026/260909001.html" target="_blank" rel="noopener">中小企業庁の公募要領</a>
+        <a class="go" href="https://www.kmt-cci.or.jp/news/reiwa8kumamotojisin2jikoubokouboyouryoukoukai/" target="_blank" rel="noopener">熊本商工会議所の案内（2次公募）</a>
+      </div>
+      <div class="card">
+        <h3><span class="who">熊本県</span>くまもと事業者再出発支援補助金</h3>
+        <p>被災した施設や設備の復旧を支援する県の補助金です。中小企業者（小規模事業者・個人事業主を含む）は<strong>補助率3/4、上限3億円</strong>、中堅企業は補助率1/2。発災日（7月28日）以降に復旧した経費は、交付決定の前でも対象になります。</p>
+        <p class="note">※交付申請の受付は10月1日に始まっています。手続きは商工会・商工会議所にもご相談ください。</p>
+        <a class="go" href="https://www.pref.kumamoto.jp/uploaded/life/282015_900109_misc.pdf" target="_blank" rel="noopener">熊本県の手引き（PDF）</a>
       </div>
       <div class="card">
         <h3><span class="who">経済産業省</span>被災中小企業・小規模事業者 支援措置</h3>
@@ -499,7 +571,8 @@
       <li>令和8年8月千葉豪雨（8月13日から・千葉県）</li>
       <li>8月27日からの大雨（富山県・石川県・福井県）</li>
       <li>台風第24号と前線による大雨（9月・愛知県、鹿児島県ほか）</li>
-      <li>台風第25号（9月21日ごろ・千葉県）</li>
+      <li>台風第25号（9月・千葉県、東京都、神奈川県）</li>
+      <li>台風第18号（9月末・鹿児島県）</li>
     </ul>
     <p>災害救助法が適用された地域では、このページで紹介している住宅の応急修理や応急住宅、被災者生活再建支援金などと同じ種類の制度が使える場合があります。<strong>まずはお住まいの市町村で、り災証明書の申請と、使える支援の確認をしてください。</strong>適用されている地域は<a href="https://www.bousai.go.jp/taisaku/kyuujo/kyuujo_tekiyou.html" target="_blank" rel="noopener">内閣府の「災害救助法の適用状況」</a>で確認できます。</p>
   </div>
