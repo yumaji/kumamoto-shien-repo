@@ -210,6 +210,12 @@
   .others ul{margin:8px 0 0 1.2em;font-size:.86rem;color:var(--ink)}
   .others li{margin-top:4px}
 
+  /* 受付を終えた窓口（結果を知りたい人のために残すが、場所はとらない） */
+  .ended{margin-top:14px;background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:14px 18px}
+  .ended h3{font-size:.9rem;font-weight:700;color:var(--ink-soft)}
+  .ended ul{margin:6px 0 0 1.2em;font-size:.82rem;color:var(--ink-soft)}
+  .ended li{margin-top:3px}
+
   footer{
     border-top:1px solid var(--line);margin-top:40px;background:var(--card);
   }
@@ -238,7 +244,7 @@
 <main id="main" tabindex="-1">
 
 <div class="hero">
-  <h1>いま、熊本のために<br><em>じぶんにできる支援</em>を選ぶ。</h1>
+  <h1>いま必要な<em>手続き</em>と、<br>いまできる<em>支援</em>を。</h1>
   <p>2026年7月28日に発生した令和8年熊本地震（最大震度7・宇城市/氷川町）の支援情報です。発災から3か月が過ぎ、被災された方の手続きは<strong>市町村ごとに期限が分かれる</strong>段階に入りました。制度と相談先は、公式の発表をもとにまとめています。</p>
   <div class="quick">
     <a href="#hisaisha">被災された方の手続き<small>市町村ごとの期限・公費解体・生活再建支援金</small></a>
@@ -250,9 +256,9 @@
 <nav class="nav-filter" aria-label="目的の情報へ移動">
   <div class="nav-filter-in">
     <a href="#hisaisha">被災された方へ</a>
+    <a href="#jigyo">被災した事業者の方へ</a>
     <a href="#start">ボランティアで支援する</a>
     <a href="#kifu">お金で支援する</a>
-    <a href="#jigyo">事業者・企業の方</a>
   </div>
 </nav>
 
@@ -417,6 +423,29 @@
     </div>
   </section>
 
+  <!-- 被災した事業者向け -->
+  <section id="jigyo" class="for-hisaisha" data-cat="jigyo">
+    <div class="sec-head"><h2>被災した事業者の方へ</h2><span class="tag public">公的制度</span></div>
+    <div class="cards">
+      <div class="card">
+        <h3><span class="who">中小企業庁</span>小規模事業者持続化補助金（災害支援枠）</h3>
+        <p>地震で被害を受けた小規模事業者の事業再建を支援する補助金です。補助率は2/3以内、上限は<strong>直接被害200万円・間接被害100万円</strong>。<strong>2次公募の申請は12月15日まで</strong>です（商工会・商工会議所が発行する支援機関確認書の受付は12月8日まで）。</p>
+        <p class="note">※機械装置の復旧、修繕、販路開拓、被災した事業用車両の購入などが対象です。商工会・商工会議所の支援を受けて取り組む制度のため、申請前に地域の商工会・商工会議所へご相談ください。</p>
+        <a class="go" href="https://www.kmt-cci.or.jp/news/reiwa8kumamotojisin2jikoubokouboyouryoukoukai/" target="_blank" rel="noopener">熊本商工会議所の案内（2次公募）</a>
+      </div>
+      <div class="card">
+        <h3><span class="who">熊本県</span>くまもと事業者再出発支援補助金</h3>
+        <p>被災した施設や設備の復旧を支援する県の補助金です。中小企業者（小規模事業者・個人事業主を含む）は<strong>補助率3/4、上限3億円</strong>、中堅企業は補助率1/2。発災日（7月28日）以降に復旧した経費は、交付決定の前でも対象になります。</p>
+        <p class="note">※交付申請の受付は10月1日に始まっています。手続きは商工会・商工会議所にもご相談ください。</p>
+      </div>
+      <div class="card">
+        <h3><span class="who">経済産業省</span>被災中小企業・小規模事業者 支援措置</h3>
+        <p>災害救助法の適用（熊本県10市10町1村）を受け、日本政策金融公庫・商工中金・信用保証協会などに特別相談窓口を設置。災害復旧貸付のほか、8月5日には小規模企業共済契約者への即日貸付や、既往債務の返済猶予を遡って柔軟に取り扱う措置が追加されました。</p>
+        <a class="go" href="https://www.meti.go.jp/press/20260729003.html" target="_blank" rel="noopener">経産省の発表</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ボランティアで支援する -->
   <section id="start">
     <div class="sec-head"><h2>ボランティアで支援する</h2><span class="tag money">まず確認</span></div>
@@ -478,6 +507,11 @@
         <p>代理寄付を含む被災自治体への寄付を受付。申し込まれた寄付はすべて支援金として届けられます。</p>
         <a class="go" href="https://www.satofull.jp/oenkifu/oenkifu_detail.php?page_id=542" target="_blank" rel="noopener">さとふる受付ページ</a>
       </div>
+      <div class="card">
+        <h3><span class="who">企業版ふるさと納税</span>法人からの災害支援寄附</h3>
+        <p>「river」等のプラットフォームで、熊本県内12自治体への企業版ふるさと納税による寄附受付が始まっています。</p>
+        <a class="go" href="https://prtimes.jp/main/html/rd/p/000000103.000112121.html" target="_blank" rel="noopener">PR TIMES の発表</a>
+      </div>
     </div>
   </section>
 
@@ -489,11 +523,6 @@
         <h3><span class="who">Yahoo!ネット募金</span>緊急支援募金 特設ページ</h3>
         <p>複数団体のプロジェクトをまとめて掲載。PayPayなどで少額から寄付できます。</p>
         <a class="go" href="https://donation.yahoo.co.jp/promo/20260728.html" target="_blank" rel="noopener">特設ページ</a>
-      </div>
-      <div class="card">
-        <h3><span class="who">楽天クラッチ募金</span>令和8年熊本地震被害支援募金（受付終了）</h3>
-        <p><strong>2026年8月28日で受付を終了しました。</strong>集まった募金は被災された方の支援に充てられます。</p>
-        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
       </div>
       <div class="card">
         <h3><span class="who">赤い羽根共同募金</span>ボラサポ・令和8年熊本地震</h3>
@@ -511,17 +540,6 @@
         <a class="go" href="https://www.japanheart.org/topics/support/20260728_kumamoto_earthquake.html" target="_blank" rel="noopener">受付ページ</a>
       </div>
       <div class="card">
-        <h3><span class="who">済生会熊本病院</span>災害拠点機能・強化プロジェクト（受付終了）</h3>
-        <p><strong>10月28日で募集を終了しました。</strong>目標1,000万円に対し、終了2日前の時点で約9,460万円（目標の9倍以上）が寄せられていました。DMAT隊員の仮眠環境や、職員の子どもを受け入れる環境の整備、医療機器・設備の修繕などに充てられます。</p>
-        <a class="go" href="https://sk-kumamoto.jp/info/33122/" target="_blank" rel="noopener">済生会熊本病院のお知らせ</a>
-      </div>
-      <div class="card">
-        <h3><span class="who">CAMPFIRE</span>緊急災害支援金（受付終了）</h3>
-        <p><strong>2026年9月25日で募集を終了しました。</strong>集まった支援金は、決済手数料5%を除いた全額が日本赤十字社の「令和8年熊本地震災害義援金」へ寄付され、熊本県の義援金配分委員会を通じて被災された方に届けられます。</p>
-        <p class="note">※ネットから寄付できる窓口としては、日本赤十字社・熊本県の義援金（いずれも2027年3月31日まで）が引き続き受け付けています。</p>
-        <a class="go" href="https://www.jrc.or.jp/contribute/help/20260731/" target="_blank" rel="noopener">日本赤十字社の受付ページ</a>
-      </div>
-      <div class="card">
         <h3><span class="who">日本財団</span>災害復興支援特別基金</h3>
         <p>被災地で活動するNPO・ボランティア団体への緊急助成のほか、ボランティアの輸送や軽トラック・機材の貸出拠点の運営などに使われる支援金です。熊本地震を受けて寄付を受付中。</p>
         <a class="go" href="https://www.nippon-foundation.or.jp/what/projects/disaster_fund" target="_blank" rel="noopener">基金の案内ページ</a>
@@ -531,12 +549,15 @@
         <p>国際協力NGOのネットワーク（認定NPO法人）。寄付は出動を決定した加盟NGOの緊急支援活動（物資配布・避難所支援など）に配分されます。</p>
         <a class="go" href="https://www.japanplatform.org/emergency/program/kumamoto_earthquake2026.html" target="_blank" rel="noopener">支援プログラムの案内</a>
       </div>
-      <div class="card">
-        <h3><span class="who">コンビニ各社</span>店頭募金（すべて受付終了）</h3>
-        <p>ファミリーマート（8月25日）、セブン‐イレブン・ローソン（8月31日）の店頭募金は、いずれも受付を終了しました。集まった募金は被災自治体等を通じて被災された方へ届けられます。</p>
-        <p class="note">※店頭での受付は終了しましたが、熊本県をはじめ、義援金・ネット募金の窓口は継続しています。</p>
-        <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/274572.html" target="_blank" rel="noopener">熊本県の受付ページ</a>
-      </div>
+    </div>
+    <div class="ended">
+      <h3>受付を終えた窓口</h3>
+      <ul>
+        <li>コンビニ各社の店頭募金（ファミリーマート8月25日、セブン‐イレブン・ローソン8月31日に終了）</li>
+        <li>楽天クラッチ募金（8月28日に終了）</li>
+        <li>CAMPFIRE 緊急災害支援金（9月25日に終了。支援金は日本赤十字社の義援金へ寄付）</li>
+        <li>済生会熊本病院 災害拠点機能・強化プロジェクト（10月28日に終了。終了2日前の時点で目標の9倍以上の約9,460万円）</li>
+      </ul>
     </div>
   </section>
 
@@ -553,38 +574,6 @@
     </div>
   </section>
 
-  <!-- 事業者向け -->
-  <section id="jigyo" data-cat="jigyo">
-    <div class="sec-head"><h2>事業者・企業向けの支援</h2><span class="tag public">公的制度</span></div>
-    <div class="cards">
-      <div class="card">
-        <h3><span class="who">中小企業庁</span>小規模事業者持続化補助金（災害支援枠）</h3>
-        <p>地震で被害を受けた小規模事業者の事業再建を支援する補助金です。補助率は2/3以内、上限は<strong>直接被害200万円・間接被害100万円</strong>。<strong>2次公募の申請は12月15日まで</strong>です（商工会・商工会議所が発行する支援機関確認書の受付は12月8日まで）。</p>
-        <p class="note">※機械装置の復旧、修繕、販路開拓、被災した事業用車両の購入などが対象です。商工会・商工会議所の支援を受けて取り組む制度のため、申請前に地域の商工会・商工会議所へご相談ください。</p>
-        <a class="go" href="https://www.kmt-cci.or.jp/news/reiwa8kumamotojisin2jikoubokouboyouryoukoukai/" target="_blank" rel="noopener">熊本商工会議所の案内（2次公募）</a>
-      </div>
-      <div class="card">
-        <h3><span class="who">熊本県</span>くまもと事業者再出発支援補助金</h3>
-        <p>被災した施設や設備の復旧を支援する県の補助金です。中小企業者（小規模事業者・個人事業主を含む）は<strong>補助率3/4、上限3億円</strong>、中堅企業は補助率1/2。発災日（7月28日）以降に復旧した経費は、交付決定の前でも対象になります。</p>
-        <p class="note">※交付申請の受付は10月1日に始まっています。手続きは商工会・商工会議所にもご相談ください。</p>
-      </div>
-      <div class="card">
-        <h3><span class="who">経済産業省</span>被災中小企業・小規模事業者 支援措置</h3>
-        <p>災害救助法の適用（熊本県10市10町1村）を受け、日本政策金融公庫・商工中金・信用保証協会などに特別相談窓口を設置。災害復旧貸付のほか、8月5日には小規模企業共済契約者への即日貸付や、既往債務の返済猶予を遡って柔軟に取り扱う措置が追加されました。</p>
-        <a class="go" href="https://www.meti.go.jp/press/20260729003.html" target="_blank" rel="noopener">経産省の発表</a>
-      </div>
-      <div class="card">
-        <h3><span class="who">企業版ふるさと納税</span>法人からの災害支援寄附</h3>
-        <p>「river」等のプラットフォームで、熊本県内12自治体への企業版ふるさと納税による寄附受付が始まっています。</p>
-        <a class="go" href="https://prtimes.jp/main/html/rd/p/000000103.000112121.html" target="_blank" rel="noopener">PR TIMES の発表</a>
-      </div>
-      <div class="card">
-        <h3><span class="who">企業の支援事例</span>Honda：義援金5千万円・物資提供</h3>
-        <p>熊本県への義援金のほか、発電機などの自社製品、食料品・日用品を提供。自社でできる支援を検討する際の参考に。</p>
-        <a class="go" href="https://global.honda/jp/news/2026/c260729b.html" target="_blank" rel="noopener">Hondaの発表</a>
-      </div>
-    </div>
-  </section>
 
   <!-- 注意 -->
   <div class="caution">
