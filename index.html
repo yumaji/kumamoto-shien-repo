@@ -182,6 +182,10 @@
   .kigen thead th:first-child{width:17%}
   .kigen tbody th{font-weight:700}
   .kigen .end{color:var(--ink-soft)}
+  /* 義援金の表は「受け取り方」の列に文章が入るため、その列を広くとる */
+  #gienkin thead th:first-child{width:15%}
+  #gienkin thead th:nth-child(2){width:17%}
+  #gienkin thead th:nth-child(3){width:44%}
   @media (max-width:560px){.kigen table{font-size:.74rem}.kigen th,.kigen td{padding:5px}}
 
   /* 被災者向け帯 */
@@ -257,7 +261,7 @@
   <!-- 被災者向け：住まいと生活の再建。金額・期限は熊本県・各市町村・総務省ガイドブックで確認 -->
   <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
     <div class="sec-head"><h2>住まいと生活の再建</h2><span class="tag life">被災された方へ</span></div>
-    <p class="sec-lead">熊本県内で住まいに被害を受けた方が使える制度です。発災から3か月が過ぎ、<strong>り災証明書の申請を締め切った市町村</strong>も出ています。一方、住宅の応急修理の完了期限は、多くの市町村で2027年1月27日まで延長されました。期限は市町村ごとに違うため、<a href="#kigen">市町村ごとの期限の一覧</a>でご確認ください。</p>
+    <p class="sec-lead">熊本県内で住まいに被害を受けた方が使える制度です。期限は市町村ごとに違い、延長も続いています。11月11日時点では、熊本市がり災証明書の申請期限を2027年3月31日まで延ばし、住宅の応急修理の完了期限は多くの市町村で2028年1月27日まで延びました。一方で、<strong>11月30日に締め切る手続き</strong>（菊池市・大津町・菊陽町・嘉島町・芦北町のり災証明書、上天草市・芦北町の公費解体など）もあります。お住まいの市町村の期限は<a href="#kigen">市町村ごとの期限の一覧</a>でご確認ください。</p>
     <div class="caution">
       <h3>申請する順番にご注意ください</h3>
       <ul>
@@ -270,7 +274,7 @@
       <div class="card">
         <h3><span class="who">熊本県内の各市町村</span>り災証明書（罹災証明書）— すべての入口</h3>
         <p>お住まいの市町村に申請すると、住まいの被害程度を判定して発行されます。生活再建支援金・応急修理・公費解体など<strong>ほぼすべての支援の前提</strong>になります。窓口のほか、マイナポータルからオンライン申請もできる市町村があります。</p>
-        <p class="note">※熊本市・菊池市・美里町・御船町・益城町などは、10月30日（オンラインは31日）で申請を締め切りました。まだ申請していない方は、すぐにお住まいの市町村へご相談ください。持ち家だけでなく、賃貸住宅に住んでいる方も申請できます。</p>
+        <p class="note">※熊本市は申請期限を2027年3月31日まで延長しました。菊池市・大津町・菊陽町・嘉島町・芦北町は<strong>11月30日まで</strong>。美里町・御船町などは締め切っています。まだ申請していない方は、すぐにお住まいの市町村へご相談ください。持ち家だけでなく、賃貸住宅に住んでいる方も申請できます。</p>
         <a class="go" href="https://digital-gov.note.jp/n/ne4f237bf506b" target="_blank" rel="noopener">デジタル庁のオンライン申請案内</a>
       </div>
       <div class="card">
@@ -280,14 +284,14 @@
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/276299.html" target="_blank" rel="noopener">熊本県の案内</a>
       </div>
       <div class="card">
-        <h3><span class="who">熊本県 ／ 各市町村</span>義援金の受け取り（第1次配分）</h3>
-        <p>全国から寄せられた義援金の第1次配分が9月28日に決まりました。基準額は、住まいの被害が<strong>全壊100万円</strong>・大規模半壊75万円・中規模半壊50万円・半壊30万円・準半壊10万円・一部損壊5万円。亡くなられた方は100万円、重傷を負われた方は10万円です。</p>
-        <p class="note">※県から市町村へ送金され、準備が整った市町村から順次配分されます。実際の支給額や、通知が届くのか申請が必要なのかは市町村ごとに異なるため、お住まいの自治体の案内をご確認ください。</p>
+        <h3><span class="who">熊本県 ／ 各市町村</span>義援金の受け取り</h3>
+        <p>全国から寄せられた義援金は、県が決めた基準額（住まいの被害が<strong>全壊100万円</strong>・大規模半壊75万円・中規模半壊50万円・半壊30万円・準半壊10万円・一部損壊5万円、亡くなられた方100万円、重傷を負われた方10万円）をもとに、市町村から届けられます。市町村が独自の分を上乗せしているため、金額と受け取り方は市町村ごとに違います。<a href="#gienkin">市町村ごとの受け取り方</a>をご確認ください。</p>
+        <p class="note">※11月12日に第2次配分が発表されました。第1次の対象にならなかった方（り災証明書の申請が遅かった方など）が対象で、すでに受け取った方への追加はありません。義援金の支給で、ATMの操作や手数料の振込を求められることはありません。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/281576.html" target="_blank" rel="noopener">熊本県の発表（第1次配分）</a>
       </div>
       <div class="card">
         <h3><span class="who">熊本県 ／ 各市町村</span>住宅の応急修理</h3>
-        <p>屋根・開口部・配管など、日常生活に不可欠な箇所を市町村が業者へ直接支払う形で修理します。上限は全壊〜半壊で<strong>75万7,000円</strong>、準半壊で36万7,000円。当初10月27日だった完了期限（完了報告の提出まで）は、<strong>多くの市町村で2027年1月27日まで延長</strong>されました。</p>
+        <p>屋根・開口部・配管など、日常生活に不可欠な箇所を市町村が業者へ直接支払う形で修理します。上限は全壊〜半壊で<strong>75万7,000円</strong>、準半壊で36万7,000円。当初10月27日だった完了期限（完了報告の提出まで）は、<strong>多くの市町村で2028年1月27日まで</strong>（発災から1年6か月）延長されました。上天草市・合志市は2027年1月27日までです。</p>
         <p class="note">※期限は市町村ごとに違い、まだ決まっていないところもあります。業者に先に代金を払ってしまうと、この制度は使えません。見積書を取ってから、お住まいの市町村へ申し込んでください。</p>
         <a class="go" href="https://www.pref.kumamoto.jp/soshiki/27/275109.html" target="_blank" rel="noopener">熊本県の案内</a>
       </div>
@@ -299,7 +303,7 @@
       </div>
       <div class="card">
         <h3><span class="who">各市町村</span>被災家屋等の公費解体</h3>
-        <p>り災証明書で半壊以上と判定された家屋等を、所有者の申請にもとづいて市町村が解体・撤去します。受付期間は市町村ごとに違い、<strong>11月30日</strong>（上天草市・芦北町）から2027年3月31日（八代市）まで幅があります。12月中に締め切る市町村が多いため、<a href="#kigen">市町村ごとの期限の一覧</a>でご確認ください。</p>
+        <p>り災証明書で半壊以上と判定された家屋等を、所有者の申請にもとづいて市町村が解体・撤去します。受付期間は市町村ごとに違い、<strong>11月30日</strong>（上天草市・芦北町）から2027年3月31日（八代市・宇城市）まで幅があります。12月中に締め切る市町村が多いため、<a href="#kigen">市町村ごとの期限の一覧</a>でご確認ください。益城町は受付を終えましたが、特別な事情がある場合は個別に相談できます。</p>
         <p class="note">※すでに自分で解体した場合も、費用の償還を申請できます。ただし償還されるのは市町村が決めた額で、支払った全額とは限りません。</p>
       </div>
       <div class="card">
@@ -315,37 +319,55 @@
     </div>
 
     <div class="kigen" id="kigen">
-      <h3 id="kigen-h">市町村ごとの期限の一覧（10月19日時点）</h3>
+      <h3 id="kigen-h">市町村ごとの期限の一覧（11月11日時点）</h3>
       <p>災害救助法が適用された21市町村の、り災証明書・住宅の応急修理・公費解体の期限です。<strong>「期限の記載なし」は、もとにした資料に期限が載っていないという意味で、受付が続いているとは限りません。</strong>必ずお住まいの市町村の窓口でご確認ください。</p>
       <table aria-labelledby="kigen-h">
         <thead>
           <tr><th scope="col">市町村</th><th scope="col">り災証明書の申請</th><th scope="col">応急修理の完了</th><th scope="col">公費解体の申請</th></tr>
         </thead>
         <tbody>
-            <tr><th scope="row">熊本市</th><td><span class="end">終了（窓口10月30日、オンライン10月31日）</span></td><td>2027年1月27日まで延長する方向（さらに延長を協議中）</td><td>12月10日まで（要予約）</td></tr>
+            <tr><th scope="row">熊本市</th><td>2027年3月31日まで（延長）</td><td>2028年1月27日まで</td><td>12月10日まで（要予約）</td></tr>
             <tr><th scope="row">八代市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>2027年3月31日まで（要予約）</td></tr>
             <tr><th scope="row">水俣市</th><td>発災から6か月以内</td><td>期限の記載なし</td><td>12月28日まで</td></tr>
-            <tr><th scope="row">山鹿市</th><td><span class="end">原則、発災から3か月以内（経過）</span></td><td>発災から6か月以内</td><td>案内の記載なし</td></tr>
-            <tr><th scope="row">菊池市</th><td><span class="end">終了（10月30日）</span></td><td>期限の記載なし</td><td>期限の記載なし</td></tr>
-            <tr><th scope="row">宇土市</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>12月28日まで</td></tr>
+            <tr><th scope="row">山鹿市</th><td><span class="end">終了（原則、発災から3か月以内）</span></td><td>発災から6か月以内</td><td>案内の記載なし</td></tr>
+            <tr><th scope="row">菊池市</th><td><strong>11月30日まで</strong>（延長）</td><td>期限の記載なし</td><td>期限の記載なし</td></tr>
+            <tr><th scope="row">宇土市</th><td>期限の記載なし</td><td>2028年1月27日まで</td><td>12月28日まで</td></tr>
             <tr><th scope="row">上天草市</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td><strong>11月30日まで</strong>（自費解体は2027年1月29日まで）</td></tr>
-            <tr><th scope="row">宇城市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>2027年1月29日まで</td></tr>
-            <tr><th scope="row">天草市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>案内の記載なし</td></tr>
+            <tr><th scope="row">宇城市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>2027年3月31日まで（延長）</td></tr>
+            <tr><th scope="row">天草市</th><td>期限の記載なし</td><td>期限の記載なし</td><td>12月10日まで（要予約）</td></tr>
             <tr><th scope="row">合志市</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>12月28日まで</td></tr>
             <tr><th scope="row">美里町</th><td><span class="end">終了（10月30日）</span></td><td>期限の記載なし</td><td>12月21日まで</td></tr>
-            <tr><th scope="row">大津町</th><td>期限の記載なし</td><td>期限の記載なし</td><td>12月18日まで</td></tr>
-            <tr><th scope="row">菊陽町</th><td><strong>11月30日まで</strong></td><td>未定（申請時に確認）</td><td>準備中</td></tr>
+            <tr><th scope="row">大津町</th><td><strong>11月30日まで</strong></td><td>期限の記載なし</td><td>12月18日まで</td></tr>
+            <tr><th scope="row">菊陽町</th><td><strong>11月30日まで</strong></td><td>未定（申請時に確認）</td><td>11月6日〜12月28日</td></tr>
             <tr><th scope="row">西原村</th><td>期限の記載なし</td><td>期限の記載なし</td><td>12月28日まで（平日のみ）</td></tr>
-            <tr><th scope="row">御船町</th><td><span class="end">終了（窓口10月30日、オンライン10月31日）</span></td><td>期限の記載なし</td><td>期限の記載なし</td></tr>
-            <tr><th scope="row">嘉島町</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>申請相談の窓口あり（要予約）</td></tr>
-            <tr><th scope="row">益城町</th><td><span class="end">終了（10月30日）</span></td><td>2027年1月27日まで</td><td>10月30日まで（予定）とされていた。延長の有無は町に確認を</td></tr>
+            <tr><th scope="row">御船町</th><td><span class="end">終了（窓口10月30日、オンライン10月31日）</span></td><td>2028年1月27日まで</td><td>期限の記載なし</td></tr>
+            <tr><th scope="row">嘉島町</th><td><strong>11月30日まで</strong></td><td>2028年1月27日まで</td><td>申請相談の窓口あり（要予約）</td></tr>
+            <tr><th scope="row">益城町</th><td><span class="end">一次調査の受付は終了</span>。二次調査の申請は<strong>11月30日まで</strong></td><td>2028年1月27日まで</td><td><span class="end">受付終了</span>（特別な事情があれば個別に相談可）</td></tr>
             <tr><th scope="row">甲佐町</th><td>期限の記載なし</td><td>期限の記載なし</td><td>期限の記載なし</td></tr>
-            <tr><th scope="row">氷川町</th><td>期限の記載なし</td><td>2027年1月27日まで</td><td>12月25日まで（<strong>予約は11月30日まで</strong>）</td></tr>
-            <tr><th scope="row">芦北町</th><td>期限の記載なし</td><td>期限の記載なし</td><td><strong>11月30日まで</strong>（自費解体は11月30日までに契約したものを2027年2月26日まで）</td></tr>
+            <tr><th scope="row">氷川町</th><td>期限の記載なし</td><td>2028年1月27日まで</td><td>12月25日まで</td></tr>
+            <tr><th scope="row">芦北町</th><td><strong>11月30日まで</strong></td><td>期限の記載なし</td><td><strong>11月30日まで</strong>（自費解体は11月30日までに契約したものを2027年2月26日まで）</td></tr>
             <tr><th scope="row">津奈木町</th><td>期限の記載なし</td><td>期限の記載なし</td><td>案内の記載なし</td></tr>
         </tbody>
       </table>
-      <p class="note">※総務省 熊本行政評価事務所「生活支援窓口案内（熊本県版ガイドブック）」第18版（10月19日時点）をもとに、その後に確認できた熊本市の応急修理の延長を反映しています。各市町村の窓口の電話番号も、<a href="https://www.soumu.go.jp/main_content/001084949.pdf" target="_blank" rel="noopener">ガイドブック（PDF）</a>に載っています。</p>
+      <p class="note">※総務省 熊本行政評価事務所「生活支援窓口案内（熊本県版ガイドブック）」第19版（11月11日時点）をもとに作成しています。各市町村の窓口の電話番号も、<a href="https://www.soumu.go.jp/main_content/001084949.pdf" target="_blank" rel="noopener">ガイドブック（PDF）</a>に載っています。</p>
+    </div>
+
+    <div class="kigen" id="gienkin">
+      <h3 id="gienkin-h">市町村ごとの義援金の受け取り方（第1次配分）</h3>
+      <p>公式の発表や報道で確認できた市町村です。<strong>ここにない市町村も順次配分を進めています。</strong>お住まいの市町村の窓口でご確認ください。</p>
+      <table aria-labelledby="gienkin-h">
+        <thead>
+          <tr><th scope="col">市町村</th><th scope="col">全壊世帯の額</th><th scope="col">受け取り方</th><th scope="col">問い合わせ</th></tr>
+        </thead>
+        <tbody>
+            <tr><th scope="row">熊本市</th><td>112万円</td><td>12月に通知を送り、2027年1月中旬ごろから支給する見通し。災害弔慰金・見舞金を受け取った方は申請なしで振り込まれ、それ以外の方には申請書が届く</td><td>熊本市災害義援金専用ダイヤル 096-328-2342</td></tr>
+            <tr><th scope="row">八代市</th><td>110万円</td><td>9月16日時点でり災証明書の交付を受けた世帯などに、10月下旬から申請書を発送。再調査を申請中の世帯は第2回以降</td><td>こども未来課 0965-33-8721</td></tr>
+            <tr><th scope="row">宇城市</th><td>105万2千円</td><td>通知が届いたら、申請書に本人確認書類と振込口座の写しを添えて申請。8月13日以降にり災証明書を申請した世帯は第2次以降</td><td>社会福祉課 0964-32-1387</td></tr>
+            <tr><th scope="row">嘉島町</th><td>（未確認）</td><td>オンラインか窓口で申請。振込をもって決定の通知に代える。追加の配分は、同じ口座に再申請なしで振り込まれる</td><td>総務課 096-237-1112</td></tr>
+            <tr><th scope="row">水俣市</th><td>（未確認）</td><td>対象の世帯に10月中旬以降、順次通知。申請の締切は2027年3月15日</td><td>福祉課総務係 0966-61-1640</td></tr>
+        </tbody>
+      </table>
+      <p class="note">※金額は第1次配分のもので、住まいの被害区分ごとに異なります。熊本市の内容は報道（熊本日日新聞）によるもので、八代市・宇城市・嘉島町・水俣市は各市町の発表によります。問い合わせ先の電話番号は総務省のガイドブックと各市町の発表によります。</p>
     </div>
   </section>
 
