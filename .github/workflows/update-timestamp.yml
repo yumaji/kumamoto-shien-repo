@@ -1,7 +1,8 @@
 name: 更新日時の自動書き換え
 
-# index.html を編集して push すると、ページ内の「最終更新」を
-# その日の日付（日本時間）に自動で書き換えてコミットします。
+# index.html を編集して push すると、ページ内の「最終更新」、構造化データ（JSON-LD）の
+# dateModified、sitemap.xml の lastmod を、その日の日付（日本時間）に自動で書き換えてコミットします。
+# 検索エンジンや AI 検索に、情報の新しさを機械的に伝えるためのもの。
 on:
   push:
     branches: [main]
@@ -25,13 +26,15 @@ jobs:
           DATE_JP=$(TZ=Asia/Tokyo date +%Y年%-m月%-d日)
           sed -i -E "s|<span id=\"last-updated\">[^<]*</span>|<span id=\"last-updated\">${DATE_ISO}</span>|" index.html
           sed -i -E "s|<span id=\"last-updated-foot\">[^<]*</span>|<span id=\"last-updated-foot\">${DATE_JP}</span>|" index.html
+          sed -i -E "s|\"dateModified\": \"[0-9-]+\"|\"dateModified\": \"${DATE_ISO}\"|" index.html
+          sed -i -E "s|<lastmod>[0-9-]+</lastmod>|<lastmod>${DATE_ISO}</lastmod>|" sitemap.xml
 
       - name: 変更があればコミット
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet; then
-            git add index.html
+            git add index.html sitemap.xml
             git commit -m "chore: 最終更新日時を自動更新"
             git push
           fi

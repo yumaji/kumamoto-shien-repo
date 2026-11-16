@@ -5,6 +5,8 @@
 ## 1. 更新日時の書き換え —— 自動
 
 - `index.html` を編集して `main` に push すると、GitHub Actions（`update-timestamp.yml`）がページ内の「最終更新」を **その日の日付（日本時間）** に自動で書き換えてコミットします。
+- 同時に、構造化データ（`index.html` の JSON-LD の `dateModified`）と `sitemap.xml` の `<lastmod>` も同じ日付に書き換えます。検索エンジンや AI 検索に情報の新しさを伝えるためのもの。どちらも手で触らないこと（`dateModified` は `"dateModified": "YYYY-MM-DD"` の1行の形のまま残す。形を変えると自動で書き換えられなくなる）。
+- 検索結果や SNS に出る説明文（`meta description`、`og:description`、JSON-LD の `description`）は自動では変わらない。サイトの中心になる情報が変わったら（新しい表を加えた、など）、3か所をそろえて書き直すこと。
 - **手で日付を書き換える必要はありません。** 情報を直したら push するだけです。
 - 逆に、内容を変えていないのに日付だけ新しくしないこと（読者に「確認済み」と誤解させるため）。
 
