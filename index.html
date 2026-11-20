@@ -220,6 +220,10 @@
   .caution h2,.caution h3{font-size:1rem;font-weight:900;color:var(--amber-ink)}
   .caution ul{margin:8px 0 0 1.2em;font-size:.86rem;color:var(--ink)}
   .caution li{margin-top:4px}
+  /* 地震のお知らせ（注意ボックスをページの先頭で使うときの調整） */
+  .caution.jishin{margin-top:8px}
+  .caution.jishin p{margin-top:8px;font-size:.86rem;color:var(--ink)}
+  .caution.jishin .src{font-size:.78rem;color:var(--ink-soft)}
 
   /* ほかの災害で被災された方へ */
   .others{
@@ -284,6 +288,18 @@
 </nav>
 
 <div class="main-in">
+
+  <!-- 11/19 の地震（震度5弱）のお知らせ。気象庁の注意期間（1週間程度）が過ぎたら見直す（ops-reminder.py の PHASES） -->
+  <div class="caution jishin" id="jishin1119">
+    <h2>11月19日に震度5弱の地震がありました</h2>
+    <p>11月19日午前2時22分ごろ、熊本県天草・芦北地方を震源とする地震（マグニチュード5.7）があり、水俣市・芦北町・津奈木町・あさぎり町・球磨村で震度5弱を観測しました。芦北町・津奈木町では、瓦の落下や外壁のひび割れなど住宅の一部が壊れる被害が出ています。11月8日にも同じ地域で震度4を観測しており、気象庁は7月の熊本地震の一連の活動とみています。</p>
+    <ul>
+      <li><strong>11月26日ごろまでの1週間程度は、同じ程度かそれ以上の強い揺れに注意</strong>してください（気象庁）。</li>
+      <li>地震で傷んだ家や、ブルーシートで応急処置をした屋根は、強い揺れでさらに壊れるおそれがあります。危ないと感じたら無理に家に入らないなど、身の安全を優先してください。</li>
+      <li>新たに被害が出た場合は、片付けや修理の前に写真を撮り、お住まいの市町村にご相談ください。</li>
+    </ul>
+    <p class="src">気象庁の発表と報道（11月19日）にもとづいています。最新の情報は<a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html" target="_blank" rel="noopener">気象庁の熊本地震の情報</a>でご確認ください。</p>
+  </div>
 
   <!-- 被災者向け：住まいと生活の再建。金額・期限は熊本県・各市町村・総務省ガイドブックで確認 -->
   <section id="hisaisha" class="for-hisaisha" data-cat="hisaisha">
